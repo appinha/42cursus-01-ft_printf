@@ -1,4 +1,4 @@
-PREFIXE		= ../../
+PREFIXE		= ./
 
 LIBPATH		= ../../
 
