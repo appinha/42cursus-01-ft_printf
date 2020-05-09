@@ -1,0 +1,26 @@
+#!/bin/sh
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    show-disabled-tests                                :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: gfielder <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/05/18 18:10:34 by gfielder          #+#    #+#              #
+#    Updated: 2019/05/18 18:10:34 by gfielder         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+PFT_ROOT=$(dirname $0)
+if [ -f "$PFT_ROOT/options-config.override.ini" ] ; then
+	CONFIG_FILE=$PFT_ROOT"/options-config.override.ini"
+else
+	CONFIG_FILE=$PFT_ROOT"/options-config.ini"
+fi
+FILENAME=$PFT_ROOT"/"$(grep -e "^UNIT_TEST_FILE" $CONFIG_FILE | cut -d '=' -f 2 | tr -d " \t")
+
+if ! [ -f "$PFT_ROOT/src/show_disabled_postprocess" ] ; then
+	clang -o $PFT_ROOT/src/show_disabled_postprocess $PFT_ROOT/src/show_disabled_postprocess.c
+fi
+
+grep "^[	 ]*int[	 ]*.*(void)" $FILENAME | grep -n "^[	 ]\+int[	 ]*.*(void)" | $PFT_ROOT/src/show_disabled_postprocess
