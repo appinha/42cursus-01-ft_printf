@@ -6,70 +6,76 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/14 23:24:33 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/15 15:02:31 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-//static void	flag2struct(va_list args, )
-static t_flags	flag2struct(char *flags, t_flags fl)
+static void		triage_specs(va_list args, int *len, t_flags fl)
 {
-	fl.minus = ft_strchr_01(flags, '-');
-	fl.dot = ft_strchr_01(flags, '.');
+	if (fl.spec == 'c')
+		print_spec_c(len, fl, va_arg(args, int));
+	if (fl.spec == 's')
+		print_spec_s(len, fl, va_arg(args, char *));
+}
+
+static t_flags	treat_flags(char *flags, t_flags fl)
+{
+	int i;
+
+	i = 0;
+	while (flags[i] != '\0' && ft_strchr_01(FLAGS, flags[i]))
+	{
+		if (flags[i++] == '0')
+			fl.pad_c = '0';
+	}
+	while (flags[i] != '\0' && ft_strchr_01(DIGITS, flags[i]))
+		fl.width = 10 * fl.width + flags[i++] - '0';
+	if (flags[i++] == '.')
+	{
+		while (flags[i] != '\0' && ft_strchr_01(DIGITS, flags[i]))
+			fl.precision = 10 * fl.precision + flags[i++] - '0';
+	}
+	//printf("> collected flags:\n");
+	//printf("  • fl.spec = '%c'\n", fl.spec);
+	//printf("  • fl.pad_c = '%c'\n", fl.pad_c);
+	//printf("  • fl.minus = '%i'\n", fl.minus);
+	//printf("  • fl.plus = '%i'\n", fl.plus);
+	//printf("  • fl.hash = '%i'\n", fl.hash);
+	//printf("  • fl.space = '%i'\n", fl.space);
+	//printf("  • fl.width = '%i'\n", fl.width);
+	//printf("  • fl.precision = '%i'\n", fl.precision);
 	return (fl);
 }
 
-static void		triage_specs(va_list args, int *len, char spec, char *flags)
-//static void	triage_specs(int *len, char spec, char *flags)
-{
-	t_flags	fl;
-
-	fl.spec = spec;
-	//printf("• fl.spec = '%c'\n", fl.spec);
-	//printf("• len = '%i'\n", *len);
-	//fl = flag2struct(args, spec, flags);
-	fl = flag2struct(flags, fl);
-	//printf("• fl.minus = %i\n", fl.minus);
-	//printf("• c = '%c'\n", va_arg(args, int));
-	if (spec == 'c')
-		print_spec_c(len, fl, va_arg(args, int));
-}
-
 static void		get_specs(va_list args, const char *format, int *len, int *i)
-//static void	get_specs(const char *format, int *len, int *i)
 {
 	int		j;
-	char 	spec;
-	char	flags[1024];
+	char	flags[20];
+	t_flags	fl;
 
-	(*i)++;
 	j = 0;
-	spec = 0;
-	while (ft_strchr_01(ALL_S_F, format[*i]))
-	{
-		if (ft_strchr_01(SPECS, format[*i]))
-			break;
-		flags[j++] = format[*i];
-		(*i)++;
-	}
+	while (ft_strchr_01(ALL_FL, format[*i]) && j < 19)
+		flags[j++] = format[(*i)++];
 	flags[j] = '\0';
 	if (ft_strchr_01(SPECS, format[*i]))
 	{
-		spec = format[(*i)++];
-		triage_specs(args, len, spec, flags);
-		//triage_specs(len, spec, flags);
+		fl.spec = format[(*i)++];
+		fl.pad_c = ' ';
+		fl.minus = ft_strchr_01(flags, '-');
+		fl.plus = ft_strchr_01(flags, '+');
+		fl.hash = ft_strchr_01(flags, '#');
+		fl.space = ft_strchr_01(flags, ' ');
+		fl.width = 0;
+		fl.precision = 0;
+		fl = treat_flags(flags, fl);
+		triage_specs(args, len, fl);
 	}
 	else
 		(*len) = -1;
 }
-/*
-static void	print_plain(char c, int *len)
-{
-	ft_putchar(c);
-	(*len)++;
-}
-*/
+
 int				ft_printf(const char *format, ...)
 {
 	va_list	args;
@@ -83,11 +89,12 @@ int				ft_printf(const char *format, ...)
 	{
 		if (format[i] != '%')
 			ft_putchar_len(format[i++], &len);
-			//print_plain(format[i++], &len);
 		else
 		{
-			get_specs(args, format, &len, &i);
-			//get_specs(format, &len, &i);
+			if (format[++i] == '%')
+				ft_putchar_len(format[i++], &len);
+			else
+				get_specs(args, format, &len, &i);
 			if (len == -1)
 				return (-1);
 		}

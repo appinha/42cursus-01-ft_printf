@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/14 23:25:34 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/15 14:52:13 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	test_star(int *i, char *s)
 	printf("s[*i] = %c\n", s[*i]);
 }
 
-#define INPUT	"%c", 'A'
+#define INPUT	"%-+#05.2c", 'A'
 
 int		main(void)
 {
