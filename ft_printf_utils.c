@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:24:53 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/15 15:09:34 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/16 20:50:50 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t l;
 
+	if (!s)
+		return (0);
 	l = 0;
 	while (s[l] != 0)
 		l++;
@@ -28,14 +30,14 @@ void	ft_putchar_len(char c, int *len)
 	(*len)++;
 }
 
-void	ft_putstr_len(char *s, int *len)
+void	ft_putcstr_len(char *s, int *len, int size)
 {
 	int i;
 
 	if (s != NULL)
 	{
 		i = 0;
-		while (s[i])
+		while (s[i] && i < size)
 		{
 			ft_putchar_len(s[i], len);
 			i++;

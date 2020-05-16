@@ -6,37 +6,51 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/15 14:11:18 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/16 20:51:30 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdio.h>
-
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
 
 /*
-** FLAG COLLECTION STRUCT
-** '-' (minus): justification
-** '0' (zero): padding
-** '.' (dot): precision
-** '*' (star): argument (complements other flags)
-** width: min number of char to be printed
+** FORMAT SPECIFIER STRUCT
+** .spe_c:	specifier character - i.e. variable type (ex.: %c %s %p %d %i).
+** .pad_c:	padding character - could be eiter ' ' (default) or '0' ('0' flag).
+** .minus:	'-' flag - left-justifies within the given field width; right
+**			justification is the default.
+** .plus:	'+' flag - preceeds positive numbers with the plus sign; by default,
+**			only negative numbers are preceeded with a '-' sign.
+** .space:	' ' flag - a blank space is inserted before unsigned values.
+** .hash:	'#' flag - for %o %x %X, preceeds not null values with 0, 0x or 0X
+**			respectively; for %a %A %e %E %f %F %g %G, prints decimal point
+**			even if no more digits follow. By default, if no digits follow, no
+**			decimal point is printed.
+** .width:	min number of characters to be printed, with blank space padding if
+**			value is shorter than width.
+** .point: '1' if precision is given, '0' if not.
+** .precision: for %d %i %o %u %x %X, min number of digits to be printed, with
+**			with 0 padding if value is shorter than precision; for %a %A %e %E
+**			%f %F, number of digits to be printed after the decimal point (by
+**			default, this is 6); for %g %G, max number of significants digits
+**			to be printed; for %s, max number of characters to be printed (by
+**			default, all characters are printed until '\0'); note: '.' = '.0'.
 */
 
 typedef struct	s_flags
 {
-	char	spec;
+	char	spe_c;
 	char	pad_c;
 	int		minus;
 	int		plus;
-	int		hash;
 	int		space;
+	int		hash;
 	int		width;
+	int		point;
 	int		precision;
 }				t_flags;
 
@@ -72,7 +86,7 @@ void	print_spec_s(int *len, t_flags fl, char *s);
 
 size_t	ft_strlen(const char *s);
 void	ft_putchar_len(char c, int *len);
-void	ft_putstr_len(char *s, int *len);
+void	ft_putcstr_len(char *s, int *len, int size);
 int		ft_strchr_01(char *s, char c);
 
 #endif

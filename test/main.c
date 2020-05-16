@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/15 18:46:13 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/16 20:54:55 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,12 @@ void	test_star(int *i, char *s)
 	printf("s[*i] = %c\n", s[*i]);
 }
 
-#define INPUT	"|%3c|%-3c|%5s|%-5s|", 'A', 'B', "str", "ing"
+#define INPUT	"%.2s%.7s", "hello", "world"
+#define INPUT_1	"|%3c|%-3c|%5s|%-5s|", 'A', 'B', "str", "ing"
 
 int		main(void)
 {
-	//int i;
 	int len;
-	char s[5] = "0123";
-
-	//i = 2;
-	//test_star(&i, s);
 
 	printf(MAIN_2("\n=== • printf compare • ===\n") "\n");
 
@@ -53,5 +49,4 @@ int		main(void)
 	printf(HEADER_2("\nprintf:") "\n");
 	len = printf(INPUT);
 	printf(HEADER_2("\nlen = %i\n"), len);
-	//ft_printf("Teste %c\n");
 }

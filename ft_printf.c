@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/15 15:02:31 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/16 20:34:52 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void		triage_specs(va_list args, int *len, t_flags fl)
 {
-	if (fl.spec == 'c')
+	if (fl.spe_c == 'c')
 		print_spec_c(len, fl, va_arg(args, int));
-	if (fl.spec == 's')
+	if (fl.spe_c == 's')
 		print_spec_s(len, fl, va_arg(args, char *));
 }
 
@@ -38,7 +38,7 @@ static t_flags	treat_flags(char *flags, t_flags fl)
 			fl.precision = 10 * fl.precision + flags[i++] - '0';
 	}
 	//printf("> collected flags:\n");
-	//printf("  • fl.spec = '%c'\n", fl.spec);
+	//printf("  • fl.spe_c = '%c'\n", fl.spe_c);
 	//printf("  • fl.pad_c = '%c'\n", fl.pad_c);
 	//printf("  • fl.minus = '%i'\n", fl.minus);
 	//printf("  • fl.plus = '%i'\n", fl.plus);
@@ -61,7 +61,7 @@ static void		get_specs(va_list args, const char *format, int *len, int *i)
 	flags[j] = '\0';
 	if (ft_strchr_01(SPECS, format[*i]))
 	{
-		fl.spec = format[(*i)++];
+		fl.spe_c = format[(*i)++];
 		fl.pad_c = ' ';
 		fl.minus = ft_strchr_01(flags, '-');
 		fl.plus = ft_strchr_01(flags, '+');

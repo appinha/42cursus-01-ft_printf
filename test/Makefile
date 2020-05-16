@@ -6,15 +6,15 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/06 17:29:07 by apuchill          #+#    #+#              #
-#    Updated: 2020/05/13 22:16:51 by apuchill         ###   ########.fr        #
+#    Updated: 2020/05/16 20:35:47 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PROJECT_DIR	= ../
-LIB	= ftprintf
+LIB	= -L$(PROJECT_DIR) -lftprintf
 
 CC		= gcc
-#CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
 RM		= /bin/rm -f
 
 NAME	= a.out
@@ -22,8 +22,8 @@ NAME	= a.out
 all:		$(NAME)
 
 $(NAME):
-			@make -C $(PROJECT_DIR)
-			@$(CC) $(CFLAGS) -o $(NAME) main.c -L$(PROJECT_DIR) -l$(LIB)
+			@make re -C $(PROJECT_DIR)
+			@$(CC) $(CFLAGS) -o $(NAME) main.c $(LIB)
 			@sh test_header.sh && ./$(NAME) && sh test_footer.sh
 #			@echo "" && cd $(PROJECT_DIR) && make fclean
 
