@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/17 13:32:25 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/17 18:21:21 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static t_flags	treat_flags(va_list args, char *flags, t_flags fl)
 	if (flags[i++] == '.')
 	{
 		fl.point = 1;
-		if (flags[i++] == '*')
+		if (flags[i] == '*')
 			fl = treat_star(args, fl, &i);
 		while (flags[i] != '\0' && ft_strchr_01(DIGITS, flags[i]))
 			fl.precision = 10 * fl.precision + flags[i++] - '0';
