@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/17 01:07:26 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/17 13:32:25 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,33 @@ static void		triage_specs(va_list args, int *len, t_flags fl)
 		print_spec_c(len, fl, va_arg(args, int));
 	if (fl.spe_c == 's')
 		print_spec_s(len, fl, va_arg(args, char *));
+	if (fl.spe_c == 'i' || fl.spe_c == 'd')
+		print_spec_i_d(len, fl, va_arg(args, int));
 }
 
-static t_flags	treat_flags(char *flags, t_flags fl)
+static t_flags	treat_star(va_list args, t_flags fl, int *i)
+{
+	int	value;
+
+	value = va_arg(args, int);
+	(*i)++;
+	if (fl.point == 0)
+	{
+		fl.width = (value >= 0) ? value : -value;
+		fl.pad_c = (value >= 0) ? fl.pad_c : ' ';
+		fl.minus = (value >= 0) ? fl.minus : 1;
+	}
+	if (fl.point == 1)
+	{
+		if (value >= 0)
+			fl.precision = value;
+		else
+			fl.point = 0;
+	}
+	return (fl);
+}
+
+static t_flags	treat_flags(va_list args, char *flags, t_flags fl)
 {
 	int i;
 
@@ -30,18 +54,22 @@ static t_flags	treat_flags(char *flags, t_flags fl)
 		if (flags[i++] == '0')
 			fl.pad_c = '0';
 	}
+	if (flags[i] == '*')
+		fl = treat_star(args, fl, &i);
 	while (flags[i] != '\0' && ft_strchr_01(DIGITS, flags[i]))
 		fl.width = 10 * fl.width + flags[i++] - '0';
 	if (flags[i++] == '.')
 	{
 		fl.point = 1;
+		if (flags[i++] == '*')
+			fl = treat_star(args, fl, &i);
 		while (flags[i] != '\0' && ft_strchr_01(DIGITS, flags[i]))
 			fl.precision = 10 * fl.precision + flags[i++] - '0';
 	}
 	return (fl);
 }
 
-static void		get_specs(va_list args, const char *format, int *len, int *i)
+static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 {
 	int		j;
 	char	flags[20];
@@ -62,7 +90,7 @@ static void		get_specs(va_list args, const char *format, int *len, int *i)
 		fl.width = 0;
 		fl.point = 0;
 		fl.precision = 0;
-		fl = treat_flags(flags, fl);
+		fl = treat_flags(args, flags, fl);
 		triage_specs(args, len, fl);
 	}
 	else
@@ -87,7 +115,7 @@ int				ft_printf(const char *format, ...)
 			if (format[++i] == '%')
 				ft_putchar_len(format[i++], &len);
 			else
-				get_specs(args, format, &len, &i);
+				get_fspecs(args, format, &len, &i);
 			if (len == -1)
 				return (-1);
 		}

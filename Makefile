@@ -6,7 +6,7 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/06 21:56:58 by apuchill          #+#    #+#              #
-#    Updated: 2020/05/14 18:05:30 by apuchill         ###   ########.fr        #
+#    Updated: 2020/05/17 13:32:44 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ RM		= /bin/rm -f
 
 NAME	= libftprintf.a
 
-SRCS	= ft_printf.c ft_printf_utils.c ft_printf_c_s.c
+SRCS	= ft_printf.c ft_printf_utils.c ft_printf_c_s.c ft_printf_i_d.c
 
 OBJS	= $(SRCS:.c=.o)
 

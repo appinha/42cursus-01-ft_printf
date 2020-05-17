@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:24:53 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/17 01:23:29 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/17 12:32:03 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strlen(const char *s)
 	if (!s)
 		return (0);
 	l = 0;
-	while (s[l] != 0)
+	while (s[l] != '\0')
 		l++;
 	return (l);
 }
@@ -38,10 +38,7 @@ void	ft_putcstr_len(char *s, int *len, int size)
 	{
 		i = 0;
 		while (s[i] && i < size)
-		{
-			ft_putchar_len(s[i], len);
-			i++;
-		}
+			ft_putchar_len(s[i++], len);
 	}
 }
 
@@ -52,9 +49,8 @@ int		ft_strchr_01(char *s, char c)
 	i = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == c)
+		if (s[i++] == c)
 			return (1);
-		i++;
 	}
 	return (0);
 }

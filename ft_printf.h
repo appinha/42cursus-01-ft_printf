@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/17 01:22:16 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/17 13:33:05 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 **			default, this is 6); for %g %G, max number of significants digits
 **			to be printed; for %s, max number of characters to be printed (by
 **			default, all characters are printed until '\0'); note: '.' = '.0'.
+** Reference: http://www.cplusplus.com/reference/cstdio/printf/
 */
 
 typedef struct	s_flags
@@ -60,7 +61,6 @@ typedef struct	s_flags
 */
 
 # define FLAGS		"-+#0 "
-# define OTHER_SP	"*."
 # define DIGITS		"0123456789"
 # define LENGTH		"lh"
 # define ALL_FL		"-+#0 *.0123456789lh"
@@ -80,6 +80,7 @@ typedef struct	s_flags
 int				ft_printf(const char *str, ...);
 void			print_spec_c(int *len, t_flags fl, char c);
 void			print_spec_s(int *len, t_flags fl, char *s);
+void			print_spec_i_d(int *len, t_flags fl, int n);
 
 /*
 ** UTILS FUNCTIONS
@@ -89,5 +90,6 @@ size_t			ft_strlen(const char *s);
 void			ft_putchar_len(char c, int *len);
 void			ft_putcstr_len(char *s, int *len, int size);
 int				ft_strchr_01(char *s, char c);
+char			*ft_itoa(int n);
 
 #endif
