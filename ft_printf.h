@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/16 23:11:09 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/17 01:22:16 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct	s_flags
 # define OTHER_SP	"*."
 # define DIGITS		"0123456789"
 # define LENGTH		"lh"
-# define ALL_FL		FLAGS OTHER_SP DIGITS LENGTH
+# define ALL_FL		"-+#0 *.0123456789lh"
 # define SPECS		"cspdiuxX%"
 
 # define SPECS_B	"nfge"
@@ -77,17 +77,17 @@ typedef struct	s_flags
 ** MAIN FUNCTIONS
 */
 
-int		ft_printf(const char *str, ...);
-void	print_spec_c(int *len, t_flags fl, char c);
-void	print_spec_s(int *len, t_flags fl, char *s);
+int				ft_printf(const char *str, ...);
+void			print_spec_c(int *len, t_flags fl, char c);
+void			print_spec_s(int *len, t_flags fl, char *s);
 
 /*
 ** UTILS FUNCTIONS
 */
 
-size_t	ft_strlen(const char *s);
-void	ft_putchar_len(char c, int *len);
-void	ft_putcstr_len(char *s, int *len, int size);
-int		ft_strchr_01(char *s, char c);
+size_t			ft_strlen(const char *s);
+void			ft_putchar_len(char c, int *len);
+void			ft_putcstr_len(char *s, int *len, int size);
+int				ft_strchr_01(char *s, char c);
 
 #endif

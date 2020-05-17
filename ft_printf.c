@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/16 23:33:40 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/17 01:07:26 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,6 @@ static t_flags	treat_flags(char *flags, t_flags fl)
 		while (flags[i] != '\0' && ft_strchr_01(DIGITS, flags[i]))
 			fl.precision = 10 * fl.precision + flags[i++] - '0';
 	}
-	//printf("> collected flags:\n");
-	//printf("  • fl.spe_c = '%c'\n", fl.spe_c);
-	//printf("  • fl.pad_c = '%c'\n", fl.pad_c);
-	//printf("  • fl.minus = '%i'\n", fl.minus);
-	//printf("  • fl.plus = '%i'\n", fl.plus);
-	//printf("  • fl.hash = '%i'\n", fl.hash);
-	//printf("  • fl.space = '%i'\n", fl.space);
-	//printf("  • fl.width = '%i'\n", fl.width);
-	//printf("  • fl.point = '%i'\n", fl.point);
-	//printf("  • fl.precision = '%i'\n", fl.precision);
 	return (fl);
 }
 

@@ -6,22 +6,22 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 17:36:54 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/17 00:37:38 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/17 01:04:01 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void print_padding(int *len, t_flags fl)
+static void	print_padding(int *len, t_flags fl)
 {
-	while(fl.width > fl.precision)
+	while (fl.width > fl.precision)
 	{
 		ft_putchar_len(' ', len);
 		fl.width--;
 	}
 }
 
-void	print_spec_c(int *len, t_flags fl, char c)
+void		print_spec_c(int *len, t_flags fl, char c)
 {
 	fl.precision = 1;
 	if (fl.minus == 0)
@@ -31,7 +31,7 @@ void	print_spec_c(int *len, t_flags fl, char c)
 		print_padding(len, fl);
 }
 
-void	print_spec_s(int *len, t_flags fl, char *s)
+void		print_spec_s(int *len, t_flags fl, char *s)
 {
 	if (s == NULL)
 		s = "(null)";

@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:24:53 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/17 00:37:44 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/17 01:23:29 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,11 @@ int		ft_strchr_01(char *s, char c)
 	int i;
 
 	i = 0;
-	//printf("  > ft_strchr_01 • s: \"%s\"\n", s);
 	while (s[i] != '\0')
 	{
 		if (s[i] == c)
 			return (1);
 		i++;
 	}
-	//printf("  > ft_strchr_01 • return (0)\n");
 	return (0);
 }
