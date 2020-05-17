@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 17:36:54 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/16 23:33:52 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/16 23:40:09 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,4 @@ void	print_spec_s(int *len, t_flags fl, char *s)
 	ft_putcstr_len(s, len, fl.precision);
 	if (fl.minus == 1)
 		print_padding(len, fl);
-
-	printf("> fl.width = %i\n", fl.width);
-	printf("> fl.point = %i\n", fl.point);
-	printf("> fl.precision = %i\n", fl.precision);
 }
