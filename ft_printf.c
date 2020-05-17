@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/16 20:34:52 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/16 23:19:19 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ static void		get_specs(va_list args, const char *format, int *len, int *i)
 		fl.pad_c = ' ';
 		fl.minus = ft_strchr_01(flags, '-');
 		fl.plus = ft_strchr_01(flags, '+');
-		fl.hash = ft_strchr_01(flags, '#');
 		fl.space = ft_strchr_01(flags, ' ');
+		fl.hash = ft_strchr_01(flags, '#');
 		fl.width = 0;
+		fl.point = 0;
 		fl.precision = 0;
 		fl = treat_flags(flags, fl);
 		triage_specs(args, len, fl);

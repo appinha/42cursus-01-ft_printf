@@ -6,13 +6,14 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/16 20:51:30 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/16 23:11:09 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>

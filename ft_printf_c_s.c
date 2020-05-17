@@ -6,15 +6,14 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 17:36:54 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/16 20:53:41 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/16 23:22:08 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void print_padding(int *len, t_flags fl, int spec_len)
+static void print_padding(int *len, t_flags fl)
 {
-	fl.width -= spec_len;
 	while(fl.width > fl.precision)
 	{
 		ft_putchar_len(' ', len);
@@ -24,12 +23,12 @@ static void print_padding(int *len, t_flags fl, int spec_len)
 
 void	print_spec_c(int *len, t_flags fl, char c)
 {
-	fl.precision = 0;
+	fl.precision = 1;
 	if (fl.minus == 0)
-		print_padding(len, fl, 1);
+		print_padding(len, fl);
 	ft_putchar_len(c, len);
 	if (fl.minus == 1)
-		print_padding(len, fl, 1);
+		print_padding(len, fl);
 }
 
 void	print_spec_s(int *len, t_flags fl, char *s)
@@ -44,8 +43,8 @@ void	print_spec_s(int *len, t_flags fl, char *s)
 	if ((fl.point == 1 && fl.precision > s_len) || fl.point == 0)
 		fl.precision = s_len;
 	if (fl.minus == 0)
-		print_padding(len, fl, s_len);
+		print_padding(len, fl);
 	ft_putcstr_len(s, len, fl.precision);
 	if (fl.minus == 1)
-		print_padding(len, fl, s_len);
+		print_padding(len, fl);
 }

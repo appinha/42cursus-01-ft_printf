@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/16 20:54:55 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/16 23:08:52 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	test_star(int *i, char *s)
 	printf("s[*i] = %c\n", s[*i]);
 }
 
-#define INPUT	"%.2s%.7s", "hello", "world"
+#define INPUT	"%32s", "abc"
 #define INPUT_1	"|%3c|%-3c|%5s|%-5s|", 'A', 'B', "str", "ing"
 
 int		main(void)
