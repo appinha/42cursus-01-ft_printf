@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 17:27:14 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 19:05:55 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,9 @@ int				ft_printf(const char *str, ...);
 void			print_spec_pct(int *len, t_flags fl);
 void			print_spec_c(int *len, t_flags fl, char c);
 void			print_spec_s(int *len, t_flags fl, char *s);
-void			print_spec_i_d(int *len, t_flags fl, long long int n);
-void			print_spec_u(int *len, t_flags fl, unsigned long long int n);
+void			print_spec_i_d_u(int *len, t_flags fl, va_list args);
+//void			print_spec_i_d(int *len, t_flags fl, long long int n);
+//void			print_spec_u(int *len, t_flags fl, unsigned long long int n);
 
 /*
 ** UTILS FUNCTIONS

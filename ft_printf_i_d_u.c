@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 18:31:33 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 19:06:12 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,35 @@ static void	print_flags(int *len, t_flags fl, unsigned long long int n)
 		print_width(len, fl);
 }
 
+void		print_spec_i_d_u(int *len, t_flags fl, va_list args)
+{
+	unsigned long long int	un;
+	long long int			n;
+
+	if (fl.spe_c == 'i' || fl.spe_c == 'd')
+	{
+		if (fl.length <= 0)
+			n = va_arg(args, int);
+		if (fl.length == 1)
+			n = va_arg(args, long int);
+		if (fl.length == 2)
+			n = va_arg(args, long long int);
+		fl.sign = (n >= 0) ? '+' : '-';
+		un = (n >= 0) ? n : -n;
+	}
+	if (fl.spe_c == 'u')
+	{
+		if (fl.length <= 0)
+			un = va_arg(args, unsigned int);
+		if (fl.length == 1)
+			un = va_arg(args, unsigned long int);
+		if (fl.length == 2)
+			un = va_arg(args, unsigned long long int);
+		fl.sign = '+';
+	}
+	print_flags(len, fl, un);
+}
+/*
 void		print_spec_i_d(int *len, t_flags fl, long long int n)
 {
 	unsigned long long int	nbr;
@@ -92,3 +121,4 @@ void		print_spec_u(int *len, t_flags fl, unsigned long long int n)
 	fl.sign = '+';
 	print_flags(len, fl, n);
 }
+*/

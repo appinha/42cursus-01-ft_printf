@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 16:07:21 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 19:05:34 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ static void		triage_specs(va_list args, int *len, t_flags fl)
 		print_spec_c(len, fl, va_arg(args, int));
 	if (fl.spe_c == 's')
 		print_spec_s(len, fl, va_arg(args, char *));
+	if (fl.spe_c == 'i' || fl.spe_c == 'd' || fl.spe_c == 'u')
+		print_spec_i_d_u(len, fl, args);
+/*
 	if ((fl.spe_c == 'i' || fl.spe_c == 'd') && fl.length <= 0)
 		print_spec_i_d(len, fl, va_arg(args, int));
 	if ((fl.spe_c == 'i' || fl.spe_c == 'd') && fl.length == 1)
@@ -32,6 +35,7 @@ static void		triage_specs(va_list args, int *len, t_flags fl)
 		print_spec_u(len, fl, va_arg(args, unsigned long int));
 	if ((fl.spe_c == 'u') && fl.length == 2)
 		print_spec_u(len, fl, va_arg(args, unsigned long long int));
+*/
 }
 
 static t_flags	treat_star(va_list args, t_flags fl)
@@ -126,7 +130,7 @@ int				ft_printf(const char *format, ...)
 		else
 		{
 			i++;
-				get_fspecs(args, format, &len, &i);
+			get_fspecs(args, format, &len, &i);
 			if (len == -1)
 				return (-1);
 		}
