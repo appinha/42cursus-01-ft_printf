@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 17:37:18 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 17:56:33 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ static void	print_flags(int *len, t_flags fl, unsigned long long int n)
 {
 	fl.a = ft_ullitoa(n);
 	fl.size = ft_strlen(fl.a);
-	//if (fl.point == 1)
-	//	fl.pad_c = ' ';
 	if (n == 0 && fl.point == 1 && fl.precision == 0)
 		fl.width++;
 	if (fl.minus == 0 && fl.pad_c == ' ')
@@ -68,11 +66,9 @@ static void	print_flags(int *len, t_flags fl, unsigned long long int n)
 		print_width(len, fl);
 	if (fl.point == 1)
 	{
-		while (fl.precision > fl.size)
-		{
+		fl.j = fl.precision;
+		while (fl.j-- > fl.size)
 			ft_putchar_len('0', len);
-			fl.precision--;
-		}
 	}
 	if (!(n == 0 && fl.point == 1 && fl.precision == 0))
 		ft_putcstr_len(fl.a, len, ft_strlen(fl.a));
