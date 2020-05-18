@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_i_d.c                                    :+:      :+:    :+:   */
+/*   ft_printf_i_d_u.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 02:54:26 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 17:37:18 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char	*ft_ullitoa(unsigned long long n)
+static char	*ft_ullitoa(unsigned long long int n)
 {
 	char				*str;
 	unsigned long long	nbr;
@@ -50,10 +50,14 @@ static void	print_width(int *len, t_flags fl)
 	}
 }
 
-static void	print_flags(int *len, t_flags fl)
+static void	print_flags(int *len, t_flags fl, unsigned long long int n)
 {
-	if (fl.point == 1)
-		fl.pad_c = ' ';
+	fl.a = ft_ullitoa(n);
+	fl.size = ft_strlen(fl.a);
+	//if (fl.point == 1)
+	//	fl.pad_c = ' ';
+	if (n == 0 && fl.point == 1 && fl.precision == 0)
+		fl.width++;
 	if (fl.minus == 0 && fl.pad_c == ' ')
 		print_width(len, fl);
 	if (fl.sign == '-' || (fl.plus == 1 && fl.sign == '+'))
@@ -70,22 +74,23 @@ static void	print_flags(int *len, t_flags fl)
 			fl.precision--;
 		}
 	}
+	if (!(n == 0 && fl.point == 1 && fl.precision == 0))
+		ft_putcstr_len(fl.a, len, ft_strlen(fl.a));
+	if (fl.minus == 1)
+		print_width(len, fl);
 }
 
 void		print_spec_i_d(int *len, t_flags fl, long long int n)
 {
-	unsigned long long	nbr;
-	char				*a;
+	unsigned long long int	nbr;
 
 	fl.sign = (n >= 0) ? '+' : '-';
 	nbr = (n >= 0) ? n : -n;
-	a = ft_ullitoa(nbr);
-	fl.size = ft_strlen(a);
-	if (n == 0 && fl.point == 1 && fl.precision == 0)
-		fl.width++;
-	print_flags(len, fl);
-	if (!(n == 0 && fl.point == 1 && fl.precision == 0))
-		ft_putcstr_len(a, len, ft_strlen(a));
-	if (fl.minus == 1)
-		print_width(len, fl);
+	print_flags(len, fl, nbr);
+}
+
+void		print_spec_u(int *len, t_flags fl, unsigned long long int n)
+{
+	fl.sign = '+';
+	print_flags(len, fl, n);
 }

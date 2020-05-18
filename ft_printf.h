@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 14:23:36 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 17:27:14 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@
 **			default, this is 6); for %g %G, max number of significants digits
 **			to be printed; for %s, max number of characters to be printed (by
 **			default, all characters are printed until '\0'); note: '.' = '.0'.
+** .length:	modifies the length of the data type as follows:
+**				| %d %i (int)	| %u %o %x %X (unsigned int)| %n (int*)		|
+**			'l'	| long int		| unsigned long int			| long int*		|
+**			'll'| long long int	| unsigned long long int	| long long int*|
+**			'h'	| short int		| unsigned short int		| short int*	|
+**			'hh	| signed char	| unsigned char				| signed char*	|
 ** Reference: http://www.cplusplus.com/reference/cstdio/printf/
 */
 
@@ -58,6 +64,7 @@ typedef struct	s_flags
 	int		length;
 	int		size;
 	char	sign;
+	char	*a;
 	int		j;
 }				t_flags;
 
@@ -85,6 +92,7 @@ void			print_spec_pct(int *len, t_flags fl);
 void			print_spec_c(int *len, t_flags fl, char c);
 void			print_spec_s(int *len, t_flags fl, char *s);
 void			print_spec_i_d(int *len, t_flags fl, long long int n);
+void			print_spec_u(int *len, t_flags fl, unsigned long long int n);
 
 /*
 ** UTILS FUNCTIONS
