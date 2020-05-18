@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 00:38:02 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 01:47:45 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct	s_flags
 	int		point;
 	int		precision;
 	int		length;
+	int		size;
+	int		sign;
 }				t_flags;
 
 /*
@@ -81,7 +83,7 @@ typedef struct	s_flags
 int				ft_printf(const char *str, ...);
 void			print_spec_c(int *len, t_flags fl, char c);
 void			print_spec_s(int *len, t_flags fl, char *s);
-void	print_spec_i_d(int *len, t_flags fl, long long int n);
+void			print_spec_i_d(int *len, t_flags fl, long long int n);
 
 /*
 ** UTILS FUNCTIONS
@@ -91,6 +93,5 @@ size_t			ft_strlen(const char *s);
 void			ft_putchar_len(char c, int *len);
 void			ft_putcstr_len(char *s, int *len, int size);
 int				ft_strchr_01(char *s, char c);
-char			*ft_itoa(int n);
 
 #endif
