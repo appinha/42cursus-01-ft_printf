@@ -6,17 +6,17 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 00:00:33 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 00:47:13 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_uitoa(unsigned int n)
+char	*ft_ullitoa(unsigned long long n)
 {
-	char	*str;
-	long	nbr;
-	size_t	size;
+	char				*str;
+	unsigned long long	nbr;
+	size_t				size;
 
 	nbr = (n > 0) ? n : -n;
 	size = 1;
@@ -58,15 +58,16 @@ static void	print_width(int *len, t_flags fl, char sign, int size)
 	}
 }
 
-void	print_spec_i_d(int *len, t_flags fl, int n)
+void	print_spec_i_d(int *len, t_flags fl, long long int n)
 {
 	char	*a;
 	char	sign;
 	int		size;
 
+	//printf("[n = %lli]", n);
 	sign = (n >= 0) ? '+' : '-';
 	n = (n >= 0) ? n : -n;
-	a = ft_uitoa((unsigned int)n);
+	a = ft_ullitoa(n);
 	size = ft_strlen(a);
 	if (fl.point == 1)
 		fl.pad_c = ' ';

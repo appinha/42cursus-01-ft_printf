@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/17 18:21:21 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 00:58:58 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ static void		triage_specs(va_list args, int *len, t_flags fl)
 		print_spec_c(len, fl, va_arg(args, int));
 	if (fl.spe_c == 's')
 		print_spec_s(len, fl, va_arg(args, char *));
-	if (fl.spe_c == 'i' || fl.spe_c == 'd')
+	if (fl.length <= 0 && (fl.spe_c == 'i' || fl.spe_c == 'd'))
 		print_spec_i_d(len, fl, va_arg(args, int));
+	if (fl.length == 1 && (fl.spe_c == 'i' || fl.spe_c == 'd'))
+		print_spec_i_d(len, fl, va_arg(args, long int));
+	if (fl.length == 2 && (fl.spe_c == 'i' || fl.spe_c == 'd'))
+		print_spec_i_d(len, fl, va_arg(args, long long int));
 }
 
 static t_flags	treat_star(va_list args, t_flags fl, int *i)
@@ -58,14 +62,18 @@ static t_flags	treat_flags(va_list args, char *flags, t_flags fl)
 		fl = treat_star(args, fl, &i);
 	while (flags[i] != '\0' && ft_strchr_01(DIGITS, flags[i]))
 		fl.width = 10 * fl.width + flags[i++] - '0';
-	if (flags[i++] == '.')
+	if (flags[i] == '.')
 	{
 		fl.point = 1;
-		if (flags[i] == '*')
+		if (flags[++i] == '*')
 			fl = treat_star(args, fl, &i);
 		while (flags[i] != '\0' && ft_strchr_01(DIGITS, flags[i]))
 			fl.precision = 10 * fl.precision + flags[i++] - '0';
 	}
+	while (flags[i] != '\0' && ft_strchr_01("l", flags[i++]))
+		fl.length++;
+	while (flags[i] != '\0' && ft_strchr_01("h", flags[i]))
+		fl.length--;
 	return (fl);
 }
 
@@ -90,6 +98,7 @@ static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 		fl.width = 0;
 		fl.point = 0;
 		fl.precision = 0;
+		fl.length = 0;
 		fl = treat_flags(args, flags, fl);
 		triage_specs(args, len, fl);
 	}

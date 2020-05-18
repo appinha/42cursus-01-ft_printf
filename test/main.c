@@ -6,12 +6,13 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/17 23:55:11 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 01:01:05 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 #define MAIN_1(string)		"\033[1m\033[38;5;199m" string "\033[0m"
 #define MAIN_2(string)		"\033[35m" string "\033[0m"
@@ -35,11 +36,11 @@ void	test_star(int *i, char *s)
 
 #define INPUT	"|%3c|%-3c|%5s|%-5s|", 'A', 'B', "str", "ing"
 
-#define INPUT_1	"%8.5i", 34
-#define INPUT_2	"%08.5i", 34
-#define INPUT_3	"%08.5i", 0
-#define INPUT_4	"%08.3i", 8375
-#define INPUT_5	"%08.3i", -8473
+#define INPUT_1	"%li", LONG_MIN
+#define INPUT_2	"%li", LONG_MAX
+#define INPUT_3	"%hi", SHRT_MIN
+#define INPUT_4	"%hi", SHRT_MAX
+#define INPUT_5	"%i", INT_MIN
 
 int		main(void)
 {
