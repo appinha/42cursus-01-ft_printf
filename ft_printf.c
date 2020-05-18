@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 02:44:52 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 14:17:04 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void		triage_specs(va_list args, int *len, t_flags fl)
 {
+	if (fl.spe_c == '%')
+		print_spec_c(len, fl, '%');
 	if (fl.spe_c == 'c')
 		print_spec_c(len, fl, va_arg(args, int));
 	if (fl.spe_c == 's')
@@ -26,12 +28,12 @@ static void		triage_specs(va_list args, int *len, t_flags fl)
 		print_spec_i_d(len, fl, va_arg(args, long long int));
 }
 
-static t_flags	treat_star(va_list args, t_flags fl, int *i)
+static t_flags	treat_star(va_list args, t_flags fl)
 {
 	int	value;
 
 	value = va_arg(args, int);
-	(*i)++;
+	fl.j++;
 	if (fl.point == 0)
 	{
 		fl.width = (value >= 0) ? value : -value;
@@ -48,58 +50,55 @@ static t_flags	treat_star(va_list args, t_flags fl, int *i)
 	return (fl);
 }
 
-static t_flags	treat_flags(va_list args, char *flags, t_flags fl)
+static t_flags	treat_flags(va_list args, t_flags fl)
 {
-	int i;
-
-	i = 0;
-	while (flags[i] != '\0' && ft_strchr_01(FLAGS, flags[i]))
+	fl.j = 0;
+	while (fl.set[fl.j] != '\0' && ft_strchr_01(FLAGS, fl.set[fl.j]))
 	{
-		if (flags[i++] == '0')
+		fl.pad_c = ' ';
+		if (fl.set[fl.j++] == '0')
 			fl.pad_c = '0';
 	}
-	if (flags[i] == '*')
-		fl = treat_star(args, fl, &i);
-	while (flags[i] != '\0' && ft_strchr_01(DIGITS, flags[i]))
-		fl.width = 10 * fl.width + flags[i++] - '0';
-	if (flags[i] == '.')
+	if (fl.set[fl.j] == '*')
+		fl = treat_star(args, fl);
+	while (fl.set[fl.j] != '\0' && ft_strchr_01(DIGITS, fl.set[fl.j]))
+		fl.width = 10 * fl.width + fl.set[fl.j++] - '0';
+	if (fl.set[fl.j] == '.')
 	{
 		fl.point = 1;
-		if (flags[++i] == '*')
-			fl = treat_star(args, fl, &i);
-		while (flags[i] != '\0' && ft_strchr_01(DIGITS, flags[i]))
-			fl.precision = 10 * fl.precision + flags[i++] - '0';
+		if (fl.set[++fl.j] == '*')
+			fl = treat_star(args, fl);
+		while (fl.set[fl.j] != '\0' && ft_strchr_01(DIGITS, fl.set[fl.j]))
+			fl.precision = 10 * fl.precision + fl.set[fl.j++] - '0';
 	}
-	while (flags[i] != '\0' && ft_strchr_01("l", flags[i++]))
+	while (fl.set[fl.j] != '\0' && ft_strchr_01("l", fl.set[fl.j++]))
 		fl.length++;
-	while (flags[i] != '\0' && ft_strchr_01("h", flags[i++]))
+	while (fl.set[fl.j] != '\0' && ft_strchr_01("h", fl.set[fl.j++]))
 		fl.length--;
 	return (fl);
 }
 
 static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 {
-	int		j;
-	char	flags[20];
 	t_flags	fl;
 
-	j = 0;
-	while (ft_strchr_01(ALL_FL, format[*i]) && j < 19)
-		flags[j++] = format[(*i)++];
-	flags[j] = '\0';
+	fl.j = 0;
+	while (ft_strchr_01(ALL_FL, format[*i]) && fl.j < 19)
+		fl.set[fl.j++] = format[(*i)++];
+	fl.set[fl.j] = '\0';
 	if (ft_strchr_01(SPECS, format[*i]))
 	{
 		fl.spe_c = format[(*i)++];
-		fl.pad_c = ' ';
-		fl.minus = ft_strchr_01(flags, '-');
-		fl.plus = ft_strchr_01(flags, '+');
-		fl.space = ft_strchr_01(flags, ' ');
-		fl.hash = ft_strchr_01(flags, '#');
+		//fl.pad_c = ' ';
+		fl.minus = ft_strchr_01(fl.set, '-');
+		fl.plus = ft_strchr_01(fl.set, '+');
+		fl.space = ft_strchr_01(fl.set, ' ');
+		fl.hash = ft_strchr_01(fl.set, '#');
 		fl.width = 0;
 		fl.point = 0;
 		fl.precision = 0;
 		fl.length = 0;
-		fl = treat_flags(args, flags, fl);
+		fl = treat_flags(args, fl);
 		triage_specs(args, len, fl);
 	}
 	else
@@ -121,9 +120,10 @@ int				ft_printf(const char *format, ...)
 			ft_putchar_len(format[i++], &len);
 		else
 		{
-			if (format[++i] == '%')
-				ft_putchar_len(format[i++], &len);
-			else
+			i++;
+			//if (format[++i] == '%')
+			//	ft_putchar_len(format[i++], &len);
+			//else
 				get_fspecs(args, format, &len, &i);
 			if (len == -1)
 				return (-1);

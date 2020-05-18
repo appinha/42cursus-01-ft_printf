@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 02:53:06 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 13:58:28 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 
 typedef struct	s_flags
 {
+	char	set[20];
 	char	spe_c;
 	char	pad_c;
 	int		minus;
@@ -57,6 +58,7 @@ typedef struct	s_flags
 	int		length;
 	int		size;
 	char	sign;
+	int		j;
 }				t_flags;
 
 /*
