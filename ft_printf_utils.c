@@ -6,18 +6,11 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:24:53 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 02:39:00 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 02:53:42 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-//APAGAR - START
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-//APAGAR - END
 
 size_t	ft_strlen(const char *s)
 {

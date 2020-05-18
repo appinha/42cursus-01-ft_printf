@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 02:39:53 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 02:53:06 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ typedef struct	s_flags
 # define SPECS		"cspdiuxX%"
 
 # define SPECS_B	"nfge"
-# define FLAGS_M	"-0.*123456789"
-# define FLAGS_B	"l ll h hh # +"
 
 # define HEXA_LOW	"0123456789abcdef"
 # define HEXA_UP	"0123456789ABCDEF"
@@ -93,8 +91,5 @@ size_t			ft_strlen(const char *s);
 void			ft_putchar_len(char c, int *len);
 void			ft_putcstr_len(char *s, int *len, int size);
 int				ft_strchr_01(char *s, char c);
-
-//APAGAR
-void	ft_putchar(char c);
 
 #endif

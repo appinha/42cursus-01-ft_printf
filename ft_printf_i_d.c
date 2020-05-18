@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 02:39:25 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 02:54:26 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void		print_spec_i_d(int *len, t_flags fl, long long int n)
 	unsigned long long	nbr;
 	char				*a;
 
-	//printf("[•]");
 	fl.sign = (n >= 0) ? '+' : '-';
 	nbr = (n >= 0) ? n : -n;
 	a = ft_ullitoa(nbr);
