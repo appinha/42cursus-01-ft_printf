@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 00:47:13 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 01:16:48 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static void	print_precis(int *len, t_flags fl, int size)
 
 static void	print_width(int *len, t_flags fl, char sign, int size)
 {
-	if (sign == '-' || (fl.plus == 1 && sign == '+'))
+	if (sign == '-' || (fl.plus == 1 && sign == '+') ||
+		(fl.space == 1 && fl.plus == 0 && sign == '+'))
 		fl.width--;
 	fl.precision = (fl.precision > size) ? fl.precision : size;
 	if (fl.pad_c == '0' && (fl.minus == 1 || fl.point == 1))
@@ -75,6 +76,8 @@ void	print_spec_i_d(int *len, t_flags fl, long long int n)
 		print_width(len, fl, sign, size);
 	if (sign == '-' || (fl.plus == 1 && sign == '+'))
 		ft_putchar_len(sign, len);
+	if (fl.space == 1 && fl.plus == 0 && sign == '+')
+		ft_putchar_len(' ', len);
 	if (fl.minus == 0 && fl.pad_c == '0')
 		print_width(len, fl, sign, size);
 	if (fl.point == 1)
