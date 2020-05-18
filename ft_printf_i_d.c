@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/17 23:10:44 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/17 23:46:04 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,22 @@ char	*ft_uitoa(unsigned int n)
 	return (str);
 }
 
-static void	print_precis(int *len, t_flags fl, char sign, int size)
+static void	print_precis(int *len, t_flags fl, int size)
 {
-	if (fl.pad_c != '0' && (sign == '-' || (fl.plus == 1 && sign == '+')))
-		ft_putchar_len(sign, len);
-	if (fl.point == 1)
+	while (fl.precision > size)
 	{
-		while (fl.precision > size)
-		{
-			ft_putchar_len('0', len);
-			fl.precision--;
-		}
+		ft_putchar_len('0', len);
+		fl.precision--;
 	}
 }
 
 static void	print_width(int *len, t_flags fl, char sign, int size)
 {
 	if (sign == '-' || (fl.plus == 1 && sign == '+'))
-	{
 		fl.width--;
-		if (fl.pad_c == '0')
-			ft_putchar_len(sign, len);
-	}
 	fl.precision = (fl.precision > size) ? fl.precision : size;
+	if (fl.pad_c == '0' && fl.minus == 1)
+		fl.pad_c = ' ';
 	while (fl.width > fl.precision)
 	{
 		ft_putchar_len(fl.pad_c, len);
@@ -75,9 +68,14 @@ void	print_spec_i_d(int *len, t_flags fl, int n)
 	n = (n >= 0) ? n : -n;
 	a = ft_uitoa((unsigned int)n);
 	size = ft_strlen(a);
-	if (fl.minus == 0)
+	if (fl.minus == 0 && fl.pad_c == ' ')
 		print_width(len, fl, sign, size);
-	print_precis(len, fl, sign, size);
+	if (sign == '-' || (fl.plus == 1 && sign == '+'))
+		ft_putchar_len(sign, len);
+	if (fl.minus == 0 && fl.pad_c == '0')
+		print_width(len, fl, sign, size);
+	if (fl.point == 1)
+		print_precis(len, fl, size);
 	ft_putcstr_len(a, len, ft_strlen(a));
 	if (fl.minus == 1)
 		print_width(len, fl, sign, size);
