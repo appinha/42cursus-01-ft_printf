@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 01:16:48 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 01:26:06 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	print_spec_i_d(int *len, t_flags fl, long long int n)
 	char	sign;
 	int		size;
 
-	//printf("[n = %lli]", n);
 	sign = (n >= 0) ? '+' : '-';
 	n = (n >= 0) ? n : -n;
 	a = ft_ullitoa(n);
@@ -82,7 +81,8 @@ void	print_spec_i_d(int *len, t_flags fl, long long int n)
 		print_width(len, fl, sign, size);
 	if (fl.point == 1)
 		print_precis(len, fl, size);
-	ft_putcstr_len(a, len, ft_strlen(a));
+	if (!(n == 0 && fl.point == 1))
+		ft_putcstr_len(a, len, ft_strlen(a));
 	if (fl.minus == 1)
 		print_width(len, fl, sign, size);
 }
