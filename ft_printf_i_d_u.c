@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 17:56:33 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 18:31:33 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static void	print_flags(int *len, t_flags fl, unsigned long long int n)
 	fl.size = ft_strlen(fl.a);
 	if (n == 0 && fl.point == 1 && fl.precision == 0)
 		fl.width++;
+	if (fl.point == 1)
+		fl.pad_c = ' ';
 	if (fl.minus == 0 && fl.pad_c == ' ')
 		print_width(len, fl);
 	if (fl.sign == '-' || (fl.plus == 1 && fl.sign == '+'))
