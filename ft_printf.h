@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 01:47:45 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 02:39:53 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct	s_flags
 	int		precision;
 	int		length;
 	int		size;
-	int		sign;
+	char	sign;
 }				t_flags;
 
 /*
@@ -93,5 +93,8 @@ size_t			ft_strlen(const char *s);
 void			ft_putchar_len(char c, int *len);
 void			ft_putcstr_len(char *s, int *len, int size);
 int				ft_strchr_01(char *s, char c);
+
+//APAGAR
+void	ft_putchar(char c);
 
 #endif

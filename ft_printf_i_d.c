@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 01:57:53 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 02:39:25 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,7 @@ static char	*ft_ullitoa(unsigned long long n)
 		str[0] = '0';
 	return (str);
 }
-/*
-static void	print_precis(int *len, t_flags fl)
-{
-		while (fl.precision > fl.size)
-		{
-			ft_putchar_len('0', len);
-			fl.precision--;
-		}
-}
-*/
+
 static void	print_width(int *len, t_flags fl)
 {
 	if (fl.sign == '-' || (fl.plus == 1 && fl.sign == '+') ||
@@ -81,11 +72,12 @@ static void	print_flags(int *len, t_flags fl)
 	}
 }
 
-void	print_spec_i_d(int *len, t_flags fl, long long int n)
+void		print_spec_i_d(int *len, t_flags fl, long long int n)
 {
 	unsigned long long	nbr;
 	char				*a;
 
+	//printf("[•]");
 	fl.sign = (n >= 0) ? '+' : '-';
 	nbr = (n >= 0) ? n : -n;
 	a = ft_ullitoa(nbr);

@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 00:58:58 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 02:44:52 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static void		triage_specs(va_list args, int *len, t_flags fl)
 		print_spec_c(len, fl, va_arg(args, int));
 	if (fl.spe_c == 's')
 		print_spec_s(len, fl, va_arg(args, char *));
-	if (fl.length <= 0 && (fl.spe_c == 'i' || fl.spe_c == 'd'))
+	if ((fl.spe_c == 'i' || fl.spe_c == 'd') && fl.length <= 0)
 		print_spec_i_d(len, fl, va_arg(args, int));
-	if (fl.length == 1 && (fl.spe_c == 'i' || fl.spe_c == 'd'))
+	if ((fl.spe_c == 'i' || fl.spe_c == 'd') && fl.length == 1)
 		print_spec_i_d(len, fl, va_arg(args, long int));
-	if (fl.length == 2 && (fl.spe_c == 'i' || fl.spe_c == 'd'))
+	if ((fl.spe_c == 'i' || fl.spe_c == 'd') && fl.length == 2)
 		print_spec_i_d(len, fl, va_arg(args, long long int));
 }
 
@@ -72,7 +72,7 @@ static t_flags	treat_flags(va_list args, char *flags, t_flags fl)
 	}
 	while (flags[i] != '\0' && ft_strchr_01("l", flags[i++]))
 		fl.length++;
-	while (flags[i] != '\0' && ft_strchr_01("h", flags[i]))
+	while (flags[i] != '\0' && ft_strchr_01("h", flags[i++]))
 		fl.length--;
 	return (fl);
 }
