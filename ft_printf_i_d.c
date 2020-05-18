@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/17 23:46:04 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 00:00:33 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	print_width(int *len, t_flags fl, char sign, int size)
 	if (sign == '-' || (fl.plus == 1 && sign == '+'))
 		fl.width--;
 	fl.precision = (fl.precision > size) ? fl.precision : size;
-	if (fl.pad_c == '0' && fl.minus == 1)
+	if (fl.pad_c == '0' && (fl.minus == 1 || fl.point == 1))
 		fl.pad_c = ' ';
 	while (fl.width > fl.precision)
 	{
@@ -68,6 +68,8 @@ void	print_spec_i_d(int *len, t_flags fl, int n)
 	n = (n >= 0) ? n : -n;
 	a = ft_uitoa((unsigned int)n);
 	size = ft_strlen(a);
+	if (fl.point == 1)
+		fl.pad_c = ' ';
 	if (fl.minus == 0 && fl.pad_c == ' ')
 		print_width(len, fl, sign, size);
 	if (sign == '-' || (fl.plus == 1 && sign == '+'))
