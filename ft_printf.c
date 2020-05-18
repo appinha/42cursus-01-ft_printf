@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 14:23:31 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 14:29:48 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static t_flags	treat_star(va_list args, t_flags fl)
 static t_flags	treat_flags(va_list args, t_flags fl)
 {
 	fl.j = 0;
+	fl.pad_c = ' ';
 	while (fl.set[fl.j] != '\0' && ft_strchr_01(FLAGS, fl.set[fl.j]))
 	{
-		fl.pad_c = ' ';
 		if (fl.set[fl.j++] == '0')
 			fl.pad_c = '0';
 	}
@@ -89,7 +89,6 @@ static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 	if (ft_strchr_01(SPECS, format[*i]))
 	{
 		fl.spe_c = format[(*i)++];
-		//fl.pad_c = ' ';
 		fl.minus = ft_strchr_01(fl.set, '-');
 		fl.plus = ft_strchr_01(fl.set, '+');
 		fl.space = ft_strchr_01(fl.set, ' ');

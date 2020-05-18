@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 17:36:54 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 14:23:33 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 14:29:11 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	print_padding(int *len, t_flags fl)
 
 void		print_spec_pct(int *len, t_flags fl)
 {
+	if (fl.minus == 1)
+		fl.pad_c = ' ';
 	fl.precision = 1;
 	if (fl.minus == 0)
 		print_padding(len, fl);
