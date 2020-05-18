@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 17:36:54 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/17 18:21:31 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/17 19:15:57 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static void	print_padding(int *len, t_flags fl)
 {
+	fl.pad_c = ' ';
 	while (fl.width > fl.precision)
 	{
-		ft_putchar_len(' ', len);
+		ft_putchar_len(fl.pad_c, len);
 		fl.width--;
 	}
 }
