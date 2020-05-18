@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 17:36:54 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/17 19:15:57 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 14:23:33 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	print_padding(int *len, t_flags fl)
 {
-	fl.pad_c = ' ';
 	while (fl.width > fl.precision)
 	{
 		ft_putchar_len(fl.pad_c, len);
@@ -22,8 +21,19 @@ static void	print_padding(int *len, t_flags fl)
 	}
 }
 
+void		print_spec_pct(int *len, t_flags fl)
+{
+	fl.precision = 1;
+	if (fl.minus == 0)
+		print_padding(len, fl);
+	ft_putchar_len('%', len);
+	if (fl.minus == 1)
+		print_padding(len, fl);
+}
+
 void		print_spec_c(int *len, t_flags fl, char c)
 {
+	fl.pad_c = ' ';
 	fl.precision = 1;
 	if (fl.minus == 0)
 		print_padding(len, fl);
@@ -34,6 +44,7 @@ void		print_spec_c(int *len, t_flags fl, char c)
 
 void		print_spec_s(int *len, t_flags fl, char *s)
 {
+	fl.pad_c = ' ';
 	if (s == NULL)
 		s = "(null)";
 	if ((fl.point == 1 && fl.precision > (int)ft_strlen(s)) || fl.point == 0)

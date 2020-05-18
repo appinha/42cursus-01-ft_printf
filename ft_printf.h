@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 13:58:28 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 14:23:36 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct	s_flags
 */
 
 int				ft_printf(const char *str, ...);
+void			print_spec_pct(int *len, t_flags fl);
 void			print_spec_c(int *len, t_flags fl, char c);
 void			print_spec_s(int *len, t_flags fl, char *s);
 void			print_spec_i_d(int *len, t_flags fl, long long int n);
