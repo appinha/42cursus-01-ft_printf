@@ -6,7 +6,7 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/06 21:56:58 by apuchill          #+#    #+#              #
-#    Updated: 2020/05/19 14:25:35 by apuchill         ###   ########.fr        #
+#    Updated: 2020/05/19 15:03:18 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RM		= /bin/rm -f
 NAME	= libftprintf.a
 
 SRCS	= ft_printf.c ft_printf_utils.c ft_printf_utils_2.c \
-			ft_printf_csp_pct.c ft_printf_iduxX.c
+			ft_printf_csp_pct.c ft_printf_iduxX.c ft_printf_f.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -29,6 +29,8 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			@ar -rcs $(NAME) $(OBJS)
 
+bonus:		$(NAME)
+
 clean:
 			@$(RM) $(OBJS)
 
@@ -37,4 +39,6 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+rebonus:	fclean bonus
+
+.PHONY:		all clean fclean re bonus rebonus

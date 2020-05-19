@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/19 14:11:18 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/19 15:18:06 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void		triage_specs(va_list args, int *len, t_flags fl)
 		print_spec_x_X(len, fl, args);
 	if (fl.spe_c == 'p')
 		print_spec_p(len, fl, va_arg(args, unsigned long int));
+	if (fl.spe_c == 'f')
+		print_spec_f(len, fl, va_arg(args, double));
 }
 
 static t_flags	treat_star(va_list args, t_flags fl)
@@ -86,7 +88,7 @@ static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 	while (ft_strchr_01(ALL_FL, format[*i]) && fl.j < 19)
 		fl.set[fl.j++] = format[(*i)++];
 	fl.set[fl.j] = '\0';
-	if (ft_strchr_01(SPECS, format[*i]))
+	if (ft_strchr_01(FSPECS, format[*i]))
 	{
 		fl.spe_c = format[(*i)++];
 		fl.minus = ft_strchr_01(fl.set, '-');

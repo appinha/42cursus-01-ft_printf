@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/19 14:24:38 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/19 16:16:27 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	test_star(int *i, char *s)
 
 #define INPUT	"|%3c|%-3c|%5s|%-5s|", 'A', 'B', "str", "ing"
 
-#define INPUT_1	"%5p", 0
-#define INPUT_2	"%5p", 0
-#define INPUT_3	"%5p", &p1
-#define INPUT_4	"%#8.5x", 0
-#define INPUT_5	"%#-8.5x", 0
+#define INPUT_1	"this %f float", 1.6
+#define INPUT_2	"%f", -3.85
+#define INPUT_3	"%f", d1
+#define INPUT_4	"%f", -3.85
+#define INPUT_5	"%f", 573.924
 
 int		main(void)
 {
@@ -49,10 +49,12 @@ int		main(void)
 	float	f1;
 	float	f2;
 	float	f3;
+	double	d1;
 
-	f1 = 483400000;
+	f1 = 0.0894255;
 	f2 = 473400001;
 	f3 = 100;
+	d1 = 0.0894255;
 
 	//ft_ullitoa_base(3267, "0123456789abcdef");
 
