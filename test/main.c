@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/19 14:15:14 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/19 14:24:38 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	test_star(int *i, char *s)
 
 #define INPUT	"|%3c|%-3c|%5s|%-5s|", 'A', 'B', "str", "ing"
 
-#define INPUT_1	"%p", NULL
+#define INPUT_1	"%5p", 0
 #define INPUT_2	"%5p", 0
 #define INPUT_3	"%5p", &p1
 #define INPUT_4	"%#8.5x", 0

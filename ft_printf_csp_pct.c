@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 17:36:54 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/19 14:21:51 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/19 14:24:49 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ void		print_spec_s(int *len, t_flags fl, char *s)
 void		print_spec_p(int *len, t_flags fl, unsigned long int p)
 {
 	fl.pad_c = ' ';
-	//if (p == NULL)
-	//	p = "0x0";
 	fl.a = ft_ullitoa_base(p, "0123456789abcdef");
 	fl.a = ft_strjoin("0x", fl.a);
+	fl.precision = ft_strlen(fl.a);
 	if (fl.minus == 0)
 		print_padding(len, fl);
 	ft_putcstr_len(fl.a, len, 14);
