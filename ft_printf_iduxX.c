@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_i_d_u.c                                  :+:      :+:    :+:   */
+/*   ft_printf_iduxX.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/19 00:36:21 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/19 12:15:28 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,9 @@ void		print_spec_x_X(int *len, t_flags fl, va_list args)
 		fl.a = ft_ullitoa_base(fl.ulli, "0123456789abcdef");
 	if (fl.spe_c == 'X')
 		fl.a = ft_ullitoa_base(fl.ulli, "0123456789ABCDEF");
+	if (fl.hash == 1 && fl.spe_c == 'x')
+		fl.a = ft_strjoin("0x", fl.a);
+	if (fl.hash == 1 && fl.spe_c == 'X')
+		fl.a = ft_strjoin("0X", fl.a);
 	print_flags(len, fl);
 }
