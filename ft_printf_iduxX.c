@@ -6,33 +6,35 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 19:06:12 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/19 00:36:21 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char	*ft_ullitoa(unsigned long long int n)
+char		*ft_ullitoa_base(unsigned long long int n, char *base)
 {
-	char				*str;
-	unsigned long long	nbr;
-	size_t				size;
+	char					*a;
+	unsigned long long int	nbr;
+	size_t					size;
+	int						b_len;
 
-	nbr = (n > 0) ? n : -n;
+	b_len = ft_strlen(base);
+	nbr = n;
 	size = 1;
-	while (n /= 10)
+	while (n /= b_len)
 		size++;
-	if (!(str = (char *)malloc(size + 1)))
+	if (!(a = (char *)malloc(size + 1)))
 		return (0);
-	str[size--] = '\0';
+	a[size--] = '\0';
 	while (nbr > 0)
 	{
-		str[size--] = nbr % 10 + '0';
-		nbr /= 10;
+		a[size--] = base[nbr % b_len];
+		nbr /= b_len;
 	}
-	if (size == 0 && str[1] == '\0')
-		str[0] = '0';
-	return (str);
+	if (size == 0 && a[1] == '\0')
+		a[0] = '0';
+	return (a);
 }
 
 static void	print_width(int *len, t_flags fl)
@@ -50,11 +52,10 @@ static void	print_width(int *len, t_flags fl)
 	}
 }
 
-static void	print_flags(int *len, t_flags fl, unsigned long long int n)
+static void	print_flags(int *len, t_flags fl)
 {
-	fl.a = ft_ullitoa(n);
 	fl.size = ft_strlen(fl.a);
-	if (n == 0 && fl.point == 1 && fl.precision == 0)
+	if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
 		fl.width++;
 	if (fl.point == 1)
 		fl.pad_c = ' ';
@@ -72,7 +73,7 @@ static void	print_flags(int *len, t_flags fl, unsigned long long int n)
 		while (fl.j-- > fl.size)
 			ft_putchar_len('0', len);
 	}
-	if (!(n == 0 && fl.point == 1 && fl.precision == 0))
+	if (!(fl.ulli == 0 && fl.point == 1 && fl.precision == 0))
 		ft_putcstr_len(fl.a, len, ft_strlen(fl.a));
 	if (fl.minus == 1)
 		print_width(len, fl);
@@ -80,45 +81,43 @@ static void	print_flags(int *len, t_flags fl, unsigned long long int n)
 
 void		print_spec_i_d_u(int *len, t_flags fl, va_list args)
 {
-	unsigned long long int	un;
-	long long int			n;
-
 	if (fl.spe_c == 'i' || fl.spe_c == 'd')
 	{
 		if (fl.length <= 0)
-			n = va_arg(args, int);
+			fl.lli = va_arg(args, int);
 		if (fl.length == 1)
-			n = va_arg(args, long int);
+			fl.lli = va_arg(args, long int);
 		if (fl.length == 2)
-			n = va_arg(args, long long int);
-		fl.sign = (n >= 0) ? '+' : '-';
-		un = (n >= 0) ? n : -n;
+			fl.lli = va_arg(args, long long int);
+		fl.sign = (fl.lli >= 0) ? '+' : '-';
+		fl.ulli = (fl.lli >= 0) ? fl.lli : -fl.lli;
 	}
 	if (fl.spe_c == 'u')
 	{
 		if (fl.length <= 0)
-			un = va_arg(args, unsigned int);
+			fl.ulli = va_arg(args, unsigned int);
 		if (fl.length == 1)
-			un = va_arg(args, unsigned long int);
+			fl.ulli = va_arg(args, unsigned long int);
 		if (fl.length == 2)
-			un = va_arg(args, unsigned long long int);
+			fl.ulli = va_arg(args, unsigned long long int);
 		fl.sign = '+';
 	}
-	print_flags(len, fl, un);
-}
-/*
-void		print_spec_i_d(int *len, t_flags fl, long long int n)
-{
-	unsigned long long int	nbr;
-
-	fl.sign = (n >= 0) ? '+' : '-';
-	nbr = (n >= 0) ? n : -n;
-	print_flags(len, fl, nbr);
+	fl.a = ft_ullitoa_base(fl.ulli, "0123456789");
+	print_flags(len, fl);
 }
 
-void		print_spec_u(int *len, t_flags fl, unsigned long long int n)
+void		print_spec_x_X(int *len, t_flags fl, va_list args)
 {
+	if (fl.length <= 0)
+	fl.ulli = va_arg(args, unsigned int);
+	if (fl.length == 1)
+		fl.ulli = va_arg(args, unsigned long int);
+	if (fl.length == 2)
+		fl.ulli = va_arg(args, unsigned long long int);
 	fl.sign = '+';
-	print_flags(len, fl, n);
+	if (fl.spe_c == 'x')
+		fl.a = ft_ullitoa_base(fl.ulli, "0123456789abcdef");
+	if (fl.spe_c == 'X')
+		fl.a = ft_ullitoa_base(fl.ulli, "0123456789ABCDEF");
+	print_flags(len, fl);
 }
-*/

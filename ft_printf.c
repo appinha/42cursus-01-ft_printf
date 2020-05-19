@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 19:05:34 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/18 21:43:29 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,8 @@ static void		triage_specs(va_list args, int *len, t_flags fl)
 		print_spec_s(len, fl, va_arg(args, char *));
 	if (fl.spe_c == 'i' || fl.spe_c == 'd' || fl.spe_c == 'u')
 		print_spec_i_d_u(len, fl, args);
-/*
-	if ((fl.spe_c == 'i' || fl.spe_c == 'd') && fl.length <= 0)
-		print_spec_i_d(len, fl, va_arg(args, int));
-	if ((fl.spe_c == 'i' || fl.spe_c == 'd') && fl.length == 1)
-		print_spec_i_d(len, fl, va_arg(args, long int));
-	if ((fl.spe_c == 'i' || fl.spe_c == 'd') && fl.length == 2)
-		print_spec_i_d(len, fl, va_arg(args, long long int));
-	if ((fl.spe_c == 'u') && fl.length <= 0)
-		print_spec_u(len, fl, va_arg(args, unsigned int));
-	if ((fl.spe_c == 'u') && fl.length == 1)
-		print_spec_u(len, fl, va_arg(args, unsigned long int));
-	if ((fl.spe_c == 'u') && fl.length == 2)
-		print_spec_u(len, fl, va_arg(args, unsigned long long int));
-*/
+	if (fl.spe_c == 'x' || fl.spe_c == 'X')
+		print_spec_x_X(len, fl, args);
 }
 
 static t_flags	treat_star(va_list args, t_flags fl)
