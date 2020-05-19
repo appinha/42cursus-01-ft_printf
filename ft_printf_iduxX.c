@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/19 13:08:49 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/19 13:28:15 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	print_flags(int *len, t_flags fl)
 	fl.size = ft_strlen(fl.a);
 	if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
 		fl.width++;
-	if (fl.hash == 1)
+	if (fl.hash == 1 && fl.ulli != 0)
 		fl.width -= 2;
 	if (fl.point == 1)
 		fl.pad_c = ' ';
