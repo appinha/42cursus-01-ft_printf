@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/18 21:43:29 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/19 14:11:18 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void		triage_specs(va_list args, int *len, t_flags fl)
 		print_spec_i_d_u(len, fl, args);
 	if (fl.spe_c == 'x' || fl.spe_c == 'X')
 		print_spec_x_X(len, fl, args);
+	if (fl.spe_c == 'p')
+		print_spec_p(len, fl, va_arg(args, unsigned long int));
 }
 
 static t_flags	treat_star(va_list args, t_flags fl)

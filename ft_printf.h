@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/19 12:26:21 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/19 14:22:21 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void			print_spec_c(int *len, t_flags fl, char c);
 void			print_spec_s(int *len, t_flags fl, char *s);
 void			print_spec_i_d_u(int *len, t_flags fl, va_list args);
 void			print_spec_x_X(int *len, t_flags fl, va_list args);
+void			print_spec_p(int *len, t_flags fl, unsigned long int p);
 
 /*
 ** UTILS FUNCTIONS
