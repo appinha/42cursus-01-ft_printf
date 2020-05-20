@@ -6,81 +6,71 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/19 18:35:39 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 02:31:02 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+# include <inttypes.h>
 
-int			ft_pot10(int x)
-{
-	int	n;
-
-	if (x > 0)
-	{
-		n = 10;
-		while (x-- > 1)
-			n *= 10;
-		return (n);
-	}
-	return(0);
-}
-
-static int		ft_dectoa_aux(double n, int size, int *len)
+static t_flags	ft_dectoa_aux(double n, t_flags fl, size_t *nbr, int *len)
 {
 	double	f;
-	int		nbr;
-	int		aux;
+	size_t	aux;
 
 	f = (n >= 0)? n : -n;
-	aux = f;
-	aux = (f - aux) * ft_pot10(size + 1);
-	nbr = aux;
+	aux = (f - fl.ulli) * ft_pow(10, fl.size + 1);
+	*nbr = aux;
 	*len = 1;
 	while (aux /= 10)
 		(*len)++;
-	if ((nbr % 10) >= 5)
-		nbr += 10;
-	nbr /= 10;
-	return (nbr);
+	if ((*nbr % 10) >= 5)
+		*nbr += 10;
+	*nbr /= 10;
+	aux = (f * 10);
+	if (((aux % 10) == 9) || (fl.precision == 0 && (aux % 10) >= 5))
+	{
+		fl.ulli++;
+		*nbr = 0;
+	}
+	return (fl);
 }
 
-static char		*ft_dectoa(double n, int size)
+static t_flags	ft_dectoa(double n, t_flags fl)
 {
-	char	*a;
 	char	zeros[20];
-	int		nbr;
+	size_t	nbr;
 	int		len;
-	int		i;
 
-	nbr = ft_dectoa_aux(n, size, &len);
+	fl = ft_dectoa_aux(n, fl, &nbr, &len);
+	if (nbr == 0)
+		len = 2;
 	zeros[0] = '.';
 	zeros[1] = '\0';
-	if (len < size + 1)
+	if (len < fl.size + 1)
 	{
-		i = 1;
-		while (len++ < size + 1)
-			zeros[i++] = '0';
-		zeros[i] = '\0';
+		fl.j = 1;
+		while (len++ < fl.size + 1)
+			zeros[fl.j++] = '0';
+		zeros[fl.j] = '\0';
 	}
-	a = ft_strjoin(zeros, ft_ullitoa_base((unsigned long long int)nbr, DIGITS));
-	return (a);
+	fl.d = ft_strjoin(zeros, ft_ullitoa_base((unsigned long long)nbr, DIGITS));
+	return (fl);
 }
 
-void		print_spec_f(int *len, t_flags fl, double n)
+void			print_spec_f(int *len, t_flags fl, double n)
 {
-	char	*d;
-
 	fl.sign = (n >= 0) ? '+' : '-';
 	fl.ulli = (n >= 0) ? n : -n;
 	if (fl.point == 0)
 		fl.size = 6;
 	else
 		fl.size = fl.precision;
+	fl = ft_dectoa(n, fl);
 	fl.a = ft_ullitoa_base(fl.ulli, "0123456789");
-	d = ft_dectoa(n, fl.size);
 	if (fl.sign == '-' || (fl.plus == 1 && fl.sign == '+'))
 		ft_putchar_len(fl.sign, len);
 	ft_putcstr_len(fl.a, len, ft_strlen(fl.a));
-	ft_putcstr_len(d, len, ft_strlen(d));
+	if (!(fl.point == 1 && fl.precision == 0))
+		ft_putcstr_len(fl.d, len, ft_strlen(fl.d));
 }

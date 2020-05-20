@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/19 15:42:39 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 02:30:48 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <stdint.h>
 
 /*
 ** FORMAT SPECIFIER STRUCT
@@ -67,6 +68,7 @@ typedef struct	s_flags
 	int						size;
 	char					sign;
 	char					*a;
+	char					*d;
 	int						j;
 }				t_flags;
 
@@ -102,6 +104,7 @@ void			ft_putcstr_len(char *s, int *len, int size);
 int				ft_strchr_01(char *s, char c);
 char			*ft_strjoin(char const *s1, char const *s2);
 
+double			ft_pow(double n, unsigned int pow);
 char			*ft_ullitoa_base(unsigned long long int n, char *base);
 
 #endif

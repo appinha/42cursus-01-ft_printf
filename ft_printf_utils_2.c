@@ -6,11 +6,16 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 12:25:19 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/19 12:26:59 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 02:31:23 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+double			ft_pow(double n, unsigned int pow)
+{
+	return (pow ? n * ft_pow(n, pow - 1) : 1);
+}
 
 char		*ft_ullitoa_base(unsigned long long int n, char *base)
 {
