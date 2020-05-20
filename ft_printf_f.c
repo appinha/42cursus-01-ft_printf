@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 15:33:36 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 17:36:10 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static int		ft_dectoa_ver(double f0, t_flags fl)
 	int	aux;
 
 	aux = f0 * 10;
-	//printf("[aux=%i]", aux);
-	//printf("[fl.size=%i]", fl.size);
 	fl.size++;
 	while (fl.size >= 0 && aux == 9)
 	{
@@ -27,10 +25,8 @@ static int		ft_dectoa_ver(double f0, t_flags fl)
 		aux = aux % 10;
 		if (fl.size == 1 && aux >= 5)
 			fl.size--;
-		//printf("[#%i-f=%.7f-aux=%i]", fl.size, f0, aux);
 		fl.size--;
 	}
-	//printf("(fl.size=%i)", fl.size);
 	if (fl.size < 0)
 		return (1);
 	return (0);
@@ -50,7 +46,6 @@ static t_flags	ft_dectoa_aux(double n, t_flags fl, size_t *nbr, int *len)
 		*nbr += 10;
 	*nbr /= 10;
 	aux = (fl.f * 10);
-	//printf("(%i)", ft_dectoa_ver(f - fl.ulli, fl));
 	if (ft_dectoa_ver(fl.f - fl.ulli, fl) == 1 ||
 		(fl.point == 1 && fl.precision == 0 && (aux % 10) >= 5))
 	{
@@ -62,29 +57,29 @@ static t_flags	ft_dectoa_aux(double n, t_flags fl, size_t *nbr, int *len)
 
 static t_flags	ft_dectoa(double n, t_flags fl)
 {
-	char	zeros[20];
+	char	z0[20];
 	size_t	nbr;
 	int		len;
 
 	fl = ft_dectoa_aux(n, fl, &nbr, &len);
 	if (nbr == 0)
 		len = 2;
-	zeros[0] = '.';
-	zeros[1] = '\0';
+	z0[0] = '.';
+	z0[1] = '\0';
 	if (!(fl.hash == 1 && fl.point == 1 && fl.precision == 0) &&
 		len < fl.size + 1)
 	{
 		fl.j = 1;
 		while (len++ < fl.size + 1)
-			zeros[fl.j++] = '0';
-		zeros[fl.j] = '\0';
+			z0[fl.j++] = '0';
+		z0[fl.j] = '\0';
 	}
 	if (fl.hash == 1 && fl.point == 1 && fl.precision == 0)
 		fl.d = ft_strdup(".");
 	else if (fl.hash == 0 && fl.point == 1 && fl.precision == 0)
 		fl.d = ft_strdup("");
 	else
-		fl.d = ft_strjoin(zeros, ft_ullitoa_base((unsigned long long)nbr, DIGITS));
+		fl.d = ft_strjoin(z0, ft_ullitoa_base((unsigned long long)nbr, DIGITS));
 	return (fl);
 }
 
@@ -98,7 +93,6 @@ void			print_spec_f(int *len, t_flags fl, double n)
 		fl.size = fl.precision;
 	fl = ft_dectoa(n, fl);
 	fl.a = ft_strjoin(ft_ullitoa_base(fl.ulli, "0123456789"), fl.d);
-	//printf("fl.ulli=%llu", fl.ulli);
 	print_flags(len, fl);
 	if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
 		ft_putchar_len('0', len);
