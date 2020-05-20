@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 02:30:48 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 12:07:10 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct	s_flags
 # define FLAGS		"-+#0 "
 # define DIGITS		"0123456789"
 # define ALL_FL		"-+#0 *.0123456789lh"
-# define FSPECS		"cspdiuxX%nfge"
+# define FSPECS		"cspdiuxX%onfge"
 
 /*
 ** MAIN FUNCTIONS
@@ -91,6 +91,7 @@ void			print_spec_c(int *len, t_flags fl, char c);
 void			print_spec_s(int *len, t_flags fl, char *s);
 void			print_spec_i_d_u(int *len, t_flags fl, va_list args);
 void			print_spec_x_X(int *len, t_flags fl, va_list args);
+void			print_spec_o(int *len, t_flags fl, va_list args);
 void			print_spec_p(int *len, t_flags fl, unsigned long int p);
 void			print_spec_f(int *len, t_flags fl, double n);
 
@@ -99,12 +100,15 @@ void			print_spec_f(int *len, t_flags fl, double n);
 */
 
 size_t			ft_strlen(const char *s);
+int				ft_strchr_01(char *s, char c);
 void			ft_putchar_len(char c, int *len);
 void			ft_putcstr_len(char *s, int *len, int size);
-int				ft_strchr_01(char *s, char c);
 char			*ft_strjoin(char const *s1, char const *s2);
 
 double			ft_pow(double n, unsigned int pow);
 char			*ft_ullitoa_base(unsigned long long int n, char *base);
+void			print_width(int *len, t_flags fl);
+void			print_zeros(int *len, t_flags fl);
+void			print_flags(int *len, t_flags fl);
 
 #endif

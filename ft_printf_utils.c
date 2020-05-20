@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:24:53 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/19 12:12:13 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 12:07:19 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,19 @@ size_t	ft_strlen(const char *s)
 	while (s[l] != '\0')
 		l++;
 	return (l);
+}
+
+int		ft_strchr_01(char *s, char c)
+{
+	int i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i++] == c)
+			return (1);
+	}
+	return (0);
 }
 
 void	ft_putchar_len(char c, int *len)
@@ -40,19 +53,6 @@ void	ft_putcstr_len(char *s, int *len, int size)
 		while (s[i] && i < size)
 			ft_putchar_len(s[i++], len);
 	}
-}
-
-int		ft_strchr_01(char *s, char c)
-{
-	int i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i++] == c)
-			return (1);
-	}
-	return (0);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
