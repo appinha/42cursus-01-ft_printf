@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 12:25:19 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 12:34:23 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 12:49:28 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ void	print_width(int *len, t_flags fl)
 
 void	print_zeros(int *len, t_flags fl)
 {
-	if (fl.hash == 1 && fl.ulli != 0 && fl.spe_c == 'x')
+	if (fl.spe_c == 'x' && fl.hash == 1 && fl.ulli != 0)
 		ft_putcstr_len("0x", len, 2);
-	if (fl.hash == 1 && fl.ulli != 0 && fl.spe_c == 'X')
+	if (fl.spe_c == 'X' && fl.hash == 1 && fl.ulli != 0)
 		ft_putcstr_len("0X", len, 2);
-	if (fl.hash == 1 && fl.ulli != 0 && fl.spe_c == 'o')
+	if (fl.spe_c == 'o' && fl.hash == 1 && (fl.ulli != 0 ||
+		(fl.point == 1 && fl.precision == 0)))
 		ft_putchar_len('0', len);
 	if (fl.minus == 0 && fl.pad_c == '0')
 		print_width(len, fl);
