@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 12:25:19 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 12:23:16 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 12:25:54 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	print_zeros(int *len, t_flags fl)
 		ft_putcstr_len("0x", len, 2);
 	if (fl.hash == 1 && fl.ulli != 0 && fl.spe_c == 'X')
 		ft_putcstr_len("0X", len, 2);
-	if (fl.hash == 1 && fl.ulli != 0 && fl.spe_c == 'o')
+	if (fl.hash == 1 && fl.spe_c == 'o')
 		ft_putchar_len('0', len);
 	if (fl.minus == 0 && fl.pad_c == '0')
 		print_width(len, fl);
@@ -82,9 +82,9 @@ void	print_flags(int *len, t_flags fl)
 		fl.width++;
 	if ((fl.hash == 1 && fl.ulli != 0) && (fl.spe_c == 'x' || fl.spe_c == 'X'))
 		fl.width -= 2;
-	if (fl.hash == 1 && fl.ulli != 0 && fl.spe_c == 'o')
+	if (fl.hash == 1 && fl.spe_c == 'o')
 		fl.width -= 1;
-	if (fl.hash == 1 && fl.ulli != 0 && fl.spe_c == 'o' && fl.point == 1)
+	if (fl.hash == 1 && fl.spe_c == 'o' && fl.point == 1)
 		fl.precision -= 1;
 	if (fl.point == 1)
 		fl.pad_c = ' ';
