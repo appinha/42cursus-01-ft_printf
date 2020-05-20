@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 14:10:28 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 14:14:06 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		ft_dectoa_ver(double f0, t_flags fl)
 		//printf("[#%i-f=%f-aux=%i]", fl.size, f, aux);
 		fl.size--;
 	}
-	printf("(fl.size=%i)", fl.size);
+	//printf("(fl.size=%i)", fl.size);
 	if (fl.size < 0)
 		return (1);
 	return (0);
