@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 15:13:54 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 15:33:36 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,8 @@ void			print_spec_f(int *len, t_flags fl, double n)
 		fl.size = fl.precision;
 	fl = ft_dectoa(n, fl);
 	fl.a = ft_strjoin(ft_ullitoa_base(fl.ulli, "0123456789"), fl.d);
+	//printf("fl.ulli=%llu", fl.ulli);
 	print_flags(len, fl);
-	/*
-	if (fl.sign == '-' || (fl.plus == 1 && fl.sign == '+'))
-		ft_putchar_len(fl.sign, len);
-	ft_putcstr_len(fl.a, len, ft_strlen(fl.a));
-	if (!(fl.point == 1 && fl.precision == 0))
-		ft_putcstr_len(fl.d, len, ft_strlen(fl.d));
-	if (fl.hash == 1 && fl.point == 1 && fl.precision == 0)
-		ft_putchar_len('.', len);
-	*/
+	if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
+		ft_putchar_len('0', len);
 }

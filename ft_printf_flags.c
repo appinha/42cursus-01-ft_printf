@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 15:03:08 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 15:03:51 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 15:37:19 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_width(int *len, t_flags fl)
 		(fl.space == 1 && fl.plus == 0 && fl.sign == '+'))
 		fl.width--;
 	fl.precision = (fl.precision > fl.size) ? fl.precision : fl.size;
-	if (fl.pad_c == '0' && (fl.minus == 1 || fl.point == 1))
+	if (fl.pad_c == '0' && (fl.minus == 1 || fl.point == 1) && fl.spe_c != 'f')
 		fl.pad_c = ' ';
 	while (fl.width > fl.precision)
 	{
@@ -58,7 +58,7 @@ void	print_flags(int *len, t_flags fl)
 		fl.width -= 1;
 	if (fl.spe_c == 'o' && fl.hash == 1 && fl.ulli != 0 && fl.point == 1)
 		fl.precision -= 1;
-	if (fl.point == 1)
+	if (fl.point == 1 && fl.spe_c != 'f')
 		fl.pad_c = ' ';
 	if (fl.minus == 0 && fl.pad_c == ' ')
 		print_width(len, fl);
