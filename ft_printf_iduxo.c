@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_iduxX.c                                  :+:      :+:    :+:   */
+/*   ft_printf_iduxo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 12:06:21 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 12:58:08 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	print_spec_i_d_u(int *len, t_flags fl, va_list args)
 	print_flags(len, fl);
 }
 
-void	print_spec_x_X(int *len, t_flags fl, va_list args)
+void	print_spec_x(int *len, t_flags fl, va_list args)
 {
 	if (fl.length <= 0)
 		fl.ulli = va_arg(args, unsigned int);

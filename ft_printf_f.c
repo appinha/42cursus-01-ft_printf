@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 03:12:12 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 12:58:39 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_flags	ft_dectoa_aux(double n, t_flags fl, size_t *nbr, int *len)
 	double	f;
 	size_t	aux;
 
-	f = (n >= 0)? n : -n;
+	f = (n >= 0) ? n : -n;
 	aux = (f - fl.ulli) * ft_pow(10, fl.size + 1);
 	*nbr = aux;
 	*len = 1;
