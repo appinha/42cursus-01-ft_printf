@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 12:25:19 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 12:25:54 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 12:28:16 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	print_flags(int *len, t_flags fl)
 		fl.width -= 2;
 	if (fl.hash == 1 && fl.spe_c == 'o')
 		fl.width -= 1;
-	if (fl.hash == 1 && fl.spe_c == 'o' && fl.point == 1)
+	if (fl.hash == 1 && fl.ulli != 0 && fl.spe_c == 'o' && fl.point == 1)
 		fl.precision -= 1;
 	if (fl.point == 1)
 		fl.pad_c = ' ';
