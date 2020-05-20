@@ -6,12 +6,31 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 02:31:02 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 03:12:12 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-# include <inttypes.h>
+
+static int		ft_dectoa_ver(double f, t_flags fl)
+{
+	int	aux;
+
+	aux = f * 10;
+	//printf("[aux=%i]", aux);
+	while (fl.size >= 0 && aux == 9)
+	{
+		f = f * 10;
+		aux = f;
+		aux = aux % 10;
+		//printf("[#%i-f=%f-aux=%i]", fl.size, f, aux);
+		fl.size--;
+	}
+	//printf("(fl.size=%i)", fl.size);
+	if (fl.size == 0)
+		return (1);
+	return (0);
+}
 
 static t_flags	ft_dectoa_aux(double n, t_flags fl, size_t *nbr, int *len)
 {
@@ -28,7 +47,9 @@ static t_flags	ft_dectoa_aux(double n, t_flags fl, size_t *nbr, int *len)
 		*nbr += 10;
 	*nbr /= 10;
 	aux = (f * 10);
-	if (((aux % 10) == 9) || (fl.precision == 0 && (aux % 10) >= 5))
+	//printf("(%i)", ft_dectoa_ver(f - fl.ulli, fl));
+	if (ft_dectoa_ver(f - fl.ulli, fl) == 1 ||
+		(fl.point == 1 && fl.precision == 0 && (aux % 10) >= 5))
 	{
 		fl.ulli++;
 		*nbr = 0;
