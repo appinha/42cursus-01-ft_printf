@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:24:53 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 12:07:19 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 15:07:20 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,20 @@ void	ft_putcstr_len(char *s, int *len, int size)
 	}
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strdup(const char *s1)
 {
-	char	*new_str;
-	int		i;
-	int		j;
+	char	*s2;
+	size_t	size;
+	size_t	i;
 
-	if (!s1 || !s2 ||
-		!(new_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
+	size = ft_strlen(s1) + 1;
+	if (!(s2 = (char *)malloc(size)))
 		return (0);
 	i = 0;
-	while (s1[i] != '\0')
+	while (i < size)
 	{
-		new_str[i] = s1[i];
+		((unsigned char *)s2)[i] = ((unsigned char *)s1)[i];
 		i++;
 	}
-	j = 0;
-	while (s2[j] != '\0')
-	{
-		new_str[i] = s2[j];
-		i++;
-		j++;
-	}
-	new_str[i] = '\0';
-	return (new_str);
+	return (s2);
 }

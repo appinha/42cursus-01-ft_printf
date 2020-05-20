@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 14:03:32 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 15:06:44 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,20 @@ typedef struct	s_flags
 */
 
 int				ft_printf(const char *str, ...);
+
+void			print_flags(int *len, t_flags fl);
+void			print_width(int *len, t_flags fl);
+void			print_zeros(int *len, t_flags fl);
+
 void			print_spec_pct(int *len, t_flags fl);
 void			print_spec_c(int *len, t_flags fl, char c);
 void			print_spec_s(int *len, t_flags fl, char *s);
+
 void			print_spec_i_d_u(int *len, t_flags fl, va_list args);
 void			print_spec_x(int *len, t_flags fl, va_list args);
 void			print_spec_o(int *len, t_flags fl, va_list args);
 void			print_spec_p(int *len, t_flags fl, unsigned long int p);
+
 void			print_spec_f(int *len, t_flags fl, double n);
 
 /*
@@ -104,12 +111,12 @@ size_t			ft_strlen(const char *s);
 int				ft_strchr_01(char *s, char c);
 void			ft_putchar_len(char c, int *len);
 void			ft_putcstr_len(char *s, int *len, int size);
-char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strdup(const char *s1);
 
+char			*ft_strjoin(char const *s1, char const *s2);
 double			ft_pow(double n, unsigned int pow);
 char			*ft_ullitoa_base(unsigned long long int n, char *base);
-void			print_width(int *len, t_flags fl);
-void			print_zeros(int *len, t_flags fl);
-void			print_flags(int *len, t_flags fl);
+
+
 
 #endif

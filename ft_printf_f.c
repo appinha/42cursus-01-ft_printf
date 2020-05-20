@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 14:38:43 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 15:13:54 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,20 @@ static t_flags	ft_dectoa(double n, t_flags fl)
 		len = 2;
 	zeros[0] = '.';
 	zeros[1] = '\0';
-	if (len < fl.size + 1)
+	if (!(fl.hash == 1 && fl.point == 1 && fl.precision == 0) &&
+		len < fl.size + 1)
 	{
 		fl.j = 1;
 		while (len++ < fl.size + 1)
 			zeros[fl.j++] = '0';
 		zeros[fl.j] = '\0';
 	}
-	fl.d = ft_strjoin(zeros, ft_ullitoa_base((unsigned long long)nbr, DIGITS));
+	if (fl.hash == 1 && fl.point == 1 && fl.precision == 0)
+		fl.d = ft_strdup(".");
+	else if (fl.hash == 0 && fl.point == 1 && fl.precision == 0)
+		fl.d = ft_strdup("");
+	else
+		fl.d = ft_strjoin(zeros, ft_ullitoa_base((unsigned long long)nbr, DIGITS));
 	return (fl);
 }
 
@@ -91,10 +97,15 @@ void			print_spec_f(int *len, t_flags fl, double n)
 	else
 		fl.size = fl.precision;
 	fl = ft_dectoa(n, fl);
-	fl.a = ft_ullitoa_base(fl.ulli, "0123456789");
+	fl.a = ft_strjoin(ft_ullitoa_base(fl.ulli, "0123456789"), fl.d);
+	print_flags(len, fl);
+	/*
 	if (fl.sign == '-' || (fl.plus == 1 && fl.sign == '+'))
 		ft_putchar_len(fl.sign, len);
 	ft_putcstr_len(fl.a, len, ft_strlen(fl.a));
 	if (!(fl.point == 1 && fl.precision == 0))
 		ft_putcstr_len(fl.d, len, ft_strlen(fl.d));
+	if (fl.hash == 1 && fl.point == 1 && fl.precision == 0)
+		ft_putchar_len('.', len);
+	*/
 }
