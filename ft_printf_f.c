@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 17:36:10 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/21 01:11:54 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,53 @@ void			print_spec_f(int *len, t_flags fl, double n)
 	print_flags(len, fl);
 	if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
 		ft_putchar_len('0', len);
+}
+
+void			print_spec_e(int *len, t_flags fl, double n)
+{
+	char	d[fl.precision + 3];
+	char	e[3];
+	int		aux;
+
+	fl.sign = (n >= 0) ? '+' : '-';
+	d[1] = '.';
+	d[fl.precision + 2] = '\0';
+	e[0] = '0';
+	e[2] = '\0';
+	//printf("[fl.precision=%i]", fl.precision);
+	fl.ulli = (n >= 0) ? n : -n;
+	fl.size = 1;
+	while (fl.ulli /= 10)
+		fl.size++;
+	aux = fl.size - 1;
+	//printf("[aux=%i]", aux);
+	fl.j = 1;
+	while (aux >= 0 && fl.j >= 0)
+	{
+		e[fl.j--] = aux % 10 + '0';
+		aux /= 10;
+	}
+	//printf("[fl.size=%i]", fl.size);
+
+	fl.ulli = (n >= 0) ? n : -n;
+	if (fl.size - 1 > fl.precision)
+		fl.ulli = fl.ulli / ft_pow(10, fl.size - fl.precision - 1);
+	//printf("[fl.ulli=%lli]", fl.ulli);
+	fl.j = fl.precision + 1;
+	//printf("[fl.j=%i]", fl.j);
+	while (fl.ulli > 9 && fl.j > 0)
+	{
+		while (fl.size++ < fl.precision + 1)
+			d[fl.j--] = '0';
+		d[fl.j--] = fl.ulli % 10 + '0';
+		fl.ulli /= 10;
+	}
+	printf("[fl.ulli=%lli]", fl.ulli);
+	d[0] = fl.ulli + '0';
+	fl.a = ft_strjoin(d, "e+");
+	fl.a = ft_strjoin(fl.a, e);
+	print_flags(len, fl);
+	//printf("d=\"%s\"\n", d);
+	//printf("e=\"%s\"\n", e);
+	//printf("%i, %c, %e", *len, fl.spe_c, n);
 }

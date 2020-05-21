@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   unit_tests.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfielder <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:15:57 by gfielder          #+#    #+#             */
-/*   Updated: 2019/06/21 17:34:47 by gfielder         ###   ########.fr       */
-/*   Updated: 2019/05/27 19:43:41 by phtruong         ###   ########.fr       */
+/*   Updated: 2020/05/21 00:00:41 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winteger-overflow"
 #pragma clang diagnostic ignored "-Wformat"
@@ -19,7 +19,7 @@
 /* -----------------------------------------------------------------------------
 ** Add unit tests to this file
 **
-** A valid unit test is prototyped 
+** A valid unit test is prototyped
 **
 **    int   foo(void)
 **
@@ -30,7 +30,7 @@
 ** ---------------------------------------------------------------------------*/
 
 /* -----------------------------------------------------------------------------
-** unit tests that start with "nocrash_" will always pass 
+** unit tests that start with "nocrash_" will always pass
 **     (provided it doesn't crash)
 ** ---------------------------------------------------------------------------*/
 
@@ -157,7 +157,7 @@ int s_prec_0_width_10_s_null(void){return test("%10.s", NULL);}
 int s_prec_0_width_1_s_nullchar(void){return test("%1.s", "\0");}
 int s_prec_0_width_2_s_nullchar(void){return test("%2.s", "\0");}
 int s_prec_0_width_9_s_nullchar(void){return test("%9.s", "\0");}
-// lj flag width  no precision 
+// lj flag width  no precision
 int s_prec_0_lj_width_3_s_hidden(void){return test("%-3.s", s_hidden);}
 int s_prec_0_lj_width_8_s_hidden(void){return test("%-8.s", s_hidden);}
 int s_prec_0_lj_width_3_s_null(void){return test("%-3.s", NULL);}
@@ -2511,51 +2511,81 @@ static int					mx_i = 42;
 int		mix_test_0(void){return test(
 			"  %o    %u    %li    %s    %X    %lli  ",
 			mx_u, mx_u, mx_li, mx_s, mx_u, mx_lli);}
+//int		mix_test_1(void){return test(
+//			"  %li    %u    %s    %X    %x    %Lf  ",
+//			mx_li, mx_u, mx_s, mx_u, mx_u, mx_Lf);}
 int		mix_test_1(void){return test(
-			"  %li    %u    %s    %X    %x    %Lf  ",
-			mx_li, mx_u, mx_s, mx_u, mx_u, mx_Lf);}
+			"  %li    %u    %s    %X    %x  ",
+			mx_li, mx_u, mx_s, mx_u, mx_u);}
+//int		mix_test_2(void){return test(
+//			"  %Lf    %p    %i    %li    %lli    %s  ",
+//			mx_Lf, &mx_i, mx_i, mx_li, mx_lli, mx_s);}
 int		mix_test_2(void){return test(
-			"  %Lf    %p    %i    %li    %lli    %s  ",
-			mx_Lf, &mx_i, mx_i, mx_li, mx_lli, mx_s);}
+			"  %p    %i    %li    %lli    %s  ",
+			&mx_i, mx_i, mx_li, mx_lli, mx_s);}
+//int		mix_test_3(void){return test(
+//			"  %x    %s    %i    %p    %X    %Lf  ",
+//			mx_u, mx_s, mx_i, &mx_i, mx_u, mx_Lf);}
 int		mix_test_3(void){return test(
-			"  %x    %s    %i    %p    %X    %Lf  ",
-			mx_u, mx_s, mx_i, &mx_i, mx_u, mx_Lf);}
+			"  %x    %s    %i    %p    %X  ",
+			mx_u, mx_s, mx_i, &mx_i, mx_u);}
+//int		mix_test_4(void){return test(
+//			"  %li    %hhi    %p    %o    %%    %Lf  ",
+//			mx_li, mx_c, &mx_i, mx_u, mx_Lf);}
 int		mix_test_4(void){return test(
-			"  %li    %hhi    %p    %o    %%    %Lf  ",
-			mx_li, mx_c, &mx_i, mx_u, mx_Lf);}
+			"  %li    %hhi    %p    %o    %%  ",
+			mx_li, mx_c, &mx_i, mx_u);}
 int		mix_test_5(void){return test(
 			"  %hi    %u    %x    %s    %i    %X  ",
 			mx_hi, mx_u, mx_u, mx_s, mx_i, mx_u);}
 int		mix_test_6(void){return test(
 			"  %f    %li    %i    %p    %u    %hi  ",
 			mx_f, mx_li, mx_i, &mx_i, mx_u, mx_hi);}
+//int		mix_test_7(void){return test(
+//			"  %u    %hhi    %p    %li    %Lf    %X  ",
+//			mx_u, mx_c, &mx_i, mx_li, mx_Lf, mx_u);}
 int		mix_test_7(void){return test(
-			"  %u    %hhi    %p    %li    %Lf    %X  ",
-			mx_u, mx_c, &mx_i, mx_li, mx_Lf, mx_u);}
+			"  %u    %hhi    %p    %li    %X  ",
+			mx_u, mx_c, &mx_i, mx_li, mx_u);}
+//int		mix_test_8(void){return test(
+//			"  %o    %Lf    %u    %li    %lli    %x  ",
+//			mx_u, mx_Lf, mx_u, mx_li, mx_lli, mx_u);}
 int		mix_test_8(void){return test(
-			"  %o    %Lf    %u    %li    %lli    %x  ",
-			mx_u, mx_Lf, mx_u, mx_li, mx_lli, mx_u);}
+			"  %o    %u    %li    %lli    %x  ",
+			mx_u, mx_u, mx_li, mx_lli, mx_u);}
+//int		mix_test_9(void){return test(
+//			"  %Lf    %li    %s    %p    %x    %o  ",
+//			mx_Lf, mx_li, mx_s, &mx_i, mx_u, mx_u);}
 int		mix_test_9(void){return test(
-			"  %Lf    %li    %s    %p    %x    %o  ",
-			mx_Lf, mx_li, mx_s, &mx_i, mx_u, mx_u);}
+			"  %li    %s    %p    %x    %o  ",
+			mx_li, mx_s, &mx_i, mx_u, mx_u);}
 int		mix_test_10(void){return test(
 			"  %hhi    %x    %s    %u    %i    %li  ",
 			mx_c, mx_u, mx_s, mx_u, mx_i, mx_li);}
 int		mix_test_11(void){return test(
 			"  %X    %li    %o    %s    %f    %u  ",
 			mx_u, mx_li, mx_u, mx_s, mx_f, mx_u);}
+//int		mix_test_12(void){return test(
+//			"  %o    %x    %i    %c    %hi    %Lf  ",
+//			mx_u, mx_u, mx_i, mx_c, mx_hi, mx_Lf);}
 int		mix_test_12(void){return test(
-			"  %o    %x    %i    %c    %hi    %Lf  ",
-			mx_u, mx_u, mx_i, mx_c, mx_hi, mx_Lf);}
+			"  %o    %x    %i    %c    %hi  ",
+			mx_u, mx_u, mx_i, mx_c, mx_hi);}
 int		mix_test_13(void){return test(
 			"  %c    %i    %hi    %o    %x    %u  ",
 			mx_c, mx_i, mx_hi, mx_u, mx_u, mx_u);}
+///int		mix_test_14(void){return test(
+//			"  %i    %f    %li    %Lf    %X    %hhi  ",
+//			mx_i, mx_f, mx_li, mx_Lf, mx_u, mx_c);}
 int		mix_test_14(void){return test(
-			"  %i    %f    %li    %Lf    %X    %hhi  ",
-			mx_i, mx_f, mx_li, mx_Lf, mx_u, mx_c);}
+			"  %i    %f    %li    %X    %hhi  ",
+			mx_i, mx_f, mx_li, mx_u, mx_c);}
+//int		mix_test_15(void){return test(
+//			"  %s    %u    %lli    %Lf    %f    %o  ",
+//			mx_s, mx_u, mx_lli, mx_Lf, mx_f, mx_u);}
 int		mix_test_15(void){return test(
-			"  %s    %u    %lli    %Lf    %f    %o  ",
-			mx_s, mx_u, mx_lli, mx_Lf, mx_f, mx_u);}
+			"  %s    %u    %lli    %f    %o  ",
+			mx_s, mx_u, mx_lli, mx_f, mx_u);}
 int		mix_test_16(void){return test(
 			"  %hhi    %X    %u    %p    %x    %o  ",
 			mx_c, mx_u, mx_u, &mx_i, mx_u, mx_u);}
@@ -2568,9 +2598,12 @@ int		mix_test_18(void){return test(
 int		mix_test_19(void){return test(
 			"  %hhi    %li    %x    %hi    %lli    %s  ",
 			mx_c, mx_li, mx_u, mx_hi, mx_lli, mx_s);}
+//int		mix_test_20(void){return test(
+//			"  %Lf    %p    %lli    %hhi    %c    %f  ",
+//			mx_Lf, &mx_i, mx_lli, mx_c, mx_c, mx_f);}
 int		mix_test_20(void){return test(
-			"  %Lf    %p    %lli    %hhi    %c    %f  ",
-			mx_Lf, &mx_i, mx_lli, mx_c, mx_c, mx_f);}
+			"  %p    %lli    %hhi    %c    %f  ",
+			&mx_i, mx_lli, mx_c, mx_c, mx_f);}
 int		mix_test_21(void){return test(
 			"  %hi    %s    %hhi    %p    %lli    %u  ",
 			mx_hi, mx_s, mx_c, &mx_i, mx_lli, mx_u);}
@@ -2583,15 +2616,21 @@ int		mix_test_23(void){return test(
 int		mix_test_24(void){return test(
 			"  %lli    %hhi    %hi    %i    %c    %o  ",
 			mx_lli, mx_c, mx_hi, mx_i, mx_c, mx_u);}
+//int		mix_test_25(void){return test(
+//			"  %s    %Lf    %p    %c    %X    %x  ",
+//			mx_s, mx_Lf, &mx_i, mx_c, mx_u, mx_u);}
 int		mix_test_25(void){return test(
-			"  %s    %Lf    %p    %c    %X    %x  ",
-			mx_s, mx_Lf, &mx_i, mx_c, mx_u, mx_u);}
+			"  %s    %p    %c    %X    %x  ",
+			mx_s, &mx_i, mx_c, mx_u, mx_u);}
 int		mix_test_26(void){return test(
 			"  %lli    %i    %u    %p    %o    %c  ",
 			mx_lli, mx_i, mx_u, &mx_i, mx_u, mx_c);}
+//int		mix_test_27(void){return test(
+//			"  %i    %p    %hhi    %X    %Lf    %lli  ",
+//			mx_i, &mx_i, mx_c, mx_u, mx_Lf, mx_lli);}
 int		mix_test_27(void){return test(
-			"  %i    %p    %hhi    %X    %Lf    %lli  ",
-			mx_i, &mx_i, mx_c, mx_u, mx_Lf, mx_lli);}
+			"  %i    %p    %hhi    %X    %lli  ",
+			mx_i, &mx_i, mx_c, mx_u, mx_lli);}
 int		mix_test_28(void){return test(
 			"  %f    %i    %p    %li    %o    %x  ",
 			mx_f, mx_i, &mx_i, mx_li, mx_u, mx_u);}
@@ -2610,15 +2649,21 @@ int		mix_test_32(void){return test(
 int		mix_test_33(void){return test(
 			"  %o    %X    %u    %c    %lli    %hi  ",
 			mx_u, mx_u, mx_u, mx_c, mx_lli, mx_hi);}
+//int		mix_test_34(void){return test(
+//			"  %hi    %X    %Lf    %s    %o    %x  ",
+//			mx_hi, mx_u, mx_Lf, mx_s, mx_u, mx_u);}
 int		mix_test_34(void){return test(
-			"  %hi    %X    %Lf    %s    %o    %x  ",
-			mx_hi, mx_u, mx_Lf, mx_s, mx_u, mx_u);}
+			"  %hi    %X    %s    %o    %x  ",
+			mx_hi, mx_u, mx_s, mx_u, mx_u);}
 int		mix_test_35(void){return test(
 			"  %X    %p    %o    %hi    %s    %lli  ",
 			mx_u, &mx_i, mx_u, mx_hi, mx_s, mx_lli);}
+///int		mix_test_36(void){return test(
+//			"  %li    %p    %f    %Lf    %x    %lli  ",
+//			mx_li, &mx_i, mx_f, mx_Lf, mx_u, mx_lli);}
 int		mix_test_36(void){return test(
-			"  %li    %p    %f    %Lf    %x    %lli  ",
-			mx_li, &mx_i, mx_f, mx_Lf, mx_u, mx_lli);}
+			"  %li    %p    %f    %x    %lli  ",
+			mx_li, &mx_i, mx_f, mx_u, mx_lli);}
 int		mix_test_37(void){return test(
 			"  %i    %li    %X    %p    %hi    %o  ",
 			mx_i, mx_li, mx_u, &mx_i, mx_hi, mx_u);}
@@ -2646,9 +2691,12 @@ int		mix_test_44(void){return test(
 int		mix_test_45(void){return test(
 			"  %f    %hhi    %c    %X    %lli    %s  ",
 			mx_f, mx_c, mx_c, mx_u, mx_lli, mx_s);}
+//int		mix_test_46(void){return test(
+//			"  %lli    %i    %hhi    %hi    %li    %Lf  ",
+//			mx_lli, mx_i, mx_c, mx_hi, mx_li, mx_Lf);}
 int		mix_test_46(void){return test(
-			"  %lli    %i    %hhi    %hi    %li    %Lf  ",
-			mx_lli, mx_i, mx_c, mx_hi, mx_li, mx_Lf);}
+			"  %lli    %i    %hhi    %hi    %li  ",
+			mx_lli, mx_i, mx_c, mx_hi, mx_li);}
 int		mix_test_47(void){return test(
 			"  %f    %c    %lli    %s    %hhi    %p  ",
 			mx_f, mx_c, mx_lli, mx_s, mx_c, &mx_i);}
@@ -2661,15 +2709,24 @@ int		mix_test_49(void){return test(
 int		mix_test_50(void){return test(
 			"  %o    %u    %f    %i    %x    %hhi  ",
 			mx_u, mx_u, mx_f, mx_i, mx_u, mx_c);}
+//int		mix_test_51(void){return test(
+//			"  %x    %u    %Lf    %hi    %o    %X  ",
+//			mx_u, mx_u, mx_Lf, mx_hi, mx_u, mx_u);}
 int		mix_test_51(void){return test(
-			"  %x    %u    %Lf    %hi    %o    %X  ",
-			mx_u, mx_u, mx_Lf, mx_hi, mx_u, mx_u);}
+			"  %x    %u    %hi    %o    %X  ",
+			mx_u, mx_u, mx_hi, mx_u, mx_u);}
+//int		mix_test_52(void){return test(
+//			"  %u    %Lf    %hi    %li    %X    %hhi  ",
+//			mx_u, mx_Lf, mx_hi, mx_li, mx_u, mx_c);}
 int		mix_test_52(void){return test(
-			"  %u    %Lf    %hi    %li    %X    %hhi  ",
-			mx_u, mx_Lf, mx_hi, mx_li, mx_u, mx_c);}
+			"  %u    %hi    %li    %X    %hhi  ",
+			mx_u, mx_hi, mx_li, mx_u, mx_c);}
+//int		mix_test_53(void){return test(
+//			"  %o    %c    %Lf    %hi    %s    %p  ",
+//			mx_u, mx_c, mx_Lf, mx_hi, mx_s, &mx_i);}
 int		mix_test_53(void){return test(
-			"  %o    %c    %Lf    %hi    %s    %p  ",
-			mx_u, mx_c, mx_Lf, mx_hi, mx_s, &mx_i);}
+			"  %o    %c    %hi    %s    %p  ",
+			mx_u, mx_c, mx_hi, mx_s, &mx_i);}
 int		mix_test_54(void){return test(
 			"  %s    %hhi    %X    %lli    %x    %u  ",
 			mx_s, mx_c, mx_u, mx_lli, mx_u, mx_u);}
@@ -2682,27 +2739,39 @@ int		mix_test_56(void){return test(
 int		mix_test_57(void){return test(
 			"  %hi    %s    %i    %X    %u    %li  ",
 			mx_hi, mx_s, mx_i, mx_u, mx_u, mx_li);}
+//int		mix_test_58(void){return test(
+//			"  %c    %X    %li    %hi    %Lf    %p  ",
+//			mx_c, mx_u, mx_li, mx_hi, mx_Lf, &mx_i);}
 int		mix_test_58(void){return test(
-			"  %c    %X    %li    %hi    %Lf    %p  ",
-			mx_c, mx_u, mx_li, mx_hi, mx_Lf, &mx_i);}
+			"  %c    %X    %li    %hi    %p  ",
+			mx_c, mx_u, mx_li, mx_hi, &mx_i);}
+//int		mix_test_59(void){return test(
+//			"  %Lf    %hi    %c    %u    %hhi    %li  ",
+//			mx_Lf, mx_hi, mx_c, mx_u, mx_c, mx_li);}
 int		mix_test_59(void){return test(
-			"  %Lf    %hi    %c    %u    %hhi    %li  ",
-			mx_Lf, mx_hi, mx_c, mx_u, mx_c, mx_li);}
+			"  %hi    %c    %u    %hhi    %li  ",
+			mx_hi, mx_c, mx_u, mx_c, mx_li);}
 int		mix_test_60(void){return test(
 			"  %li    %p    %s    %hi    %u    %lli  ",
 			mx_li, &mx_i, mx_s, mx_hi, mx_u, mx_lli);}
+//int		mix_test_61(void){return test(
+//			"  %li    %X    %Lf    %s    %c    %lli  ",
+//			mx_li, mx_u, mx_Lf, mx_s, mx_c, mx_lli);}
 int		mix_test_61(void){return test(
-			"  %li    %X    %Lf    %s    %c    %lli  ",
-			mx_li, mx_u, mx_Lf, mx_s, mx_c, mx_lli);}
+			"  %li    %X    %s    %c    %lli  ",
+			mx_li, mx_u, mx_s, mx_c, mx_lli);}
 int		mix_test_62(void){return test(
 			"  %lli    %hhi    %f    %o    %s    %X  ",
 			mx_lli, mx_c, mx_f, mx_u, mx_s, mx_u);}
 int		mix_test_63(void){return test(
 			"  %x    %X    %u    %s    %li    %f  ",
 			mx_u, mx_u, mx_u, mx_s, mx_li, mx_f);}
+//int		mix_test_64(void){return test(
+//			"  %hhi    %X    %u    %o    %Lf    %s  ",
+//			mx_c, mx_u, mx_u, mx_u, mx_Lf, mx_s);}
 int		mix_test_64(void){return test(
-			"  %hhi    %X    %u    %o    %Lf    %s  ",
-			mx_c, mx_u, mx_u, mx_u, mx_Lf, mx_s);}
+			"  %hhi    %X    %u    %o    %s  ",
+			mx_c, mx_u, mx_u, mx_u, mx_s);}
 int		mix_test_65(void){return test(
 			"  %li    %u    %x    %o    %lli    %s  ",
 			mx_li, mx_u, mx_u, mx_u, mx_lli, mx_s);}
@@ -2712,18 +2781,30 @@ int		mix_test_66(void){return test(
 int		mix_test_67(void){return test(
 			"  %i    %c    %f    %hi    %s    %o  ",
 			mx_i, mx_c, mx_f, mx_hi, mx_s, mx_u);}
+//int		mix_test_68(void){return test(
+//			"  %li    %s    %p    %f    %Lf    %X  ",
+//			mx_li, mx_s, &mx_i, mx_f, mx_Lf, mx_u);}
 int		mix_test_68(void){return test(
-			"  %li    %s    %p    %f    %Lf    %X  ",
-			mx_li, mx_s, &mx_i, mx_f, mx_Lf, mx_u);}
+			"  %li    %s    %p    %f    %X  ",
+			mx_li, mx_s, &mx_i, mx_f, mx_u);}
+//int		mix_test_69(void){return test(
+//			"  %s    %p    %Lf    %lli    %x    %o  ",
+//			mx_s, &mx_i, mx_Lf, mx_lli, mx_u, mx_u);}
 int		mix_test_69(void){return test(
-			"  %s    %p    %Lf    %lli    %x    %o  ",
-			mx_s, &mx_i, mx_Lf, mx_lli, mx_u, mx_u);}
+			"  %s    %p    %lli    %x    %o  ",
+			mx_s, &mx_i, mx_lli, mx_u, mx_u);}
+//int		mix_test_70(void){return test(
+//			"  %hhi    %hi    %Lf    %c    %x    %lli  ",
+//			mx_c, mx_hi, mx_Lf, mx_c, mx_u, mx_lli);}
 int		mix_test_70(void){return test(
-			"  %hhi    %hi    %Lf    %c    %x    %lli  ",
-			mx_c, mx_hi, mx_Lf, mx_c, mx_u, mx_lli);}
+			"  %hhi    %hi    %c    %x    %lli  ",
+			mx_c, mx_hi, mx_c, mx_u, mx_lli);}
+//int		mix_test_71(void){return test(
+//			"  %p    %u    %lli    %c    %Lf    %X  ",
+//			&mx_i, mx_u, mx_lli, mx_c, mx_Lf, mx_u);}
 int		mix_test_71(void){return test(
-			"  %p    %u    %lli    %c    %Lf    %X  ",
-			&mx_i, mx_u, mx_lli, mx_c, mx_Lf, mx_u);}
+			"  %p    %u    %lli    %c    %X  ",
+			&mx_i, mx_u, mx_lli, mx_c, mx_u);}
 int		mix_test_72(void){return test(
 			"  %X    %p    %f    %c    %o    %li  ",
 			mx_u, &mx_i, mx_f, mx_c, mx_u, mx_li);}
@@ -2739,33 +2820,51 @@ int		mix_test_75(void){return test(
 int		mix_test_76(void){return test(
 			"  %u    %x    %lli    %hi    %i    %hhi  ",
 			mx_u, mx_u, mx_lli, mx_hi, mx_i, mx_c);}
+//int		mix_test_77(void){return test(
+//			"  %li    %hi    %Lf    %c    %o    %lli  ",
+//			mx_li, mx_hi, mx_Lf, mx_c, mx_u, mx_lli);}
 int		mix_test_77(void){return test(
-			"  %li    %hi    %Lf    %c    %o    %lli  ",
-			mx_li, mx_hi, mx_Lf, mx_c, mx_u, mx_lli);}
+			"  %li    %hi    %c    %o    %lli  ",
+			mx_li, mx_hi, mx_c, mx_u, mx_lli);}
 int		mix_test_78(void){return test(
 			"  %u    %i    %c    %p    %o    %f  ",
 			mx_u, mx_i, mx_c, &mx_i, mx_u, mx_f);}
+//int		mix_test_79(void){return test(
+//			"  %Lf    %X    %p    %hhi    %c    %s  ",
+//			mx_Lf, mx_u, &mx_i, mx_c, mx_c, mx_s);}
 int		mix_test_79(void){return test(
-			"  %Lf    %X    %p    %hhi    %c    %s  ",
-			mx_Lf, mx_u, &mx_i, mx_c, mx_c, mx_s);}
+			"  %X    %p    %hhi    %c    %s  ",
+			mx_u, &mx_i, mx_c, mx_c, mx_s);}
 int		mix_test_80(void){return test(
 			"  %c    %hi    %u    %i    %f    %X  ",
 			mx_c, mx_hi, mx_u, mx_i, mx_f, mx_u);}
+//int		mix_test_81(void){return test(
+//			"  %s    %p    %u    %Lf    %hhi    %li  ",
+//			mx_s, &mx_i, mx_u, mx_Lf, mx_c, mx_li);}
 int		mix_test_81(void){return test(
-			"  %s    %p    %u    %Lf    %hhi    %li  ",
-			mx_s, &mx_i, mx_u, mx_Lf, mx_c, mx_li);}
+			"  %s    %p    %u    %hhi    %li  ",
+			mx_s, &mx_i, mx_u, mx_c, mx_li);}
+//int		mix_test_82(void){return test(
+//			"  %X    %x    %i    %c    %Lf    %li  ",
+//			mx_u, mx_u, mx_i, mx_c, mx_Lf, mx_li);}
 int		mix_test_82(void){return test(
-			"  %X    %x    %i    %c    %Lf    %li  ",
-			mx_u, mx_u, mx_i, mx_c, mx_Lf, mx_li);}
+			"  %X    %x    %i    %c    %li  ",
+			mx_u, mx_u, mx_i, mx_c, mx_li);}
 int		mix_test_83(void){return test(
 			"  %X    %hi    %x    %u    %c    %o  ",
 			mx_u, mx_hi, mx_u, mx_u, mx_c, mx_u);}
+//int		mix_test_84(void){return test(
+//			"  %hi    %Lf    %hhi    %li    %s    %lli  ",
+//			mx_hi, mx_Lf, mx_c, mx_li, mx_s, mx_lli);}
 int		mix_test_84(void){return test(
-			"  %hi    %Lf    %hhi    %li    %s    %lli  ",
-			mx_hi, mx_Lf, mx_c, mx_li, mx_s, mx_lli);}
+			"  %hi    %hhi    %li    %s    %lli  ",
+			mx_hi, mx_c, mx_li, mx_s, mx_lli);}
+//int		mix_test_85(void){return test(
+//			"  %Lf    %o    %f    %u    %X    %li  ",
+//			mx_Lf, mx_u, mx_f, mx_u, mx_u, mx_li);}
 int		mix_test_85(void){return test(
-			"  %Lf    %o    %f    %u    %X    %li  ",
-			mx_Lf, mx_u, mx_f, mx_u, mx_u, mx_li);}
+			"  %o    %f    %u    %X    %li  ",
+			mx_u, mx_f, mx_u, mx_u, mx_li);}
 int		mix_test_86(void){return test(
 			"  %f    %i    %lli    %hi    %u    %o  ",
 			mx_f, mx_i, mx_lli, mx_hi, mx_u, mx_u);}
@@ -2778,18 +2877,24 @@ int		mix_test_88(void){return test(
 int		mix_test_89(void){return test(
 			"  %li    %c    %o    %f    %u    %lli  ",
 			mx_li, mx_c, mx_u, mx_f, mx_u, mx_lli);}
+//int		mix_test_90(void){return test(
+//			"  %Lf    %o    %f    %li    %p    %s  ",
+//			mx_Lf, mx_u, mx_f, mx_li, &mx_i, mx_s);}
 int		mix_test_90(void){return test(
-			"  %Lf    %o    %f    %li    %p    %s  ",
-			mx_Lf, mx_u, mx_f, mx_li, &mx_i, mx_s);}
+			"  %o    %f    %li    %p    %s  ",
+			mx_u, mx_f, mx_li, &mx_i, mx_s);}
 int		mix_test_91(void){return test(
 			"  %X    %c    %p    %s    %i    %f  ",
 			mx_u, mx_c, &mx_i, mx_s, mx_i, mx_f);}
 int		mix_test_92(void){return test(
 			"  %c    %hhi    %o    %X    %s    %lli  ",
 			mx_c, mx_c, mx_u, mx_u, mx_s, mx_lli);}
+//int		mix_test_93(void){return test(
+//			"  %Lf    %hi    %c    %hhi    %s    %f  ",
+//			mx_Lf, mx_hi, mx_c, mx_c, mx_s, mx_f);}
 int		mix_test_93(void){return test(
-			"  %Lf    %hi    %c    %hhi    %s    %f  ",
-			mx_Lf, mx_hi, mx_c, mx_c, mx_s, mx_f);}
+			"  %hi    %c    %hhi    %s    %f  ",
+			mx_hi, mx_c, mx_c, mx_s, mx_f);}
 int		mix_test_94(void){return test(
 			"  %c    %u    %x    %lli    %hi    %s  ",
 			mx_c, mx_u, mx_u, mx_lli, mx_hi, mx_s);}
@@ -2799,12 +2904,18 @@ int		mix_test_95(void){return test(
 int		mix_test_96(void){return test(
 			"  %f    %hi    %li    %c    %x    %X  ",
 			mx_f, mx_hi, mx_li, mx_c, mx_u, mx_u);}
+//int		mix_test_97(void){return test(
+//			"  %u    %Lf    %i    %f    %hhi    %hi  ",
+//			mx_u, mx_Lf, mx_i, mx_f, mx_c, mx_hi);}
 int		mix_test_97(void){return test(
-			"  %u    %Lf    %i    %f    %hhi    %hi  ",
-			mx_u, mx_Lf, mx_i, mx_f, mx_c, mx_hi);}
+			"  %u    %i    %f    %hhi    %hi  ",
+			mx_u, mx_i, mx_f, mx_c, mx_hi);}
+//int		mix_test_98(void){return test(
+//			"  %Lf    %s    %hi    %i    %f    %x  ",
+//			mx_Lf, mx_s, mx_hi, mx_i, mx_f, mx_u);}
 int		mix_test_98(void){return test(
-			"  %Lf    %s    %hi    %i    %f    %x  ",
-			mx_Lf, mx_s, mx_hi, mx_i, mx_f, mx_u);}
+			"  %s    %hi    %i    %f    %x  ",
+			mx_s, mx_hi, mx_i, mx_f, mx_u);}
 int		mix_test_99(void){return test(
 			"  %u    %f    %X    %c    %lli    %p  ",
 			mx_u, mx_f, mx_u, mx_c, mx_lli, &mx_i);}
@@ -2817,27 +2928,39 @@ int		mix_test_101(void){return test(
 int		mix_test_102(void){return test(
 			"  %hhi    %c    %f    %x    %hi    %li  ",
 			mx_c, mx_c, mx_f, mx_u, mx_hi, mx_li);}
+//int		mix_test_103(void){return test(
+//			"  %p    %Lf    %x    %X    %f    %s  ",
+//			&mx_i, mx_Lf, mx_u, mx_u, mx_f, mx_s);}
 int		mix_test_103(void){return test(
-			"  %p    %Lf    %x    %X    %f    %s  ",
-			&mx_i, mx_Lf, mx_u, mx_u, mx_f, mx_s);}
+			"  %p    %x    %X    %f    %s  ",
+			&mx_i, mx_u, mx_u, mx_f, mx_s);}
 int		mix_test_104(void){return test(
 			"  %s    %x    %lli    %i    %o    %p  ",
 			mx_s, mx_u, mx_lli, mx_i, mx_u, &mx_i);}
+//int		mix_test_105(void){return test(
+//			"  %X    %s    %Lf    %p    %lli    %x  ",
+//			mx_u, mx_s, mx_Lf, &mx_i, mx_lli, mx_u);}
 int		mix_test_105(void){return test(
-			"  %X    %s    %Lf    %p    %lli    %x  ",
-			mx_u, mx_s, mx_Lf, &mx_i, mx_lli, mx_u);}
+			"  %X    %s    %p    %lli    %x  ",
+			mx_u, mx_s, &mx_i, mx_lli, mx_u);}
 int		mix_test_106(void){return test(
 			"  %c    %hhi    %hi    %x    %u    %li  ",
 			mx_c, mx_c, mx_hi, mx_u, mx_u, mx_li);}
+//int		mix_test_107(void){return test(
+//			"  %li    %X    %s    %Lf    %f    %hhi  ",
+//			mx_li, mx_u, mx_s, mx_Lf, mx_f, mx_c);}
 int		mix_test_107(void){return test(
-			"  %li    %X    %s    %Lf    %f    %hhi  ",
-			mx_li, mx_u, mx_s, mx_Lf, mx_f, mx_c);}
+			"  %li    %X    %s    %f    %hhi  ",
+			mx_li, mx_u, mx_s, mx_f, mx_c);}
 int		mix_test_108(void){return test(
 			"  %u    %hhi    %s    %c    %p    %f  ",
 			mx_u, mx_c, mx_s, mx_c, &mx_i, mx_f);}
+//int		mix_test_109(void){return test(
+//			"  %Lf    %s    %u    %f    %i    %X  ",
+//			mx_Lf, mx_s, mx_u, mx_f, mx_i, mx_u);}
 int		mix_test_109(void){return test(
-			"  %Lf    %s    %u    %f    %i    %X  ",
-			mx_Lf, mx_s, mx_u, mx_f, mx_i, mx_u);}
+			"  %s    %u    %f    %i    %X  ",
+			mx_s, mx_u, mx_f, mx_i, mx_u);}
 int		mix_test_110(void){return test(
 			"  %i    %p    %hi    %c    %f    %s  ",
 			mx_i, &mx_i, mx_hi, mx_c, mx_f, mx_s);}
@@ -3096,18 +3219,30 @@ int		mix_test_194(void){return test(
 int		mix_test_195(void){return test(
 			"  %li    %s    %X    %o    %lli    %f  ",
 			mx_li, mx_s, mx_u, mx_u, mx_lli, mx_f);}
+//int		mix_test_196(void){return test(
+//			"  %c    %o    %f    %Lf    %lli    %X  ",
+//			mx_c, mx_u, mx_f, mx_Lf, mx_lli, mx_u);}
 int		mix_test_196(void){return test(
-			"  %c    %o    %f    %Lf    %lli    %X  ",
-			mx_c, mx_u, mx_f, mx_Lf, mx_lli, mx_u);}
+			"  %c    %o    %f    %lli    %X  ",
+			mx_c, mx_u, mx_f, mx_lli, mx_u);}
+//int		mix_test_197(void){return test(
+//			"  %hi    %o    %i    %Lf    %li    %x  ",
+//			mx_hi, mx_u, mx_i, mx_Lf, mx_li, mx_u);}
 int		mix_test_197(void){return test(
-			"  %hi    %o    %i    %Lf    %li    %x  ",
-			mx_hi, mx_u, mx_i, mx_Lf, mx_li, mx_u);}
+			"  %hi    %o    %i    %li    %x  ",
+			mx_hi, mx_u, mx_i, mx_li, mx_u);}
+//int		mix_test_198(void){return test(
+//			"  %p    %i    %x    %Lf    %u    %o  ",
+//			&mx_i, mx_i, mx_u, mx_Lf, mx_u, mx_u);}
 int		mix_test_198(void){return test(
-			"  %p    %i    %x    %Lf    %u    %o  ",
-			&mx_i, mx_i, mx_u, mx_Lf, mx_u, mx_u);}
+			"  %p    %i    %x    %u    %o  ",
+			&mx_i, mx_i, mx_u, mx_u, mx_u);}
+//int		mix_test_199(void){return test(
+//			"  %f    %Lf    %c    %hi    %hhi    %li  ",
+//			mx_f, mx_Lf, mx_c, mx_hi, mx_c, mx_li);}
 int		mix_test_199(void){return test(
-			"  %f    %Lf    %c    %hi    %hhi    %li  ",
-			mx_f, mx_Lf, mx_c, mx_hi, mx_c, mx_li);}
+			"  %f    %c    %hi    %hhi    %li  ",
+			mx_f, mx_c, mx_hi, mx_c, mx_li);}
 
 
 int		mix_test_extra_1(void){return test(
@@ -3436,7 +3571,7 @@ int		moul_s_2(void){return test("%s !", "Ceci n'est pas un \0 exercice !");}
 int		moul_s_3(void){return test("%s!", "Ceci n'est toujours pas un exercice !");}
 int		moul_s_4(void){char *str = NULL; return test("%s!", str);}
 
-int		moul_s_5_this_ones_a_doozy(void){return test("%s", 
+int		moul_s_5_this_ones_a_doozy(void){return test("%s",
 		"Lesenfantsnesententpastrestresbonmaiscac'estparcequ'ilsfontcacadansleurculotteetquecen'estvraimentpastrestrespropreNonmongroscoupdecœurc'étaitunsoirde2005,j'étaisinvitéàuneconférenceàLaSorbonnepourparlerdelachansonfrancaiseetdel'écrituredetexteavecpleinsd'autresgens.ParmilesstarsémergentesilyavaitOliviaRuizquietaitentraindedevenirunestaravecsachansonsurlechocolatàlacon.Brefjeelretrouvecoincélorsd'une\"atelierderéflexion\"entreOliviaetRichardCrossquicommençaitàêtrepasmalconnudanslemilieuencemomentàcausedequelquesémissionsdeteréalité.J'aibienrigoleavecOliviaRuizcesoirlà,jeluiparlaitdemonrêved'écritetunechansondepirate,elledelafaçonqu'elleavaitd'écriredeschansons\"commeellessortaient\"etdes'étonnerparfoisqued'autrestrouventcabien.Brefçac'étaitunechouettesoirée/nuitquis'estterminéeauxalentoursde7hdumatinenprenantuncaféauChaidel'AbbayeprèsdeMabillon.Avantqu'ellenedisparaissepourtoujoursdemonexistence.JesuissouventrepasséauChaitôtlematinenespérantlarevoirmaisniet.Rien.JusteChristineScottThomasaperçuunjeudimatinoùilfaisaitchaud.Lesenfantsnesententpastrestresbonmaiscac'estparcequ'ilsfontcacadansleurculotteetquecen'estvraimentpastrestrespropreNonmongroscoupdecœurc'étaitunsoirde2005,j'étaisinvitéàuneconférenceàLaSorbonnepourparlerdelachansonfrancaiseetdel'écrituredetexteavecpleinsd'autresgens.ParmilesstarsémergentesilyavaitOliviaRuizquietaitentraindedevenirunestaravecsachansonsurlechocolatàlacon.Brefjeelretrouvecoincélorsd'une\"atelierderéflexion\"entreOliviaetRichardCrossquicommençaitàêtrepasmalconnudanslemilieuencemomentàcausedequelquesémissionsdeteréalité.J'aibienrigoleavecOliviaRuizcesoirlà,jeluiparlaitdemonrêved'écritetunechansondepirate,elledelafaçonqu'elleavaitd'écriredeschansons\"commeellessortaient\"etdes'étonnerparfoisqued'autrestrouventcabien.Brefçac'étaitunechouettesoirée/nuitquis'estterminéeauxalentoursde7hdumatinenprenantuncaféauChaidel'AbbayeprèsdeMabillon.Avantqu'ellenedisparaissepourtoujoursdemonexistence.JesuissouventrepasséauChaitôtlematinenespérantlarevoirmaisniet.Rien.JusteChristineScottThomasaperçuunjeudimatinoùilfaisaitchaud.Lesenfantsnesententpastrestresbonmaiscac'estparcequ'ilsfontcacadansleurculotteetquecen'estvraimentpastrestrespropreNonmongroscoupdecœurc'étaitunsoirde2005,j'étaisinvitéàuneconférenceàLaSorbonnepourparlerdelachansonfrancaiseetdel'écrituredetexteavecpleinsd'autresgens.ParmilesstarsémergentesilyavaitOliviaRuizquietaitentraindedevenirunestaravecsachansonsurlechocolatàlacon.Brefjeelretrouvecoincélorsd'une\"atelierderéflexion\"entreOliviaetRichardCrossquicommençaitàêtrepasmalconnudanslemilieuencemomentàcausedequelquesémissionsdeteréalité.J'aibienrigoleavecOliviaRuizcesoirlà,jeluiparlaitdemonrêved'écritetunechansondepirate,elledelafaçonqu'elleavaitd'écriredeschansons\"commeellessortaient\"etdes'étonnerparfoisqued'autrestrouventcabien.Brefçac'étaitunechouettesoirée/nuitquis'estterminéeauxalentoursde7hdumatinenprenantuncaféauChaidel'AbbayeprèsdeMabillon.Avantqu'ellenedisparaissepourtoujoursdemonexistence.JesuissouventrepasséauChaitôtlematinenespérantlarevoirmaisniet.Rien.JusteChristineScottThomasaperçuunjeudimatinoùilfaisaitchaud.Lesenfantsnesententpastrestresbonmaiscac'estparcequ'ilsfontcacadansleurculotteetquecen'estvraimentpastrestrespropreNonmongroscoupdecœurc'étaitunsoirde2005,j'étaisinvitéàuneconférenceàLaSorbonnepourparlerdelachansonfrancaiseetdel'écrituredetexteavecpleinsd'autresgens.ParmilesstarsémergentesilyavaitOliviaRuizquietaitentraindedevenirunestaravecsachansonsurlechocolatàlacon.Brefjeelretrouvecoincélorsd'une\"atelierderéflexion\"entreOliviaetRichardCrossquicommençaitàêtrepasmalconnudanslemilieuencemomentàcausedequelquesémissionsdeteréalité.J'aibienrigoleavecOliviaRuizcesoirlà,jeluiparlaitdemonrêved'écritetunechansondepirate,elledelafaçonqu'elleavaitd'écriredeschansons\"commeellessortaient\"etdes'étonnerparfoisqued'autrestrouventcabien.Brefçac'étaitunechouettesoirée/nuitquis'estterminéeauxalentoursde7hdumatinenprenantuncaféauChaidel'AbbayeprèsdeMabillon.Avantqu'ellenedisparaissepourtoujoursdemonexistence.JesuissouventrepasséauChaitôtlematinenespérantlarevoirmaisniet.Rien.JusteChristineScottThomasaperçuunjeudimatinoùilfaisaitchaud.Lesenfantsnesententpastrestresbonmaiscac'estparcequ'ilsfontcacadansleurculotteetquecen'estvraimentpastrestrespropreNonmongroscoupdecœurc'étaitunsoirde2005,j'étaisinvitéàuneconférenceàLaSorbonnepourparlerdelachansonfrancaiseetdel'écrituredetexteavecpleinsd'autresgens.ParmilesstarsémergentesilyavaitOliviaRuizquietaitentraindedevenirunestaravecsachansonsurlechocolatàlacon.Brefjeelretrouvecoincélorsd'une\"atelierderéflexion\"entreOliviaetRichardCrossquicommençaitàêtrepasmalconnudanslemilieuencemomentàcausedequelquesémissionsdeteréalité.J'aibienrigoleavecOliviaRuizcesoirlà,jeluiparlaitdemonrêved'écritetunechansondepirate,elledelafaçonqu'elleavaitd'écriredeschansons\"commeellessortaient\"etdes'étonnerparfoisqued'autrestrouventcabien.Brefçac'étaitunechouettesoirée/nuitquis'estterminéeauxalentoursde7hdumatinenprenantuncaféauChaidel'AbbayeprèsdeMabillon.Avantqu'ellenedisparaissepourtoujoursdemonexistence.JesuissouventrepasséauChaitôtlematinenespérantlarevoirmaisniet.Rien.JusteChristineScottThomasaperçuunjeudimatinoùilfaisaitchaud.Lesenfantsnesententpastrestresbonmaiscac'estparcequ'ilsfontcacadansleurculotteetquecen'estvraimentpastrestrespropreNonmongroscoupdecœurc'étaitunsoirde2005,j'étaisinvitéàuneconférenceàLaSorbonnepourparlerdelachansonfrancaiseetdel'écrituredetexteavecpleinsd'autresgens.ParmilesstarsémergentesilyavaitOliviaRuizquietaitentraindedevenirunestaravecsachansonsurlechocolatàlacon.Brefjeelretrouvecoincélorsd'une\"atelierderéflexion\"entreOliviaetRichardCrossquicommençaitàêtrepasmalconnudanslemilieuencemomentàcausedequelquesémissionsdeteréalité.J'aibienrigoleavecOliviaRuizcesoirlà,jeluiparlaitdemonrêved'écritetunechansondepirate,elledelafaçonqu'elleavaitd'écriredeschansons\"commeellessortaient\"etdes'étonnerparfoisqued'autrestrouventcabien.Brefçac'étaitunechouettesoirée/nuitquis'estterminéeauxalentoursde7hdumatinenprenantuncaféauChaidel'AbbayeprèsdeMabillon.Avantqu'ellenedisparaissepourtoujoursdemonexistence.JesuissouventrepasséauChaitôtlematinenespérantlarevoirmaisniet.Rien.JusteChristineScottThomasaperçuunjeudimatinoùilfaisaitchaud.Lesenfantsnesententpastrestresbonmaiscac'estparcequ'ilsfontcacadansleurculotteetquecen'estvraimentpastrestrespropreNonmongroscoupdecœurc'étaitunsoirde2005,j'étaisinvitéàuneconférenceàLaSorbonnepourparlerdelachansonfrancaiseetdel'écrituredetexteavecpleinsd'autresgens.ParmilesstarsémergentesilyavaitOliviaRuizquietaitentraindedevenirunestaravecsachansonsurlechocolatàlacon.Brefjeelretrouvecoincélorsd'une\"atelierderéflexion\"entreOliviaetRichardCrossquicommençaitàêtrepasmalconnudanslemilieuencemomentàcausedequelquesémissionsdeteréalité.J'aibienrigoleavecOliviaRuizcesoirlà,jeluiparlaitdemonrêved'écritetunechansondepirate,elledelafaçonqu'elleavaitd'écriredeschansons\"commeellessortaient\"etdes'étonnerparfoisqued'autrestrouventcabien.Brefçac'étaitunechouettesoirée/nuitquis'estterminéeauxalentoursde7hdumatinenprenantuncaféauChaidel'AbbayeprèsdeMabillon.Avantqu'ellenedisparaissepourtoujoursdemonexistence.JesuissouventrepasséauChaitôtlematinenespérantlarevoirmaisniet.Rien.JusteChristineScottThomasaperçuunjeudimatinoùilfaisaitchaud.Lesenfantsnesententpastrestresbonmaiscac'estparcequ'ilsfontcacadansleurculotteetquecen'estvraimentpastrestrespropreNonmongroscoupdecœurc'étaitunsoirde2005,j'étaisinvitéàuneconférenceàLaSorbonnepourparlerdelachansonfrancaiseetdel'écrituredetexteavecpleinsd'autresgens.ParmilesstarsémergentesilyavaitOliviaRuizquietaitentraindedevenirunestaravecsachansonsurlechocolatàlacon.Brefjeelretrouvecoincélorsd'une\"atelierderéflexion\"entreOliviaetRichardCrossquicommençaitàêtrepasmalconnudanslemilieuencemomentàcausedequelquesémissionsdeteréalité.J'aibienrigoleavecOliviaRuizcesoirlà,jeluiparlaitdemonrêved'écritetunechansondepirate,elledelafaçonqu'elleavaitd'écriredeschansons\"commeellessortaient\"etdes'étonnerparfoisqued'autrestrouventcabien.Brefçac'étaitunechouettesoirée/nuitquis'estterminéeauxalentoursde7hdumatinenprenantuncaféauChaidel'AbbayeprèsdeMabillon.Avantqu'ellenedisparaissepourtoujoursdemonexistence.JesuissouventrepasséauChaitôtlematinenespérantlarevoirmaisniet.Rien.JusteChristineScottThomasaperçuunjeudimatinoùilfaisaitchaud.Etalafinilla*bip*");}
 
 int moul_d_1(void){return test("%d", 42);}
