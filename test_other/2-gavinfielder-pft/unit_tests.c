@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:15:57 by gfielder          #+#    #+#             */
-/*   Updated: 2020/05/21 01:34:01 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/21 01:40:19 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2498,7 +2498,7 @@ int f_stress_limits_ndblmin_prec18(void){return test("%.18f", -DBL_MIN);}
 
 //Mix tests
 static unsigned int		mx_u = 235;
-static long double			mx_Lf = 0.375l;
+//static long double			mx_Lf = 0.375l;
 static double				mx_f = 0.625;
 static long				mx_li =  4223372036854775800;
 static long long			mx_lli = 3223372036654775200;
