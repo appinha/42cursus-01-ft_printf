@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:15:57 by gfielder          #+#    #+#             */
-/*   Updated: 2020/05/21 01:40:19 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/21 01:47:00 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -3889,33 +3889,33 @@ int moul_sp_1(void){return test("%%      i 42 == |%      i|\n", 42);}
 int moul_sp_2(void){return test("%% i -42 == |% i|\n", -42);}
 int moul_sp_3(void){return test("%% 4i 42 == |% 4i|\n", 42);}
 
- int moul_notmandatory_e_1(void){return test("%e", (double)42);}
- int moul_notmandatory_e_2(void){return test("Kashim a %e histoires à raconter", (double)1001);}
- int moul_notmandatory_e_3(void){return test("Il fait au moins %e\n", (double)-8000);}
- int moul_notmandatory_e_4(void){return test("%e", (double)-0);}
- int moul_notmandatory_e_5(void){return test("%e", (double)0);}
- int moul_notmandatory_e_6(void){return test("%e", (double)INT_MAX);}
- int moul_notmandatory_e_7(void){return test("%e", (double)INT_MIN);}
- int moul_notmandatory_e_8(void){return test("%e", (double)INT_MIN - 1);}
- int moul_notmandatory_e_9(void){return test("%e", (double)INT_MAX + 1);}
- int moul_notmandatory_e_10(void){return test("%%e 0000042 == |%e|\n", (double)0000042);}
- int moul_notmandatory_e_11(void){return test("%%e \t == |%e|\n", (double)'\t');}
- int moul_notmandatory_e_12(void){return test("%%e Lydie == |%e|\n", (double)'L'+'y'+'d'+'i'+'e');}
- int moul_notmandatory_e_13(void){return test("%%e 42.42 == |%e|\n", 42.42);}
- int moul_notmandatory_e_14(void){return test("%E", (double)42);}
- int moul_notmandatory_e_15(void){return test("Kashim a %E histoires à raconter", (double)1001);}
- int moul_notmandatory_e_16(void){return test("Il fait au moins %E\n", (double)-8000);}
- int moul_notmandatory_e_17(void){return test("%E", (double)-0);}
- int moul_notmandatory_e_18(void){return test("%E", (double)0);}
- int moul_notmandatory_e_19(void){return test("%E", (double)INT_MAX);}
- int moul_notmandatory_e_20(void){return test("%E", (double)INT_MIN);}
- int moul_notmandatory_e_21(void){return test("%E", (double)INT_MIN - 1);}
- int moul_notmandatory_e_22(void){return test("%E", (double)INT_MAX + 1);}
- int moul_notmandatory_e_23(void){return test("%%E 0000042 == |%E|\n", (double)0000042);}
- int moul_notmandatory_e_24(void){return test("%%E \t == |%E|\n", (double)'\t');}
- int moul_notmandatory_e_25(void){return test("%%E Lydie == |%E|\n", (double)'L'+'y'+'d'+'i'+'e');}
- int moul_notmandatory_e_26(void){return test("%%E 42.42 == |%E|\n", 42.42);}
- int moul_notmandatory_e_27(void){return test("%%E 42.42 == |%.2E|\n", 42.42);}
+int e_1(void){return test("%e", (double)42);}
+int e_2(void){return test("Kashim a %e histoires à raconter", (double)1001);}
+int e_3(void){return test("Il fait au moins %e\n", (double)-8000);}
+int e_4(void){return test("%e", (double)-0);}
+int e_5(void){return test("%e", (double)0);}
+int e_6(void){return test("%e", (double)INT_MAX);}
+int e_7(void){return test("%e", (double)INT_MIN);}
+int e_8(void){return test("%e", (double)INT_MIN - 1);}
+int e_9(void){return test("%e", (double)INT_MAX + 1);}
+int e_10(void){return test("%%e 0000042 == |%e|\n", (double)0000042);}
+int e_11(void){return test("%%e \t == |%e|\n", (double)'\t');}
+int e_12(void){return test("%%e Lydie == |%e|\n", (double)'L'+'y'+'d'+'i'+'e');}
+int e_13(void){return test("%%e 42.42 == |%e|\n", 42.42);}
+//int moul_notmandatory_e_14(void){return test("%E", (double)42);}
+//int moul_notmandatory_e_15(void){return test("Kashim a %E histoires à raconter", (double)1001);}
+//int moul_notmandatory_e_16(void){return test("Il fait au moins %E\n", (double)-8000);}
+//int moul_notmandatory_e_17(void){return test("%E", (double)-0);}
+//int moul_notmandatory_e_18(void){return test("%E", (double)0);}
+//int moul_notmandatory_e_19(void){return test("%E", (double)INT_MAX);}
+//int moul_notmandatory_e_20(void){return test("%E", (double)INT_MIN);}
+//int moul_notmandatory_e_21(void){return test("%E", (double)INT_MIN - 1);}
+//int moul_notmandatory_e_22(void){return test("%E", (double)INT_MAX + 1);}
+//int moul_notmandatory_e_23(void){return test("%%E 0000042 == |%E|\n", (double)0000042);}
+//int moul_notmandatory_e_24(void){return test("%%E \t == |%E|\n", (double)'\t');}
+//int moul_notmandatory_e_25(void){return test("%%E Lydie == |%E|\n", (double)'L'+'y'+'d'+'i'+'e');}
+//int moul_notmandatory_e_26(void){return test("%%E 42.42 == |%E|\n", 42.42);}
+//int moul_notmandatory_e_27(void){return test("%%E 42.42 == |%.2E|\n", 42.42);}
 
  int moul_notmandatory_g_1(void){return test("%g", (double)42);}
  int moul_notmandatory_g_2(void){return test("Kashim a %g histoires à raconter", (double)1001);}

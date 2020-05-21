@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/21 01:11:54 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/21 01:44:44 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void			print_spec_e(int *len, t_flags fl, double n)
 		d[fl.j--] = fl.ulli % 10 + '0';
 		fl.ulli /= 10;
 	}
-	printf("[fl.ulli=%lli]", fl.ulli);
+	//printf("[fl.ulli=%lli]", fl.ulli);
 	d[0] = fl.ulli + '0';
 	fl.a = ft_strjoin(d, "e+");
 	fl.a = ft_strjoin(fl.a, e);
