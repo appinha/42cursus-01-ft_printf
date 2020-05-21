@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 15:39:22 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/20 20:06:14 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,20 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-void	test_star(int *i, char *s)
-{
-	printf(MAIN_2("=== • test_star • ===\n") "\n");
-	printf("original value = %i\n", *i);
-	*i += 2;
-	printf("changed value (1) = %i\n", *i);
-	(*i)++;
-	printf("changed value (2) = %i\n", *i);
-	*i = 0;
-	printf("s[*i] = %c\n", s[*i]);
-	printf("s[(*i)++] = %c\n", s[(*i)++]);
-	printf("s[*i] = %c\n", s[*i]);
-}
-
-#define INPUT	"|%3c|%-3c|%5s|%-5s|", 'A', 'B', "str", "ing"
-
-#define INPUT_1	"%-05.0f", 7.3
-#define INPUT_2	"%-05.1f", 7.3
-#define INPUT_3	"%-05.0f", -7.3
-#define INPUT_4	"%-05.1f", -7.3
-#define INPUT_5	"%0-5.0f", 7.3
+#define INPUT_1	"Hello,%n world!", &n1
+#define INPUT_2	"n1=%i", n1
+#define INPUT_3	"%n0123%n456789%n", &n1, &n2, &n3
+#define INPUT_4	"n1=%i, n2=%i, n3=%i", n1, n2, n3
+#define INPUT_5	"%f", 7.3
 
 int		main(void)
 {
 	int		len;
 	char	*p1;
-	float	f1;
-	float	f2;
-	float	f3;
+	int		n1;
+	int		n2;
+	int		n3;
 	double	d1;
-
-	f1 = 0.0894255;
-	f2 = 473400001;
-	f3 = 100;
-	d1 = 0.0894255;
-
-	//ft_ullitoa_base(3267, "0123456789abcdef");
 
 	printf(MAIN_2("\n=== • printf compare • ===\n") "\n");
 
