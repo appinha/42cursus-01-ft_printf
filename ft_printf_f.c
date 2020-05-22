@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/21 01:44:44 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/22 01:19:36 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ static int		ft_dectoa_ver(double f0, t_flags fl)
 	return (0);
 }
 
-static t_flags	ft_dectoa_aux(double n, t_flags fl, size_t *nbr, int *len)
+static t_flags	ft_dectoa_aux(t_flags fl, size_t *nbr, int *len)
 {
 	size_t	aux;
 
-	fl.f = (n >= 0) ? n : -n;
-	aux = (fl.f - fl.ulli) * ft_pow(10, fl.size + 1);
-	*nbr = aux;
+	*nbr = (fl.f - fl.ulli) * ft_pow(10, fl.size + 1);
+	aux = *nbr;
 	*len = 1;
 	while (aux /= 10)
 		(*len)++;
@@ -55,13 +54,13 @@ static t_flags	ft_dectoa_aux(double n, t_flags fl, size_t *nbr, int *len)
 	return (fl);
 }
 
-static t_flags	ft_dectoa(double n, t_flags fl)
+static t_flags	ft_dectoa(t_flags fl)
 {
 	char	z0[20];
 	size_t	nbr;
 	int		len;
 
-	fl = ft_dectoa_aux(n, fl, &nbr, &len);
+	fl = ft_dectoa_aux(fl, &nbr, &len);
 	if (nbr == 0)
 		len = 2;
 	z0[0] = '.';
@@ -86,63 +85,12 @@ static t_flags	ft_dectoa(double n, t_flags fl)
 void			print_spec_f(int *len, t_flags fl, double n)
 {
 	fl.sign = (n >= 0) ? '+' : '-';
+	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = (n >= 0) ? n : -n;
-	if (fl.point == 0)
-		fl.size = 6;
-	else
-		fl.size = fl.precision;
-	fl = ft_dectoa(n, fl);
-	fl.a = ft_strjoin(ft_ullitoa_base(fl.ulli, "0123456789"), fl.d);
+	fl.size = fl.precision;
+	fl = ft_dectoa(fl);
+	fl.a = ft_strjoin(ft_ullitoa_base(fl.ulli, DIGITS), fl.d);
 	print_flags(len, fl);
 	if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
 		ft_putchar_len('0', len);
-}
-
-void			print_spec_e(int *len, t_flags fl, double n)
-{
-	char	d[fl.precision + 3];
-	char	e[3];
-	int		aux;
-
-	fl.sign = (n >= 0) ? '+' : '-';
-	d[1] = '.';
-	d[fl.precision + 2] = '\0';
-	e[0] = '0';
-	e[2] = '\0';
-	//printf("[fl.precision=%i]", fl.precision);
-	fl.ulli = (n >= 0) ? n : -n;
-	fl.size = 1;
-	while (fl.ulli /= 10)
-		fl.size++;
-	aux = fl.size - 1;
-	//printf("[aux=%i]", aux);
-	fl.j = 1;
-	while (aux >= 0 && fl.j >= 0)
-	{
-		e[fl.j--] = aux % 10 + '0';
-		aux /= 10;
-	}
-	//printf("[fl.size=%i]", fl.size);
-
-	fl.ulli = (n >= 0) ? n : -n;
-	if (fl.size - 1 > fl.precision)
-		fl.ulli = fl.ulli / ft_pow(10, fl.size - fl.precision - 1);
-	//printf("[fl.ulli=%lli]", fl.ulli);
-	fl.j = fl.precision + 1;
-	//printf("[fl.j=%i]", fl.j);
-	while (fl.ulli > 9 && fl.j > 0)
-	{
-		while (fl.size++ < fl.precision + 1)
-			d[fl.j--] = '0';
-		d[fl.j--] = fl.ulli % 10 + '0';
-		fl.ulli /= 10;
-	}
-	//printf("[fl.ulli=%lli]", fl.ulli);
-	d[0] = fl.ulli + '0';
-	fl.a = ft_strjoin(d, "e+");
-	fl.a = ft_strjoin(fl.a, e);
-	print_flags(len, fl);
-	//printf("d=\"%s\"\n", d);
-	//printf("e=\"%s\"\n", e);
-	//printf("%i, %c, %e", *len, fl.spe_c, n);
 }

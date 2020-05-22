@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 23:12:19 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/22 18:32:10 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct	s_flags
 	char					sign;
 	char					*a;
 	char					*d;
+	char					e[5];
 	unsigned long int		*p;
 	int						j;
 }				t_flags;
@@ -79,9 +80,13 @@ typedef struct	s_flags
 */
 
 # define FLAGS		"-+#0 "
-# define DIGITS		"0123456789"
 # define ALL_FL		"-+#0 *.0123456789lh"
 # define FSPECS		"cspdiuxX%onfge"
+
+# define DIGITS		"0123456789"
+# define HEXALOW	"0123456789abcdef"
+# define HEXAUPP	"0123456789ABCDEF"
+# define OCTAL		"01234567"
 
 /*
 ** MAIN FUNCTIONS
@@ -103,6 +108,7 @@ void			print_spec_o(int *len, t_flags fl, va_list args);
 void			print_spec_p(int *len, t_flags fl, unsigned long int p);
 
 void			print_spec_f(int *len, t_flags fl, double n);
+
 void			print_spec_e(int *len, t_flags fl, double n);
 
 /*

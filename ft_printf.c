@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/21 00:25:38 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/21 23:51:14 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 		fl.precision = 0;
 		fl.length = 0;
 		fl = treat_flags(args, fl);
-		if (fl.spe_c == 'e' && fl.point == 0)
+		if ((fl.spe_c == 'f' || fl.spe_c == 'e') && fl.point == 0)
 			fl.precision = 6;
 		triage_specs(args, len, fl);
 	}

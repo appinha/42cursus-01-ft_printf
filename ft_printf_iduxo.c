@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 21:53:54 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/22 00:49:24 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_spec_i_d_u(int *len, t_flags fl, va_list args)
 			fl.ulli = va_arg(args, unsigned long long int);
 		fl.sign = '+';
 	}
-	fl.a = ft_ullitoa_base(fl.ulli, "0123456789");
+	fl.a = ft_ullitoa_base(fl.ulli, DIGITS);
 	print_flags(len, fl);
 }
 
@@ -49,9 +49,9 @@ void	print_spec_x(int *len, t_flags fl, va_list args)
 		fl.ulli = va_arg(args, unsigned long long int);
 	fl.sign = '+';
 	if (fl.spe_c == 'x')
-		fl.a = ft_ullitoa_base(fl.ulli, "0123456789abcdef");
+		fl.a = ft_ullitoa_base(fl.ulli, HEXALOW);
 	if (fl.spe_c == 'X')
-		fl.a = ft_ullitoa_base(fl.ulli, "0123456789ABCDEF");
+		fl.a = ft_ullitoa_base(fl.ulli, HEXAUPP);
 	print_flags(len, fl);
 }
 
@@ -64,6 +64,6 @@ void	print_spec_o(int *len, t_flags fl, va_list args)
 	if (fl.length == 2)
 		fl.ulli = va_arg(args, unsigned long long int);
 	fl.sign = '+';
-	fl.a = ft_ullitoa_base(fl.ulli, "01234567");
+	fl.a = ft_ullitoa_base(fl.ulli, OCTAL);
 	print_flags(len, fl);
 }

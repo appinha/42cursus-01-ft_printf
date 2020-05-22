@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 15:03:08 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 15:43:00 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/22 20:55:52 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	print_flags(int *len, t_flags fl)
 	if (fl.space == 1 && fl.plus == 0 && fl.sign == '+')
 		ft_putchar_len(' ', len);
 	print_zeros(len, fl);
-	if (!(fl.ulli == 0 && fl.point == 1 && fl.precision == 0))
+	if (!(fl.ulli == 0 && fl.point == 1 && fl.precision == 0 &&
+		fl.spe_c != 'e'))
 		ft_putcstr_len(fl.a, len, ft_strlen(fl.a));
 	if (fl.minus == 1)
 		print_width(len, fl);

@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/21 01:02:54 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/22 20:57:01 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,22 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%.5e", (double)4123456
-#define INPUT_2	"Kashim a %e histoires à raconter", (double)1001
-#define INPUT_3	"Il fait au moins %e\n", (double)-8000
-#define INPUT_4	"%e", (double)-0
-#define INPUT_5	"%e", (double)0
+#define INPUT_1	"%e", (double)42
+#define INPUT_2	"%.1e", (double)-0
+#define INPUT_3	"%.2e", (double)0
+#define INPUT_4	"%.e", (double)0
+#define INPUT_5	"%.3e", (double)0
+#define INPUT_6	"%e", (double)INT_MAX + 1
+#define INPUT_7	"%%e \t == |%e|\n", (double)'\t'
+#define INPUT_8	"%%e 42.42 == |%e|\n", 42.42
 
+/*
+#define INPUT_1	"%f", 3.9999999
+#define INPUT_2	"%f", -5.9999999
+#define INPUT_3	"%e", (double)INT_MAX
+#define INPUT_4	"%e", (double)INT_MIN
+#define INPUT_5	"%e", (double)INT_MIN - 1
+*/
 int		main(void)
 {
 	int		len;
