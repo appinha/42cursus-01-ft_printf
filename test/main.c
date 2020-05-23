@@ -6,13 +6,14 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 16:07:10 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 18:19:18 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 #include <stdio.h>
 #include <limits.h>
+#include <float.h>
 
 #define MAIN_1(string)		"\033[1m\033[38;5;199m" string "\033[0m"
 #define MAIN_2(string)		"\033[35m" string "\033[0m"
@@ -20,11 +21,11 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%.9e", (double)0
-#define INPUT_2	"%.10e", 999.999999991
-#define INPUT_3	"%.10e", -99.9999999999
-#define INPUT_4	"%.11e", 0.00000000010000000
-#define INPUT_5	"%.11e", 99.999999999990000000
+#define INPUT_1	"%.0e", DBL_MIN
+#define INPUT_2	"%.3e", DBL_MIN
+#define INPUT_3	"%e", DBL_MIN
+#define INPUT_4	"%.8e", DBL_MIN
+#define INPUT_5	"%.15f", DBL_MIN
 
 /*
 #define INPUT_1	"%f", 3.9999999

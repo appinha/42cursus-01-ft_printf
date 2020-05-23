@@ -6,22 +6,22 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 15:00:43 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 17:47:40 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		ft_dectoa_ver(double f0, t_flags fl)
+static int		ft_dectoa_ver(t_flags fl)
 {
 	int	aux;
 
-	aux = f0 * 10;
+	aux = fl.f0 * 10;
 	fl.size++;
 	while (fl.size >= 0 && aux == 9)
 	{
-		f0 = f0 * 10;
-		aux = f0;
+		fl.f0 = fl.f0 * 10;
+		aux = fl.f0;
 		aux = aux % 10;
 		if (fl.size == 1 && aux >= fl.rnd)
 			fl.size--;
@@ -45,7 +45,7 @@ static t_flags	ft_dectoa_aux(t_flags fl, size_t *nbr, int *len)
 		*nbr += 10;
 	*nbr /= 10;
 	aux = (fl.f * 10);
-	if (ft_dectoa_ver(fl.f - fl.ulli, fl) == 1 ||
+	if (ft_dectoa_ver(fl) == 1 ||
 		(fl.point == 1 && fl.precision == 0 && (aux % 10) >= fl.rnd))
 	{
 		fl.ulli++;
@@ -93,6 +93,7 @@ void			print_spec_f(int *len, t_flags fl, double n)
 	fl.sign = (n >= 0) ? '+' : '-';
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = (n >= 0) ? n : -n;
+	fl.f0 = fl.f - fl.ulli;
 	fl.size = fl.precision;
 	fl = ft_dectoa(fl);
 	fl.a = ft_strjoin(ft_ullitoa_base(fl.ulli, DIGITS), fl.d);

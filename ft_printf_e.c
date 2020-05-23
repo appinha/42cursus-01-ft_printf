@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 16:39:24 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 18:13:33 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ static t_flags	ver_rounding(t_flags fl, int *size)
 			break;
 		}
 	}
-	if (fl.a[1] == '.' + 1 && (fl.a[1] = '.'))
+	fl.lli = fl.f0 * 10;
+	if ((fl.a[1] == '.' + 1 && (fl.a[1] = '.')) ||
+		(fl.point == 1 && fl.precision == 0 && (fl.lli % 10) >= fl.rnd))
 	{
 		fl.a[0]++;
-		if (fl.a[0] == '9' + 1)
+		if (fl.a[0] == '9' + 1 && (fl.a[0] = '1'))
 		{
-			fl.a[0] = '1';
 			(*size)++;
 			fl.rnd = 0;
 		}
@@ -94,17 +95,14 @@ static t_flags	nbr0toa(t_flags fl, int *size)
 
 static t_flags	print_spec_e_aux(t_flags fl, int *size)
 {
-	*size = 0;
-	if (fl.ulli > 0)
+	if (fl.ulli > 0 && (fl.e[1] = '+'))
 	{
-		fl.e[1] = '+';
 		while (fl.ulli /= 10)
 			(*size)++;
 		fl.ulli = fl.f;
 	}
-	else
+	else if ((fl.e[1] = '-'))
 	{
-		fl.e[1] = '-';
 		while (fl.ulli == 0 && (*size)-- > -100)
 		{
 			fl.f *= 10;
@@ -116,6 +114,10 @@ static t_flags	print_spec_e_aux(t_flags fl, int *size)
 			return (fl);
 		}
 	}
+	if (*size > 0)
+		fl.f0 = fl.f / ft_pow(10, *size);
+	if (*size < 0)
+		fl.f0 = fl.f * ft_pow(10, *size);
 	fl = nbrtoa(fl, size);
 	return (fl);
 }
@@ -129,6 +131,7 @@ void			print_spec_e(int *len, t_flags fl, double n)
 	fl.ulli = fl.f;
 	fl.e[0] = 'e';
 	fl.e[4] = '\0';
+	size = 0;
 	fl = print_spec_e_aux(fl, &size);
 	size = (size >= 0) ? size : -size;
 	if (size > 9)
