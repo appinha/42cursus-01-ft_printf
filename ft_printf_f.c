@@ -6,12 +6,12 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 19:24:19 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 20:28:30 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
+
 static t_flags	ft_dectoa_ver_prec(t_flags fl)
 {
 	if (fl.precision > 0 && (ft_strlen(fl.d)) > (size_t)fl.precision + 1)
@@ -23,7 +23,7 @@ static t_flags	ft_dectoa_ver_prec(t_flags fl)
 	}
 	return (fl);
 }
-*/
+
 static int		ft_dectoa_ver_rnd(t_flags fl)
 {
 	int	aux;
@@ -96,7 +96,7 @@ t_flags	ft_dectoa(t_flags fl)
 		fl.d = ft_strdup("");
 	else
 		fl.d = ft_strjoin(z0, ft_ullitoa_base((unsigned long long)nbr, DIGITS));
-	//fl = ft_dectoa_ver_prec(fl);
+	fl = ft_dectoa_ver_prec(fl);
 	return (fl);
 }
 
