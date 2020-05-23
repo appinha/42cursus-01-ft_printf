@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 12:15:10 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 15:00:43 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_flags	ft_dectoa(t_flags fl)
 
 void			print_spec_f(int *len, t_flags fl, double n)
 {
-	fl.rnd = 5;
+	//fl.rnd = 5;
 	fl.sign = (n >= 0) ? '+' : '-';
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = (n >= 0) ? n : -n;

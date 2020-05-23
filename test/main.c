@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 12:34:09 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 16:07:10 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%.9e", 999.9999999
-#define INPUT_2	"%.10e", 999.99999999
+#define INPUT_1	"%.9e", (double)0
+#define INPUT_2	"%.10e", 999.999999991
 #define INPUT_3	"%.10e", -99.9999999999
 #define INPUT_4	"%.11e", 0.00000000010000000
 #define INPUT_5	"%.11e", 99.999999999990000000
@@ -44,31 +44,31 @@ int		main(void)
 
 	printf(MAIN_2("\n=== • printf compare • ===\n") "\n");
 
-	printf(HEADER_2("• printf") "\n");
-	printf(HEADER_1("• ft_printf") "\n\n");
+	//printf(HEADER_2("• printf") "\n");
+	//printf(HEADER_1("• ft_printf") "\n\n");
 
 	len = printf(INPUT_1);
-	printf(HEADER_2(" (len = %i)") "\n", len);
+	printf(HEADER_2(" (len = %i - printf)") "\n", len);
 	len = ft_printf(INPUT_1);
-	printf(HEADER_1(" (len = %i)") "\n\n", len);
+	printf(HEADER_1(" (len = %i - ft_printf)") "\n\n", len);
 
 	len = printf(INPUT_2);
-	printf(HEADER_2(" (len = %i)") "\n", len);
+	printf(HEADER_2(" (len = %i - printf)") "\n", len);
 	len = ft_printf(INPUT_2);
-	printf(HEADER_1(" (len = %i)") "\n\n", len);
+	printf(HEADER_1(" (len = %i - ft_printf)") "\n\n", len);
 
 	len = printf(INPUT_3);
-	printf(HEADER_2(" (len = %i)") "\n", len);
+	printf(HEADER_2(" (len = %i - printf)") "\n", len);
 	len = ft_printf(INPUT_3);
-	printf(HEADER_1(" (len = %i)") "\n\n", len);
+	printf(HEADER_1(" (len = %i - ft_printf)") "\n\n", len);
 
 	len = printf(INPUT_4);
-	printf(HEADER_2(" (len = %i)") "\n", len);
+	printf(HEADER_2(" (len = %i - printf)") "\n", len);
 	len = ft_printf(INPUT_4);
-	printf(HEADER_1(" (len = %i)") "\n\n", len);
+	printf(HEADER_1(" (len = %i - ft_printf)") "\n\n", len);
 
 	len = printf(INPUT_5);
-	printf(HEADER_2(" (len = %i)") "\n", len);
+	printf(HEADER_2(" (len = %i - printf)") "\n", len);
 	len = ft_printf(INPUT_5);
-	printf(HEADER_1(" (len = %i)") "\n\n", len);
+	printf(HEADER_1(" (len = %i - ft_printf)") "\n\n", len);
 }
