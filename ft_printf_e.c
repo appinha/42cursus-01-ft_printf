@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 13:17:04 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 13:23:12 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_flags	nbrtoa(t_flags fl, int size)
 	char	*aux;
 
 	fl = ft_dectoa(fl);
-	printf("[size=%i]", size);
+	//printf("[size=%i]", size);
 	aux = ft_strjoin(ft_ullitoa_base(fl.ulli, DIGITS), fl.d);
 	free(fl.d);
 	fl.j = ft_strlen(aux);
