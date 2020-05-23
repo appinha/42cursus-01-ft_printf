@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 18:13:33 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 20:23:32 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ static t_flags	print_spec_e_aux(t_flags fl, int *size)
 	if (*size > 0)
 		fl.f0 = fl.f / ft_pow(10, *size);
 	if (*size < 0)
-		fl.f0 = fl.f * ft_pow(10, *size);
+		fl.f0 = fl.f * ft_pow(10, -*size);
 	fl = nbrtoa(fl, size);
 	return (fl);
 }
