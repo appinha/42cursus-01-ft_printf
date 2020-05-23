@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/22 22:24:47 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 13:14:01 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct	s_flags
 	char					*a;
 	char					*d;
 	char					e[5];
+	short unsigned int		rnd;
 	unsigned long int		*p;
 	int						j;
 }				t_flags;
@@ -122,6 +123,7 @@ void			ft_putcstr_len(char *s, int *len, int size);
 char			*ft_strdup(const char *s1);
 
 char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
 double			ft_pow(double n, unsigned int pow);
 char			*ft_ullitoa_base(unsigned long long int n, char *base);
 

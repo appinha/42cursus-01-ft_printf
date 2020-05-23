@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/22 22:43:20 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 12:15:10 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int		ft_dectoa_ver(double f0, t_flags fl)
 		f0 = f0 * 10;
 		aux = f0;
 		aux = aux % 10;
-		if (fl.size == 1 && aux >= 5)
+		if (fl.size == 1 && aux >= fl.rnd)
 			fl.size--;
 		fl.size--;
 	}
@@ -41,12 +41,12 @@ static t_flags	ft_dectoa_aux(t_flags fl, size_t *nbr, int *len)
 	*len = 1;
 	while (aux /= 10)
 		(*len)++;
-	if ((*nbr % 10) >= 5)
+	if ((*nbr % 10) >= fl.rnd)
 		*nbr += 10;
 	*nbr /= 10;
 	aux = (fl.f * 10);
 	if (ft_dectoa_ver(fl.f - fl.ulli, fl) == 1 ||
-		(fl.point == 1 && fl.precision == 0 && (aux % 10) >= 5))
+		(fl.point == 1 && fl.precision == 0 && (aux % 10) >= fl.rnd))
 	{
 		fl.ulli++;
 		if (fl.spe_c == 'e' && fl.ulli == 10)
@@ -89,6 +89,7 @@ t_flags	ft_dectoa(t_flags fl)
 
 void			print_spec_f(int *len, t_flags fl, double n)
 {
+	fl.rnd = 5;
 	fl.sign = (n >= 0) ? '+' : '-';
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = (n >= 0) ? n : -n;

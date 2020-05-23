@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 12:25:19 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/20 15:04:44 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 13:13:26 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,22 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	new_str[i] = '\0';
+	return (new_str);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*new_str;
+	size_t	i;
+	size_t	j;
+
+	if (!s || !(new_str = (char *)malloc(len + 1)))
+		return (0);
+	i = start;
+	j = 0;
+	while (i < ft_strlen(s) && j < len)
+		new_str[j++] = s[i++];
+	new_str[j] = '\0';
 	return (new_str);
 }
 

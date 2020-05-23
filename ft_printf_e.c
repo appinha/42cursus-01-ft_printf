@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/22 22:43:41 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 13:17:04 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,74 +38,83 @@ static t_flags	nbr0toa(t_flags fl)
 	return (fl);
 }
 
-static t_flags	nbrtoa(t_flags fl)
+static t_flags	nbrtoa(t_flags fl, int size)
 {
 	char	*aux;
 
-	if (fl.size > 0)
-		fl.f = fl.f / ft_pow(10, fl.size);
-	fl.ulli = fl.f;
-	fl.size = fl.precision;
 	fl = ft_dectoa(fl);
+	printf("[size=%i]", size);
 	aux = ft_strjoin(ft_ullitoa_base(fl.ulli, DIGITS), fl.d);
 	free(fl.d);
-	fl.d = aux;
+	fl.j = ft_strlen(aux);
+	while (--fl.j >= 0)
+	{
+		if (aux[fl.j] == '.' && fl.j >= 2)
+		{
+			aux[fl.j] = aux[fl.j - 1];
+			aux[fl.j - 1] = '.';
+		}
+	}
+	if (size > 0)
+		fl.d = ft_substr(aux, 0, (ft_strlen(aux) - size));
+	else
+		fl.d = ft_strdup(aux);
+	free(aux);
 	return (fl);
 }
 
 static t_flags	intpart_0(t_flags fl)
 {
+	int		size;
+
 	fl.e[1] = '-';
-	fl.size = 0;
-	while (fl.ulli == 0 && fl.size++ < 100)
+	size = 0;
+	while (fl.ulli == 0 && size-- > -100)
 	{
 		fl.f *= 10;
 		fl.ulli = fl.f;
 	}
-	if (fl.size > 99)
+	fl.size = fl.precision;
+	fl = nbrtoa(fl, size);
+	if (-size > 99)
 	{
 		fl = nbr0toa(fl);
 		return (fl);
 	}
-	else if (fl.size > 9)
-		fl.a = ft_ullitoa_base(fl.size, DIGITS);
+	else if (-size > 9)
+		fl.a = ft_ullitoa_base(-size, DIGITS);
 	else
-		fl.a = ft_strjoin("0", ft_ullitoa_base(fl.size, DIGITS));
+		fl.a = ft_strjoin("0", ft_ullitoa_base(-size, DIGITS));
 	fl.e[2] = fl.a[0];
 	fl.e[3] = fl.a[1];
 	free(fl.a);
-	fl.size = 0;
-	fl = nbrtoa(fl);
 	return (fl);
 }
 
 static t_flags	intpart_not0(t_flags fl)
 {
+	int	size;
+
 	fl.e[1] = '+';
-	fl.size = 0;
+	size = 0;
 	while (fl.ulli /= 10)
-		fl.size++;
+		size++;
 	fl.ulli = fl.f;
-	if (fl.size > 9)
-		fl.a = ft_ullitoa_base(fl.size, DIGITS);
+	fl.size = fl.precision;
+	fl = nbrtoa(fl, size);
+	if (size > 9)
+		fl.a = ft_ullitoa_base(size, DIGITS);
 	else
-		fl.a = ft_strjoin("0", ft_ullitoa_base(fl.size, DIGITS));
+		fl.a = ft_strjoin("0", ft_ullitoa_base(size, DIGITS));
 	fl.e[2] = fl.a[0];
 	fl.e[3] = fl.a[1];
 	free(fl.a);
-	if (fl.size > fl.precision)
-	{
-		fl.ulli = fl.ulli / ft_pow(10, fl.size - fl.precision - 1);
-		if ((fl.ulli % 10) >= 5)
-			fl.ulli += 10;
-		fl.ulli /= 10;
-	}
-	fl = nbrtoa(fl);
 	return (fl);
 }
 
 void			print_spec_e(int *len, t_flags fl, double n)
 {
+	fl.rnd = 6;
 	fl.sign = (n >= 0) ? '+' : '-';
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = fl.f;
