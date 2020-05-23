@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/22 20:58:45 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/22 22:43:41 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,16 @@ static t_flags	nbr0toa(t_flags fl)
 
 static t_flags	nbrtoa(t_flags fl)
 {
-	char	str[fl.precision + 3];
+	char	*aux;
 
-	if (fl.size < fl.precision)
-		fl.ulli = fl.f * ft_pow(10, fl.precision - fl.size);
-	fl.d = ft_ullitoa_base(fl.ulli, DIGITS);
-	str[0] = fl.d[0];
-	str[1] = '.';
-	str[fl.precision + 2] = '\0';
-	fl.j = 1;
-	while (++fl.j < fl.precision + 2)
-		str[fl.j] = fl.d[fl.j - 1];
-	if (ft_strlen(fl.d) - 1 < (size_t)fl.precision)
-	{
-		while (fl.j <= fl.precision + 1)
-			str[fl.j++] = '0';
-	}
+	if (fl.size > 0)
+		fl.f = fl.f / ft_pow(10, fl.size);
+	fl.ulli = fl.f;
+	fl.size = fl.precision;
+	fl = ft_dectoa(fl);
+	aux = ft_strjoin(ft_ullitoa_base(fl.ulli, DIGITS), fl.d);
 	free(fl.d);
-	fl.d = ft_strdup(str);
+	fl.d = aux;
 	return (fl);
 }
 
@@ -124,7 +116,6 @@ void			print_spec_e(int *len, t_flags fl, double n)
 	else
 		fl = intpart_0(fl);
 	fl.a = ft_strjoin(fl.d, fl.e);
-	//ft_printf("[fl.a=\"%s\"]", fl.a);
 	free(fl.d);
 	fl.ulli = fl.f;
 	print_flags(len, fl);
