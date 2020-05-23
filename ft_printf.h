@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 17:47:03 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 19:11:54 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct	s_flags
 	char					*a;
 	char					*d;
 	char					e[5];
+	char					*tmp;
 	short unsigned int		rnd;
 	unsigned long int		*p;
 	int						j;

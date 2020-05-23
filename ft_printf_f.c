@@ -6,13 +6,25 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 17:47:40 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 19:12:59 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		ft_dectoa_ver(t_flags fl)
+static t_flags	ft_dectoa_ver_prec(t_flags fl)
+{
+	if (fl.precision > 0 && (ft_strlen(fl.d)) > (size_t)fl.precision + 1)
+	{
+		fl.tmp = ft_substr(fl.d, 2, ft_strlen(fl.d) - 2);
+		free(fl.d);
+		fl.d = ft_strjoin(".", fl.tmp);
+		free(fl.tmp);
+	}
+	return (fl);
+}
+
+static int		ft_dectoa_ver_rnd(t_flags fl)
 {
 	int	aux;
 
@@ -45,7 +57,7 @@ static t_flags	ft_dectoa_aux(t_flags fl, size_t *nbr, int *len)
 		*nbr += 10;
 	*nbr /= 10;
 	aux = (fl.f * 10);
-	if (ft_dectoa_ver(fl) == 1 ||
+	if (ft_dectoa_ver_rnd(fl) == 1 ||
 		(fl.point == 1 && fl.precision == 0 && (aux % 10) >= fl.rnd))
 	{
 		fl.ulli++;
@@ -84,6 +96,7 @@ t_flags	ft_dectoa(t_flags fl)
 		fl.d = ft_strdup("");
 	else
 		fl.d = ft_strjoin(z0, ft_ullitoa_base((unsigned long long)nbr, DIGITS));
+	fl = ft_dectoa_ver_prec(fl);
 	return (fl);
 }
 
