@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:15:57 by gfielder          #+#    #+#             */
-/*   Updated: 2020/05/22 21:26:56 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/22 22:51:19 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -4301,6 +4301,7 @@ int e_asspr_prec1n_ignoreflag(void){return test("% +.1e", -7.3);}
 int e_asspr_prec3n_ignoreflag(void){return test("% +.3e", -7.3);}
 int e_asspr_prec6n_ignoreflag(void){return test("% +.6e", -7.3);}
 //Scientific notation whose precision exceeds their compiled literal precision
+/*
 int e_overprec_might_be_undefbehav_100(void){return test("%.100e", 0.237);}
 int e_overprec_might_be_undefbehav_32(void){return test("%.32e", 0.237);}
 int e_overprec_might_be_undefbehav_4(void){return test("%.4e", 0.237);}
@@ -4309,7 +4310,9 @@ int e_overprec_might_be_undefbehav_10_from_0(void){return test("%.10e", 0.0);}
 int e_overprec_might_be_undefbehav_2000(void){return test("%.2000e", 623.28376510723481);}
 int e_overprec_might_be_undefbehav_dblmin(void){return test("%.2000e", DBL_MIN);}
 int e_overprec_might_be_undefbehav_ndblmin(void){return test("%.2000e", -DBL_MIN);}
+*/
 //Scientific notation at double max, double min
+/*
 int e_limits_dblmax_prec0_notmandatory(void){return test("%.0e", DBL_MAX);}
 int e_limits_dblmax_prec3_notmandatory(void){return test("%.3e", DBL_MAX);}
 int e_limits_dblmax_precd_notmandatory(void){return test("%e", DBL_MAX);}
@@ -4324,6 +4327,7 @@ int e_limits_ndblmax_prec8_notmandatory(void){return test("%.8e", -DBL_MAX);}
 int e_stress_limits_ndblmax_prec12_notmandatory(void){return test("%.12e", -DBL_MAX);}
 int e_stress_limits_ndblmax_prec16_notmandatory(void){return test("%.16e", -DBL_MAX);}
 int e_stress_limits_ndblmax_prec18_notmandatory(void){return test("%.18e", -DBL_MAX);}
+*/
 int e_limits_dblmin_prec0(void){return test("%.0e", DBL_MIN);}
 int e_limits_dblmin_prec3(void){return test("%.3e", DBL_MIN);}
 int e_limits_dblmin_precd(void){return test("%e", DBL_MIN);}
