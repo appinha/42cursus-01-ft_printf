@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/24 18:13:16 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/24 18:15:51 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%e", 3.9999999
-#define INPUT_2	"%e", -5.9999999
-#define INPUT_3	"this %.0e scientific notation", 1.6
-#define INPUT_4	"%.0e", -3.85
-#define INPUT_5	"%.7e", 23.375094499
+#define INPUT_1	"this %.0e scientific notation", 1.6
+#define INPUT_2	"%.0e", -3.85
+#define INPUT_3	"%.7e", 23.375094499
+#define INPUT_4	"%.7e", -56.2012685
+#define INPUT_5	"%.7e", 43.43999949
 
 int		main(void)
 {

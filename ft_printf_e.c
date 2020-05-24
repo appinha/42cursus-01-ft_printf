@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/24 18:13:30 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/24 18:22:03 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static t_flags	ver_rounding(t_flags fl, int *size)
 {
 	fl.j = ft_strlen(fl.a) - *size + 1;
+	printf("[fl.a=\"%s\"]", fl.a);
 	while (--fl.j >= 2)
 	{
 		if (fl.a[fl.j] < (fl.rnd + '0'))

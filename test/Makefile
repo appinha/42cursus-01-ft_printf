@@ -6,7 +6,7 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/06 17:29:07 by apuchill          #+#    #+#              #
-#    Updated: 2020/05/16 23:47:48 by apuchill         ###   ########.fr        #
+#    Updated: 2020/05/24 19:02:09 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ NAME	= a.out
 all:		$(NAME)
 
 $(NAME):
-			@make re -C $(PROJECT_DIR)
+			@make rebonus -C $(PROJECT_DIR)
 			@$(CC) $(CFLAGS) -o $(NAME) main.c $(LIB)
 			@sh test_header.sh && ./$(NAME) && sh test_footer.sh
 #			@echo "" && cd $(PROJECT_DIR) && make fclean

@@ -6,7 +6,7 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/06 21:56:58 by apuchill          #+#    #+#              #
-#    Updated: 2020/05/21 23:56:02 by apuchill         ###   ########.fr        #
+#    Updated: 2020/05/24 19:01:38 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,13 @@ RM		= /bin/rm -f
 NAME	= libftprintf.a
 
 SRCS	= ft_printf.c ft_printf_utils.c ft_printf_utils_2.c ft_printf_flags.c \
-			ft_printf_csp_pct.c ft_printf_iduxo.c ft_printf_f.c ft_printf_e.c
+			ft_printf_csp_pct.c ft_printf_iduxo.c
+
+SRCS_B	= ft_printf_utils_3.c ft_printf_f.c ft_printf_e.c
 
 OBJS	= $(SRCS:.c=.o)
+
+OBJS_B	= $(SRCS_B:.c=.o)
 
 .c.o:
 			@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
@@ -29,7 +33,8 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			@ar -rcs $(NAME) $(OBJS)
 
-bonus:		$(NAME)
+bonus:		$(NAME) $(OBJS_B)
+			@ar -rcs $(NAME) $(OBJS) $(OBJS_B)
 
 clean:
 			@$(RM) $(OBJS)
