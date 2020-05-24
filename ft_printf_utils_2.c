@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 12:25:19 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 13:13:26 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/24 12:34:47 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,14 @@ char	*ft_ullitoa_base(unsigned long long int n, char *base)
 	if (size == 0 && a[1] == '\0')
 		a[0] = '0';
 	return (a);
+}
+
+double	ft_fmod(double n, double mod)
+{
+	while (n >= mod)
+	{
+		printf("%f\n", n);
+		n -= mod;
+	}
+	return (n);
 }

@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 20:23:32 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/23 21:26:40 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 static t_flags	ver_rounding(t_flags fl, int *size)
 {
+	printf("[fl.a=\"%s\"]", fl.a);
 	fl.j = ft_strlen(fl.a) - *size + 1;
 	while (--fl.j >= 2)
 	{
+		printf("[c='%c']", fl.a[fl.j]);
 		if (fl.a[fl.j] < (fl.rnd + '0'))
 			break;
 		if (fl.a[fl.j] >= '9' && (fl.a[fl.j] = '0'))
@@ -28,8 +30,9 @@ static t_flags	ver_rounding(t_flags fl, int *size)
 		}
 	}
 	fl.lli = fl.f0 * 10;
-	if ((fl.a[1] == '.' + 1 && (fl.a[1] = '.')) ||
-		(fl.point == 1 && fl.precision == 0 && (fl.lli % 10) >= fl.rnd))
+	//printf("[fl.lli=%lli]", fl.lli);
+	printf("[fl.f0=%.10f]", fl.f0);
+	if ((fl.a[1] == '.' + 1 && (fl.a[1] = '.')) || ((fl.lli % 10) >= fl.rnd))
 	{
 		fl.a[0]++;
 		if (fl.a[0] == '9' + 1 && (fl.a[0] = '1'))
@@ -56,7 +59,8 @@ static t_flags	nbrtoa(t_flags fl, int *size)
 			fl.a[fl.j - 1] = '.';
 		}
 	}
-	if (*size > 0)
+	//printf("[size=%i]", *size);
+	if (*size >= 0)
 		fl = ver_rounding(fl, size);
 	if (*size > 0 && fl.rnd > 0)
 		fl.d = ft_substr(fl.a, 0, (ft_strlen(fl.a) - *size));
@@ -116,6 +120,8 @@ static t_flags	print_spec_e_aux(t_flags fl, int *size)
 	}
 	if (*size > 0)
 		fl.f0 = fl.f / ft_pow(10, *size);
+	if (*size == 0)
+		fl.f0 = fl.f;
 	if (*size < 0)
 		fl.f0 = fl.f * ft_pow(10, -*size);
 	fl = nbrtoa(fl, size);

@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 19:11:54 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/24 12:27:34 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 double			ft_pow(double n, unsigned int pow);
 char			*ft_ullitoa_base(unsigned long long int n, char *base);
+double			ft_fmod(double n, double mod);
 
 t_flags			ft_dectoa(t_flags fl);
 

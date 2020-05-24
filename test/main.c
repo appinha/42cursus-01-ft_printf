@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 20:23:53 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/24 12:35:33 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%f", 0.000039
-#define INPUT_2	"%f", -0.00032
-#define INPUT_3	"%f", 0.000001
-#define INPUT_4	"%f", -0.000001
-#define INPUT_5	"%f", 0.999999
+#define INPUT_1	"%f", (double)340282346638528859811704183484516925440
+#define INPUT_2	"%e", -5.9999999
+#define INPUT_3	"%.7e", 23.375094499
+#define INPUT_4	"%.7e", -56.2012685
+#define INPUT_5	"%.7e", 43.43999949
 
 /*
 #define INPUT_1	"%f", 3.9999999
@@ -41,7 +41,15 @@ int		main(void)
 	int		n1;
 	int		n2;
 	int		n3;
-	double	d1;
+	double	dbl1 = 123456789.0;
+	double	mod = 10.0;
+	double	res;
+
+	printf("FLT_MAX     :   %.7f\n", (float)FLT_MAX);
+	printf("FLT_MAX     :   %.7f\n", (float)340282346638528859811704183484516925440);
+
+	res = ft_fmod(34028234663852885981170418348451692544, mod);
+	printf("\n• ft_fmod(dbl, mod) = %f\n", res);
 
 	printf(MAIN_2("\n=== • printf compare • ===\n") "\n");
 
