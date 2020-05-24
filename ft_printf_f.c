@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 20:28:30 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/24 18:13:41 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ static int		ft_dectoa_ver_rnd(t_flags fl)
 {
 	int	aux;
 
-	aux = fl.f0 * 10;
+	aux = fl.f * 10;
 	fl.size++;
-	while (fl.size >= 0 && aux == 9)
+	while (fl.size >= 0 && (aux % 10) == 9)
 	{
-		fl.f0 = fl.f0 * 10;
-		aux = fl.f0;
+		fl.f = fl.f * 10;
+		aux = fl.f;
 		aux = aux % 10;
 		if (fl.size == 1 && aux >= fl.rnd)
 			fl.size--;
@@ -46,7 +46,7 @@ static int		ft_dectoa_ver_rnd(t_flags fl)
 
 static t_flags	ft_dectoa_aux(t_flags fl, size_t *nbr, int *len)
 {
-	size_t	aux;
+	unsigned long long int	aux;
 
 	*nbr = (fl.f - fl.ulli) * ft_pow(10, fl.size + 1);
 	aux = *nbr;

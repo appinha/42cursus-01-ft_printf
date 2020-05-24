@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/24 17:57:00 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/24 18:13:30 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static t_flags	ver_rounding(t_flags fl, int *size)
 	if ((fl.a[1] == '.' + 1 && (fl.a[1] = '.')) ||
 		(fl.point == 1 && fl.precision == 0 && (fl.lli % 10) >= fl.rnd))
 	{
-		printf("A");
 		fl.a[0]++;
 		if (fl.a[0] == '9' + 1 && (fl.a[0] = '1'))
 		{
