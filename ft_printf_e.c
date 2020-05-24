@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/24 18:22:03 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/24 19:19:47 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ static t_flags	nbrtoa(t_flags fl, int *size)
 {
 	fl.size = fl.precision;
 	fl = ft_dectoa(fl);
-	fl.a = ft_strjoin(ft_ullitoa_base(fl.ulli, DIGITS), fl.d);
+	fl.tmp = ft_ullitoa_base(fl.ulli, DIGITS);
+	fl.a = ft_strjoin(fl.tmp, fl.d);
+	free(fl.tmp);
 	free(fl.d);
 	fl.j = ft_strlen(fl.a);
 	while (--fl.j >= 0)
@@ -138,10 +140,12 @@ void			print_spec_e(int *len, t_flags fl, double n)
 	size = 0;
 	fl = print_spec_e_aux(fl, &size);
 	size = (size >= 0) ? size : -size;
+	fl.tmp = ft_ullitoa_base(size, DIGITS);
 	if (size > 9)
-		fl.a = ft_ullitoa_base(size, DIGITS);
+		fl.a = ft_strdup(fl.tmp);
 	else
-		fl.a = ft_strjoin("0", ft_ullitoa_base(size, DIGITS));
+		fl.a = ft_strjoin("0", fl.tmp);
+	free(fl.tmp);
 	fl.e[2] = fl.a[0];
 	fl.e[3] = fl.a[1];
 	free(fl.a);

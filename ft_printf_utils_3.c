@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/24 18:56:59 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/24 19:26:25 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,14 @@ t_flags	ft_dectoa(t_flags fl)
 			z0[fl.j++] = '0';
 		z0[fl.j] = '\0';
 	}
+	fl.tmp = ft_ullitoa_base((unsigned long long)nbr, DIGITS);
 	if (fl.hash == 1 && fl.point == 1 && fl.precision == 0)
 		fl.d = ft_strdup(".");
 	else if (fl.hash == 0 && fl.point == 1 && fl.precision == 0)
 		fl.d = ft_strdup("");
 	else
-		fl.d = ft_strjoin(z0, ft_ullitoa_base((unsigned long long)nbr, DIGITS));
+		fl.d = ft_strjoin(z0, fl.tmp);
+	free(fl.tmp);
 	fl = ft_dectoa_ver_prec(fl);
 	return (fl);
 }
