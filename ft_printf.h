@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/24 12:27:34 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/24 17:38:54 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <stdint.h>
 
 /*
 ** FORMAT SPECIFIER STRUCT

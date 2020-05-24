@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/23 21:26:40 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/24 17:52:12 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 static t_flags	ver_rounding(t_flags fl, int *size)
 {
-	printf("[fl.a=\"%s\"]", fl.a);
 	fl.j = ft_strlen(fl.a) - *size + 1;
 	while (--fl.j >= 2)
 	{
-		printf("[c='%c']", fl.a[fl.j]);
 		if (fl.a[fl.j] < (fl.rnd + '0'))
 			break;
 		if (fl.a[fl.j] >= '9' && (fl.a[fl.j] = '0'))
@@ -30,8 +28,6 @@ static t_flags	ver_rounding(t_flags fl, int *size)
 		}
 	}
 	fl.lli = fl.f0 * 10;
-	//printf("[fl.lli=%lli]", fl.lli);
-	printf("[fl.f0=%.10f]", fl.f0);
 	if ((fl.a[1] == '.' + 1 && (fl.a[1] = '.')) || ((fl.lli % 10) >= fl.rnd))
 	{
 		fl.a[0]++;
@@ -149,7 +145,6 @@ void			print_spec_e(int *len, t_flags fl, double n)
 	free(fl.a);
 	fl.a = ft_strjoin(fl.d, fl.e);
 	free(fl.d);
-	//fl.ulli = fl.f;
 	print_flags(len, fl);
 	free(fl.a);
 }

@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/24 12:35:33 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/24 17:50:18 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <float.h>
+# include <stdint.h>
 
 #define MAIN_1(string)		"\033[1m\033[38;5;199m" string "\033[0m"
 #define MAIN_2(string)		"\033[35m" string "\033[0m"
@@ -21,19 +22,12 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%f", (double)340282346638528859811704183484516925440
-#define INPUT_2	"%e", -5.9999999
-#define INPUT_3	"%.7e", 23.375094499
-#define INPUT_4	"%.7e", -56.2012685
-#define INPUT_5	"%.7e", 43.43999949
+#define INPUT_1	"%.8f",  0.999999999999999900
+#define INPUT_2	"%.8f",        1.025978548534310421
+#define INPUT_3	"%.8f",        0.125978548534310421
+#define INPUT_4	"%-2p", 1234
+#define INPUT_5	"%.5p", 0
 
-/*
-#define INPUT_1	"%f", 3.9999999
-#define INPUT_2	"%f", -5.9999999
-#define INPUT_3	"%e", (double)INT_MAX
-#define INPUT_4	"%e", (double)INT_MIN
-#define INPUT_5	"%e", (double)INT_MIN - 1
-*/
 int		main(void)
 {
 	int		len;
@@ -41,17 +35,41 @@ int		main(void)
 	int		n1;
 	int		n2;
 	int		n3;
-	double	dbl1 = 123456789.0;
+	double	dbl_max = FLT_MAX;
+	double	dbl1 = 3402823466385288598117041834845169254.0;
 	double	mod = 10.0;
 	double	res;
 
-	printf("FLT_MAX     :   %.7f\n", (float)FLT_MAX);
-	printf("FLT_MAX     :   %.7f\n", (float)340282346638528859811704183484516925440);
+	// Hello Kitty test variables
+	int		a = -4;
+	int		b = 0;
+	char	c = 'a';
+	int		d = 2147483647;
+	int		e = -2147483648;
+	int		f = 42;
+	int		g = 25;
+	int		h = 4200;
+	int		i = 8;
+	int		j = -12;
+	int		k = 123456789;
+	int		l = 0;
+	int		m = -12345678;
+	char	*n = "abcdefghijklmnop";
+	char	*o = "-a";
+	char	*p = "-12";
+	char	*q = "0";
+	char	*r = "%%";
+	char	*s = "-2147483648";
+	char	*t = "0x12345678";
+	char	*u = "-0";
 
-	res = ft_fmod(34028234663852885981170418348451692544, mod);
-	printf("\n• ft_fmod(dbl, mod) = %f\n", res);
+	//printf("FLT_MAX     :   %.7f\n", (float)FLT_MAX);
+	//printf("FLT_MAX     :   %.7f\n", dbl1 - mod);
 
-	printf(MAIN_2("\n=== • printf compare • ===\n") "\n");
+	//res = ft_fmod(dbl1, mod);
+	//printf("\n• ft_fmod(dbl, mod) = %f\n", res);
+
+	printf(MAIN_2("\n\n=== • printf compare • ===\n") "\n");
 
 	//printf(HEADER_2("• printf") "\n");
 	//printf(HEADER_1("• ft_printf") "\n\n");
