@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 17:27:20 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 17:28:57 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ static t_flags	ft_dectoa_ver_prec(t_flags fl, int dec_len)
 
 	strlen = ft_strlen(fl.d);
 	diff = strlen - 1 - (size_t)dec_len;
-	printf("  [fl.d=\"%s\"]", fl.d);
-	printf("[strlen=%li]", strlen);
-	printf("[dec_len=%i]", dec_len);
-	printf("[diff=%i]", diff);
 	if (dec_len > 0 && diff > 0)
 	{
 		fl.tmp = ft_substr(fl.d, diff + 1, dec_len + 1);
