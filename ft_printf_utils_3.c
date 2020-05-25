@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 16:20:57 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 16:58:44 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ static t_flags	ft_dectoa_rnd(t_flags fl, int dec_int_size,
 	unsigned long long int	aux;
 	int						size;
 
-	if ((*dec_int % 10) >= fl.rnd)
+	if (*dec_int > 9 && (*dec_int % 10) >= fl.rnd)
 		*dec_int += 10;
 	aux = *dec_int;
 	size = 1;
 	while (aux /= 10)
 		size++;
-	if (size > dec_int_size + 1)
+	if (((size > dec_int_size + 1) && (aux % 10) == 0) ||
+		(*dec_int <= 9 && *dec_int >= fl.rnd))
 	{
 		*dec_int = 0;
 		fl.ulli++;
