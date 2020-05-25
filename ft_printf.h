@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 00:02:55 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 00:42:13 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,18 @@ typedef struct	s_flags
 	int						precision;
 	char					length;
 	size_t					strlen;
+	char					sign;
 	unsigned long long int	ulli;
 	long long int			lli;
 	short unsigned int		rnd;
 	double					f;
 	double					f0;
+	double					fe;
+	unsigned long long int	dpart;
+	int						e_nbr;
+	int						i_len;
+	int						d_len;
 	int						size;
-	char					sign;
 	char					*a;
 	char					*d;
 	char					e[5];

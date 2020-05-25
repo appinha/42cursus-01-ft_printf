@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/24 18:15:51 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 00:18:26 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #define INPUT_2	"%.0e", -3.85
 #define INPUT_3	"%.7e", 23.375094499
 #define INPUT_4	"%.7e", -56.2012685
-#define INPUT_5	"%.7e", 43.43999949
+#define INPUT_5	"%.7f", 43.43999949
 
 int		main(void)
 {
@@ -69,7 +69,7 @@ int		main(void)
 	//res = ft_fmod(dbl1, mod);
 	//printf("\n• ft_fmod(dbl, mod) = %f\n", res);
 
-	printf(MAIN_2("\n\n=== • printf compare • ===\n") "\n");
+	printf(MAIN_2("\n=== • printf compare • ===\n") "\n");
 
 	//printf(HEADER_2("• printf") "\n");
 	//printf(HEADER_1("• ft_printf") "\n\n");

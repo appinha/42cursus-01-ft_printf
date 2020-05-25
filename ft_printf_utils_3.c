@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/24 19:26:25 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 01:01:18 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ static int		ft_dectoa_ver_rnd(t_flags fl)
 	int	aux;
 
 	aux = fl.f * 10;
-	fl.size++;
-	while (fl.size >= 0 && (aux % 10) == 9)
+	fl.d_len++;
+	while (fl.d_len >= 0 && (aux % 10) == 9)
 	{
 		fl.f = fl.f * 10;
 		aux = fl.f;
 		aux = aux % 10;
-		if (fl.size == 1 && aux >= fl.rnd)
-			fl.size--;
-		fl.size--;
+		if (fl.d_len == 1 && aux >= fl.rnd)
+			fl.d_len--;
+		fl.d_len--;
 	}
-	if (fl.size < 0)
+	if (fl.d_len < 0)
 		return (1);
 	return (0);
 }
@@ -48,26 +48,31 @@ static t_flags	ft_dectoa_aux(t_flags fl, size_t *nbr, int *len)
 {
 	unsigned long long int	aux;
 
-	*nbr = (fl.f - fl.ulli) * ft_pow(10, fl.size + 1);
+	*nbr = (fl.f - fl.ulli) * ft_pow(10, fl.d_len + 1);
 	aux = *nbr;
 	*len = 1;
 	while (aux /= 10)
 		(*len)++;
-	if ((*nbr % 10) >= fl.rnd)
-		*nbr += 10;
-	*nbr /= 10;
-	aux = (fl.f * 10);
-	if (ft_dectoa_ver_rnd(fl) == 1 ||
-		(fl.point == 1 && fl.precision == 0 && (aux % 10) >= fl.rnd))
+	if (fl.spe_c == 'f')
 	{
-		fl.ulli++;
-		if (fl.spe_c == 'e' && fl.ulli == 10)
+		if ((*nbr % 10) >= fl.rnd)
+			*nbr += 10;
+		*nbr /= 10;
+		aux = (fl.f * 10);
+		if (ft_dectoa_ver_rnd(fl) == 1 ||
+			(fl.point == 1 && fl.precision == 0 && (aux % 10) >= fl.rnd))
 		{
-			fl.ulli = 1;
-			fl.e[3]++;
+			fl.ulli++;
+			if (fl.spe_c == 'e' && fl.ulli == 10)
+			{
+				fl.ulli = 1;
+				fl.e[3]++;
+			}
+			*nbr = 0;
 		}
-		*nbr = 0;
 	}
+	else
+		*nbr /= 10;
 	return (fl);
 }
 
@@ -83,10 +88,10 @@ t_flags	ft_dectoa(t_flags fl)
 	z0[0] = '.';
 	z0[1] = '\0';
 	if (!(fl.hash == 1 && fl.point == 1 && fl.precision == 0) &&
-		len < fl.size + 1)
+		len < fl.d_len + 1)
 	{
 		fl.j = 1;
-		while (len++ < fl.size + 1)
+		while (len++ < fl.d_len + 1)
 			z0[fl.j++] = '0';
 		z0[fl.j] = '\0';
 	}
