@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 18:51:44 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 19:28:43 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ t_flags			ft_dectoa(t_flags fl, int dec_len)
 	fl = ft_dectoa_convrs(fl, dec_len, &dec_int, &dec_int_size);
 	z0[0] = '.';
 	z0[1] = '\0';
-	if (!(fl.hash == 1 && fl.point == 1 && fl.precision == 0) &&
-		dec_int_size < dec_len + 1)
+	if (dec_int_size < dec_len + 1)
 	{
 		fl.j = 1;
 		while (dec_int_size++ < dec_len + 1)
@@ -85,9 +84,7 @@ t_flags			ft_dectoa(t_flags fl, int dec_len)
 		z0[fl.j] = '\0';
 	}
 	fl.tmp = ft_ullitoa_base(dec_int, DIGITS);
-	if (fl.hash == 1 && fl.point == 1 && fl.precision == 0)
-		fl.d = ft_strdup(".");
-	else if (fl.hash == 0 && fl.point == 1 && fl.precision == 0)
+	if (fl.point == 1 && fl.precision == 0)
 		fl.d = ft_strdup("");
 	else
 		fl.d = ft_strjoin(z0, fl.tmp);
