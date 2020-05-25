@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 15:03:08 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/22 20:55:52 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 00:00:38 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_width(int *len, t_flags fl)
 	if (fl.sign == '-' || (fl.plus == 1 && fl.sign == '+') ||
 		(fl.space == 1 && fl.plus == 0 && fl.sign == '+'))
 		fl.width--;
-	fl.precision = (fl.precision > fl.size) ? fl.precision : fl.size;
+	fl.precision = (fl.precision > (int)fl.strlen) ? fl.precision : (int)fl.strlen;
 	if (fl.pad_c == '0' && (fl.minus == 1 || fl.point == 1) &&
 		!(fl.spe_c == 'f' && fl.minus == 0))
 		fl.pad_c = ' ';
@@ -42,14 +42,14 @@ void	print_zeros(int *len, t_flags fl)
 	if (fl.point == 1)
 	{
 		fl.j = fl.precision;
-		while (fl.j-- > fl.size)
+		while (fl.j-- > (int)fl.strlen)
 			ft_putchar_len('0', len);
 	}
 }
 
 void	print_flags(int *len, t_flags fl)
 {
-	fl.size = ft_strlen(fl.a);
+	fl.strlen = ft_strlen(fl.a);
 	if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
 		fl.width++;
 	if ((fl.spe_c == 'x' || fl.spe_c == 'X') && fl.hash == 1 && fl.ulli != 0)

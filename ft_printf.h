@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/24 17:38:54 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 00:02:55 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,18 @@ typedef struct	s_flags
 	char					set[20];
 	char					spe_c;
 	char					pad_c;
-	int						minus;
-	int						plus;
-	int						space;
-	int						hash;
+	char					minus;
+	char					plus;
+	char					space;
+	char					hash;
 	int						width;
-	int						point;
+	char					point;
 	int						precision;
-	int						length;
+	char					length;
+	size_t					strlen;
 	unsigned long long int	ulli;
 	long long int			lli;
+	short unsigned int		rnd;
 	double					f;
 	double					f0;
 	int						size;
@@ -72,7 +74,6 @@ typedef struct	s_flags
 	char					*d;
 	char					e[5];
 	char					*tmp;
-	short unsigned int		rnd;
 	unsigned long int		*p;
 	int						j;
 }				t_flags;
