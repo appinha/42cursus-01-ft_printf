@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 17:48:07 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 18:09:58 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 #define INPUT_1	"%f", -875.000002
 #define INPUT_2	"%.1f", 2.999999
-#define INPUT_3	"%.0f", 7.4
+#define INPUT_3	"%.0f", 7.5
 #define INPUT_4	"%.9f", -875.000001
 #define INPUT_5	"%.16f",  0.999999999999999900
 
