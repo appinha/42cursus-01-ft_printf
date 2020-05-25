@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 18:32:27 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 18:51:44 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static t_flags	ft_dectoa_convrs(t_flags fl, int dec_len,
 	return (fl);
 }
 
-t_flags	ft_dectoa(t_flags fl, int dec_len)
+t_flags			ft_dectoa(t_flags fl, int dec_len)
 {
 	unsigned long long int	dec_int;
 	int						dec_int_size;
