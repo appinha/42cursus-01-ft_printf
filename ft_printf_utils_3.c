@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 01:01:18 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 16:20:57 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,78 +24,60 @@ static t_flags	ft_dectoa_ver_prec(t_flags fl)
 	return (fl);
 }
 
-static int		ft_dectoa_ver_rnd(t_flags fl)
-{
-	int	aux;
-
-	aux = fl.f * 10;
-	fl.d_len++;
-	while (fl.d_len >= 0 && (aux % 10) == 9)
-	{
-		fl.f = fl.f * 10;
-		aux = fl.f;
-		aux = aux % 10;
-		if (fl.d_len == 1 && aux >= fl.rnd)
-			fl.d_len--;
-		fl.d_len--;
-	}
-	if (fl.d_len < 0)
-		return (1);
-	return (0);
-}
-
-static t_flags	ft_dectoa_aux(t_flags fl, size_t *nbr, int *len)
+static t_flags	ft_dectoa_rnd(t_flags fl, int dec_int_size,
+					unsigned long long int *dec_int)
 {
 	unsigned long long int	aux;
+	int						size;
 
-	*nbr = (fl.f - fl.ulli) * ft_pow(10, fl.d_len + 1);
-	aux = *nbr;
-	*len = 1;
+	if ((*dec_int % 10) >= fl.rnd)
+		*dec_int += 10;
+	aux = *dec_int;
+	size = 1;
 	while (aux /= 10)
-		(*len)++;
-	if (fl.spe_c == 'f')
+		size++;
+	if (size > dec_int_size + 1)
 	{
-		if ((*nbr % 10) >= fl.rnd)
-			*nbr += 10;
-		*nbr /= 10;
-		aux = (fl.f * 10);
-		if (ft_dectoa_ver_rnd(fl) == 1 ||
-			(fl.point == 1 && fl.precision == 0 && (aux % 10) >= fl.rnd))
-		{
-			fl.ulli++;
-			if (fl.spe_c == 'e' && fl.ulli == 10)
-			{
-				fl.ulli = 1;
-				fl.e[3]++;
-			}
-			*nbr = 0;
-		}
+		*dec_int = 0;
+		fl.ulli++;
 	}
-	else
-		*nbr /= 10;
 	return (fl);
 }
 
-t_flags	ft_dectoa(t_flags fl)
+static t_flags	ft_dectoa_convrs(t_flags fl, int dec_len,
+					unsigned long long int *dec_int, int *dec_int_size)
 {
-	char	z0[20];
-	size_t	nbr;
-	int		len;
+	*dec_int = (fl.f - fl.ulli) * ft_pow(10, dec_len);
+	*dec_int_size = 1;
+	while (*(dec_int) /= 10)
+		(*dec_int_size)++;
+	*dec_int = (fl.f - fl.ulli) * ft_pow(10, dec_len + 1);
+	if (fl.spe_c == 'f')
+		fl = ft_dectoa_rnd(fl, *dec_int_size, dec_int);
+	*dec_int /= 10;
+	if (*dec_int == 0)
+		*dec_int_size = 2;
+	return (fl);
+}
 
-	fl = ft_dectoa_aux(fl, &nbr, &len);
-	if (nbr == 0)
-		len = 2;
+t_flags	ft_dectoa(t_flags fl, int dec_len)
+{
+	unsigned long long int	dec_int;
+	int						dec_int_size;
+	char					z0[20];
+
+	fl = ft_dectoa_convrs(fl, dec_len, &dec_int, &dec_int_size);
 	z0[0] = '.';
 	z0[1] = '\0';
 	if (!(fl.hash == 1 && fl.point == 1 && fl.precision == 0) &&
-		len < fl.d_len + 1)
+		dec_int_size < dec_len + 1)
 	{
 		fl.j = 1;
-		while (len++ < fl.d_len + 1)
+		while (dec_int_size++ < dec_len + 1)
 			z0[fl.j++] = '0';
 		z0[fl.j] = '\0';
 	}
-	fl.tmp = ft_ullitoa_base((unsigned long long)nbr, DIGITS);
+	fl.tmp = ft_ullitoa_base(dec_int, DIGITS);
 	if (fl.hash == 1 && fl.point == 1 && fl.precision == 0)
 		fl.d = ft_strdup(".");
 	else if (fl.hash == 0 && fl.point == 1 && fl.precision == 0)

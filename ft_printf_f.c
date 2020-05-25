@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 00:52:17 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 14:38:28 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void			print_spec_f(int *len, t_flags fl, double n)
 	fl.sign = (n >= 0) ? '+' : '-';
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = (n >= 0) ? n : -n;
-	//fl.f0 = fl.f - fl.ulli;
-	fl.d_len = fl.precision;
-	fl = ft_dectoa(fl);
+	fl = ft_dectoa(fl, fl.precision);
 	fl.tmp = ft_ullitoa_base(fl.ulli, DIGITS);
 	fl.a = ft_strjoin(fl.tmp, fl.d);
 	free(fl.tmp);

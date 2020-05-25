@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 00:42:13 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 14:45:42 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,11 @@ typedef struct	s_flags
 	char					sign;
 	unsigned long long int	ulli;
 	long long int			lli;
+	unsigned long long int	aux;
 	short unsigned int		rnd;
 	double					f;
-	double					f0;
 	double					fe;
-	unsigned long long int	dpart;
 	int						e_nbr;
-	int						i_len;
-	int						d_len;
 	int						size;
 	char					*a;
 	char					*d;
@@ -135,6 +132,6 @@ double			ft_pow(double n, unsigned int pow);
 char			*ft_ullitoa_base(unsigned long long int n, char *base);
 double			ft_fmod(double n, double mod);
 
-t_flags			ft_dectoa(t_flags fl);
+t_flags			ft_dectoa(t_flags fl, int d_len);
 
 #endif

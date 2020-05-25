@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 00:55:16 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 16:15:42 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,21 @@
 static t_flags	ver_rounding(t_flags fl)
 {
 	fl.j = ft_strlen(fl.a) - fl.e_nbr + 1;
-	//printf("[fl.a=\"%s\"]", fl.a);
 	while (--fl.j >= 2)
 	{
 		if (fl.a[fl.j] < (fl.rnd + '0'))
-			break;
+			break ;
 		if (fl.a[fl.j] >= '9' && (fl.a[fl.j] = '0'))
 			fl.a[fl.j - 1] += 1;
 		else
 		{
 			fl.a[fl.j - 1] += 1;
-			break;
+			break ;
 		}
 	}
-	fl.lli = fl.fe * 10;
+	fl.aux = fl.fe * 10;
 	if ((fl.a[1] == '.' + 1 && (fl.a[1] = '.')) ||
-		(fl.point == 1 && fl.precision == 0 && (fl.lli % 10) >= fl.rnd))
+		(fl.point == 1 && fl.precision == 0 && (fl.aux % 10) >= fl.rnd))
 	{
 		fl.a[0]++;
 		if (fl.a[0] == '9' + 1 && (fl.a[0] = '1'))
@@ -44,7 +43,7 @@ static t_flags	ver_rounding(t_flags fl)
 
 static t_flags	nbrtoa(t_flags fl)
 {
-	fl = ft_dectoa(fl);
+	fl = ft_dectoa(fl, fl.precision);
 	fl.tmp = ft_ullitoa_base(fl.ulli, DIGITS);
 	fl.a = ft_strjoin(fl.tmp, fl.d);
 	free(fl.tmp);
@@ -58,7 +57,6 @@ static t_flags	nbrtoa(t_flags fl)
 			fl.a[fl.j - 1] = '.';
 		}
 	}
-	//printf("[size=%i]", *size);
 	if (fl.e_nbr >= 0)
 		fl = ver_rounding(fl);
 	if (fl.e_nbr > 0 && fl.rnd > 0)
@@ -77,7 +75,6 @@ static t_flags	nbr0toa(t_flags fl)
 
 	fl.e[1] = '+';
 	fl.e_nbr = 0;
-	fl.d_len = fl.precision;
 	if (fl.point == 1 && fl.precision == 0)
 	{
 		str[0] = '0';
@@ -88,7 +85,7 @@ static t_flags	nbr0toa(t_flags fl)
 		str[0] = '0';
 		str[1] = '.';
 		fl.j = 2;
-		while (fl.j <= fl.d_len + 1)
+		while (fl.j <= fl.precision + 1)
 			str[fl.j++] = '0';
 		str[fl.precision + 2] = '\0';
 	}
@@ -132,13 +129,12 @@ void			print_spec_e(int *len, t_flags fl, double n)
 	fl.sign = (n >= 0) ? '+' : '-';
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = fl.f;
-	fl.d_len = fl.precision;
 	fl.e[0] = 'e';
 	fl.e[4] = '\0';
 	fl.e_nbr = 0;
 	fl = print_spec_e_aux(fl);
 	fl.size = (fl.e_nbr >= 0) ? fl.e_nbr : -fl.e_nbr;
-	fl.tmp = ft_ullitoa_base(fl.size, DIGITS);
+	fl.tmp = ft_ullitoa_base((fl.e_nbr >= 0) ? fl.e_nbr : -fl.e_nbr, DIGITS);
 	if (fl.size > 9)
 		fl.a = ft_strdup(fl.tmp);
 	else
