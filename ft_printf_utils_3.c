@@ -6,17 +6,26 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 16:58:44 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 17:27:20 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static t_flags	ft_dectoa_ver_prec(t_flags fl)
+static t_flags	ft_dectoa_ver_prec(t_flags fl, int dec_len)
 {
-	if (fl.precision > 0 && (ft_strlen(fl.d)) > (size_t)fl.precision + 1)
+	size_t	strlen;
+	int		diff;
+
+	strlen = ft_strlen(fl.d);
+	diff = strlen - 1 - (size_t)dec_len;
+	printf("  [fl.d=\"%s\"]", fl.d);
+	printf("[strlen=%li]", strlen);
+	printf("[dec_len=%i]", dec_len);
+	printf("[diff=%i]", diff);
+	if (dec_len > 0 && diff > 0)
 	{
-		fl.tmp = ft_substr(fl.d, 2, ft_strlen(fl.d) - 2);
+		fl.tmp = ft_substr(fl.d, diff + 1, dec_len + 1);
 		free(fl.d);
 		fl.d = ft_strjoin(".", fl.tmp);
 		free(fl.tmp);
@@ -36,7 +45,8 @@ static t_flags	ft_dectoa_rnd(t_flags fl, int dec_int_size,
 	size = 1;
 	while (aux /= 10)
 		size++;
-	if (((size > dec_int_size + 1) && (aux % 10) == 0) ||
+	aux = ((fl.f - fl.ulli) * 10) + 1;
+	if (((size > dec_int_size + 1) && (aux >= fl.rnd)) ||
 		(*dec_int <= 9 && *dec_int >= fl.rnd))
 	{
 		*dec_int = 0;
@@ -86,6 +96,6 @@ t_flags	ft_dectoa(t_flags fl, int dec_len)
 	else
 		fl.d = ft_strjoin(z0, fl.tmp);
 	free(fl.tmp);
-	fl = ft_dectoa_ver_prec(fl);
+	fl = ft_dectoa_ver_prec(fl, dec_len);
 	return (fl);
 }
