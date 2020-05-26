@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 21:00:43 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/26 18:23:32 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ typedef struct	s_flags
 	long long int			lli;
 	unsigned long long int	aux;
 	short unsigned int		rnd;
-	double					f;
-	double					fe;
+	long double				f;
+	long double				fe;
 	int						e_nbr;
 	int						size;
 	char					*a;
@@ -82,11 +82,11 @@ typedef struct	s_flags
 
 typedef struct	s_ftoa_rnd
 {
-	double					n;
+	long double				n;
 	short int 				dec_len;
 	short int 				rnd;
 	unsigned long long int	int_part;
-	double					dec_part;
+	long double				dec_part;
 	unsigned long long int	dec_int;
 	int						dec_int_size;
 	char					*a;
@@ -143,10 +143,10 @@ char			*ft_strdup(const char *s1);
 
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-double			ft_pow(double n, unsigned int pow);
+long double			ft_pow(long double n, unsigned int pow);
 char			*ft_ullitoa_base(unsigned long long int n, char *base);
-double			ft_fmod(double n, double mod);
+long double			ft_fmod(long double n, long double mod);
 
-char			*ft_ftoa_rnd(double n, short int dec_len, short int rnd);
+char			*ft_ftoa_rnd(long double n, short int dec_len, short int rnd);
 
 #endif

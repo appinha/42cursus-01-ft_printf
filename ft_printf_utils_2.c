@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 12:25:19 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/24 12:34:47 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/26 18:24:41 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (new_str);
 }
 
-double	ft_pow(double n, unsigned int pow)
+long double	ft_pow(long double n, unsigned int pow)
 {
 	return (pow ? n * ft_pow(n, pow - 1) : 1);
 }
@@ -84,12 +84,9 @@ char	*ft_ullitoa_base(unsigned long long int n, char *base)
 	return (a);
 }
 
-double	ft_fmod(double n, double mod)
+long double	ft_fmod(long double n, long double mod)
 {
 	while (n >= mod)
-	{
-		printf("%f\n", n);
 		n -= mod;
-	}
 	return (n);
 }

@@ -6,13 +6,13 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 22:45:15 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/26 15:46:24 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char	*ver_precision(char *dec_str, short int dec_len)
+static char			*ver_precision(char *dec_str, short int dec_len)
 {
 	size_t	strlen;
 	int		diff;
@@ -51,6 +51,25 @@ static t_ftoa_rnd	ver_rounding(t_ftoa_rnd var)
 	return (var);
 }
 
+static t_ftoa_rnd	dectoa(t_ftoa_rnd var)
+{
+	int			i;
+
+	var.z0[0] = '.';
+	i = 1;
+	if (var.dec_int_size < var.dec_len + 1)
+	{
+		while (var.dec_int_size++ < var.dec_len + 1)
+			var.z0[i++] = '0';
+	}
+	var.z0[i] = '\0';
+	var.tmp = ft_ullitoa_base(var.dec_int, DIGITS);
+	var.d = ft_strjoin(var.z0, var.tmp);
+	var.d = ver_precision(var.d, var.dec_len);
+	free(var.tmp);
+	return (var);
+}
+
 static t_ftoa_rnd	dectoulli(t_ftoa_rnd var)
 {
 	var.int_part = var.n;
@@ -67,30 +86,16 @@ static t_ftoa_rnd	dectoulli(t_ftoa_rnd var)
 	return (var);
 }
 
-char			*ft_ftoa_rnd(double n, short int dec_len, short int rnd)
+char				*ft_ftoa_rnd(long double n, short int dec_len, short int rnd)
 {
 	t_ftoa_rnd	var;
-	int			i;
 
 	var.n = (n >= 0) ? n : -n;
 	var.dec_len = dec_len;
 	var.rnd = rnd;
 	var = dectoulli(var);
 	if (var.dec_len > 0)
-	{
-		var.z0[0] = '.';
-		i = 1;
-		if (var.dec_int_size < dec_len + 1)
-		{
-			while (var.dec_int_size++ < dec_len + 1)
-				var.z0[i++] = '0';
-		}
-		var.z0[i] = '\0';
-		var.tmp = ft_ullitoa_base(var.dec_int, DIGITS);
-		var.d = ft_strjoin(var.z0, var.tmp);
-		var.d = ver_precision(var.d, var.dec_len);
-		free(var.tmp);
-	}
+		var = dectoa(var);
 	else
 		var.d = ft_strdup("");
 	var.tmp = ft_ullitoa_base(var.int_part, DIGITS);
