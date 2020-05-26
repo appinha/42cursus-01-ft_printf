@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 16:15:42 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 21:02:17 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,7 @@ static t_flags	ver_rounding(t_flags fl)
 
 static t_flags	nbrtoa(t_flags fl)
 {
-	fl = ft_dectoa(fl, fl.precision);
-	fl.tmp = ft_ullitoa_base(fl.ulli, DIGITS);
-	fl.a = ft_strjoin(fl.tmp, fl.d);
-	free(fl.tmp);
-	free(fl.d);
+	fl.a = ft_ftoa_rnd(fl.f, fl.precision, 5);
 	fl.j = ft_strlen(fl.a);
 	while (--fl.j >= 0)
 	{
@@ -126,6 +122,7 @@ static t_flags	print_spec_e_aux(t_flags fl)
 
 void			print_spec_e(int *len, t_flags fl, double n)
 {
+	fl.rnd = 5;
 	fl.sign = (n >= 0) ? '+' : '-';
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = fl.f;

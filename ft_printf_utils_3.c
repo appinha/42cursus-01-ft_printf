@@ -6,89 +6,95 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 19:28:43 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 21:07:39 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static t_flags	ft_dectoa_ver_prec(t_flags fl, int dec_len)
+static void	ver_precision(char *dec_str, short int dec_len)
 {
 	size_t	strlen;
 	int		diff;
+	char	*tmp;
 
-	strlen = ft_strlen(fl.d);
+	strlen = ft_strlen(dec_str);
 	diff = strlen - 1 - (size_t)dec_len;
 	if (dec_len > 0 && diff > 0)
 	{
-		fl.tmp = ft_substr(fl.d, diff + 1, dec_len + 1);
-		free(fl.d);
-		fl.d = ft_strjoin(".", fl.tmp);
-		free(fl.tmp);
+		tmp = ft_substr(dec_str, diff + 1, dec_len + 1);
+		free(dec_str);
+		dec_str = ft_strjoin(".", tmp);
+		free(tmp);
 	}
-	return (fl);
 }
 
-static t_flags	ft_dectoa_rnd(t_flags fl, int dec_int_size,
-					unsigned long long int *dec_int)
+static t_ftoa_rnd	ver_rounding(t_ftoa_rnd var)
 {
 	unsigned long long int	aux;
 	int						size;
 
-	if ((*dec_int % 10) >= fl.rnd)
-		*dec_int += 10;
-	aux = *dec_int;
+	if ((var.dec_int % 10) >= (unsigned)var.rnd)
+		var.dec_int += 10;
+	aux = var.dec_int;
 	size = 1;
 	while (aux /= 10)
 		size++;
-	aux = (fl.f - fl.ulli) * 10;
-	if ((fl.point == 1 && fl.precision == 0 && aux >= fl.rnd) ||
-		(size > dec_int_size + 1 && aux + 1 >= fl.rnd))
+	aux = var.dec_part * 10;
+	if ((var.dec_len == 0 && aux >= (unsigned)var.rnd) ||
+		(size > var.dec_int_size + 1 && aux + 1 >= (unsigned)var.rnd))
 	{
-		*dec_int = 0;
-		fl.ulli++;
+		var.dec_int = 0;
+		var.int_part++;
 	}
-	return (fl);
+	return (var);
 }
 
-static t_flags	ft_dectoa_convrs(t_flags fl, int dec_len,
-					unsigned long long int *dec_int, int *dec_int_size)
+static t_ftoa_rnd	dectoulli(t_ftoa_rnd var)
 {
-	*dec_int = (fl.f - fl.ulli) * ft_pow(10, dec_len);
-	*dec_int_size = 1;
-	while (*(dec_int) /= 10)
-		(*dec_int_size)++;
-	*dec_int = (fl.f - fl.ulli) * ft_pow(10, dec_len + 1);
-	if (fl.spe_c == 'f')
-		fl = ft_dectoa_rnd(fl, *dec_int_size, dec_int);
-	*dec_int /= 10;
-	if (*dec_int == 0)
-		*dec_int_size = 2;
-	return (fl);
+	var.int_part = var.n;
+	var.dec_part = var.n - var.int_part;
+	var.dec_int = var.dec_part * ft_pow(10, var.dec_len);
+	var.dec_int_size = 1;
+	while ((var.dec_int) /= 10)
+		(var.dec_int_size)++;
+	var.dec_int = var.dec_part * ft_pow(10, var.dec_len + 1);
+	var = ver_rounding(var);
+	var.dec_int /= 10;
+	if (var.dec_int == 0)
+		var.dec_int_size = 2;
+	return (var);
 }
 
-t_flags			ft_dectoa(t_flags fl, int dec_len)
+char			*ft_ftoa_rnd(double n, short int dec_len, short int rnd)
 {
-	unsigned long long int	dec_int;
-	int						dec_int_size;
-	char					z0[20];
+	t_ftoa_rnd	var;
+	int			i;
 
-	fl = ft_dectoa_convrs(fl, dec_len, &dec_int, &dec_int_size);
-	z0[0] = '.';
-	z0[1] = '\0';
-	if (dec_int_size < dec_len + 1)
+	var.n = (n >= 0) ? n : -n;
+	var.dec_len = dec_len;
+	var.rnd = rnd;
+	var = dectoulli(var);
+	if (var.dec_len >= 0)
 	{
-		fl.j = 1;
-		while (dec_int_size++ < dec_len + 1)
-			z0[fl.j++] = '0';
-		z0[fl.j] = '\0';
+		var.z0[0] = '.';
+		i = 1;
+		if (var.dec_int_size < dec_len + 1)
+		{
+			while (var.dec_int_size++ < dec_len + 1)
+				var.z0[i++] = '0';
+		}
+		var.z0[i] = '\0';
+		var.tmp = ft_ullitoa_base(var.dec_int, DIGITS);
+		var.d = ft_strjoin(var.z0, var.tmp);
+		ver_precision(var.d, var.dec_len);
+		free(var.tmp);
 	}
-	fl.tmp = ft_ullitoa_base(dec_int, DIGITS);
-	if (fl.point == 1 && fl.precision == 0)
-		fl.d = ft_strdup("");
-	else
-		fl.d = ft_strjoin(z0, fl.tmp);
-	free(fl.tmp);
-	fl = ft_dectoa_ver_prec(fl, dec_len);
-	return (fl);
+	if (var.dec_len == 0)
+		var.d = ft_strdup("");
+	var.tmp = ft_ullitoa_base(var.int_part, DIGITS);
+	var.a = ft_strjoin(var.tmp, var.d);
+	free(var.tmp);
+	free(var.d);
+	return (var.a);
 }
