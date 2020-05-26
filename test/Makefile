@@ -6,7 +6,7 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/06 17:29:07 by apuchill          #+#    #+#              #
-#    Updated: 2020/05/24 19:02:09 by apuchill         ###   ########.fr        #
+#    Updated: 2020/05/25 21:48:32 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ LIB	= -L$(PROJECT_DIR) -lftprintf
 
 CC		= gcc
 #CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS	= -g3 -fsanitize=address
 RM		= /bin/rm -f
 
 NAME	= a.out

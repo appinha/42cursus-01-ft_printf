@@ -6,13 +6,13 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 21:07:39 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 22:36:38 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ver_precision(char *dec_str, short int dec_len)
+static char	*ver_precision(char *dec_str, short int dec_len)
 {
 	size_t	strlen;
 	int		diff;
@@ -27,6 +27,7 @@ static void	ver_precision(char *dec_str, short int dec_len)
 		dec_str = ft_strjoin(".", tmp);
 		free(tmp);
 	}
+	return (dec_str);
 }
 
 static t_ftoa_rnd	ver_rounding(t_ftoa_rnd var)
@@ -75,7 +76,7 @@ char			*ft_ftoa_rnd(double n, short int dec_len, short int rnd)
 	var.dec_len = dec_len;
 	var.rnd = rnd;
 	var = dectoulli(var);
-	if (var.dec_len >= 0)
+	if (var.dec_len > 0)
 	{
 		var.z0[0] = '.';
 		i = 1;
@@ -87,13 +88,15 @@ char			*ft_ftoa_rnd(double n, short int dec_len, short int rnd)
 		var.z0[i] = '\0';
 		var.tmp = ft_ullitoa_base(var.dec_int, DIGITS);
 		var.d = ft_strjoin(var.z0, var.tmp);
-		ver_precision(var.d, var.dec_len);
+		//var.d = ft_strdup(var.tmp);
+		var.d = ver_precision(var.d, var.dec_len);
 		free(var.tmp);
 	}
-	if (var.dec_len == 0)
+	else
 		var.d = ft_strdup("");
 	var.tmp = ft_ullitoa_base(var.int_part, DIGITS);
 	var.a = ft_strjoin(var.tmp, var.d);
+	//var.a = ft_strdup(var.tmp);
 	free(var.tmp);
 	free(var.d);
 	return (var.a);

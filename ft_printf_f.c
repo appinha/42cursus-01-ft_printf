@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 21:04:31 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 21:55:38 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void			print_spec_f(int *len, t_flags fl, double n)
 	}
 	print_flags(len, fl);
 	free(fl.a);
-	free(fl.d);
 	if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
 		ft_putchar_len('0', len);
 }
