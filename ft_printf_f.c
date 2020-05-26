@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 21:55:38 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/25 22:45:48 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			print_spec_f(int *len, t_flags fl, double n)
 	fl.a = ft_ftoa_rnd(fl.f, fl.precision, 5);
 	if (fl.hash == 1 && fl.point == 1 && fl.precision == 0)
 	{
-		fl.tmp = ft_substr(fl.a, 0, ft_strlen(fl.a) - 1);
+		fl.tmp = ft_strjoin(fl.a, ".");
 		free(fl.a);
 		fl.a = fl.tmp;
 	}
