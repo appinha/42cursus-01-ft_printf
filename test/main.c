@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/27 03:20:35 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/27 03:27:19 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%e", 7.5
-#define INPUT_2	"%e", 1.0
-#define INPUT_3	"%e", -3.85
+#define INPUT_1	"%e", 0.000039
+#define INPUT_2	"%e", -0.00032
+#define INPUT_3	"%e", 0.000001
 #define INPUT_4	"%e", 573.924
 #define INPUT_5	"%i, %d, %d, %d, %d, %s, %c, %d, %u, %x, %X", i, j, k, l, m, n, c, c, j, j, j
 
