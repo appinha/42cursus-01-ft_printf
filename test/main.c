@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 22:44:51 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/26 23:22:36 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,46 +22,28 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%.0f", 7.4
-#define INPUT_2	"%#.0f", -7.4
-#define INPUT_3	"%#-5.0f", 7.3
-#define INPUT_4	"%.14f", 0.000000000000010000
-#define INPUT_5	"%.0f", 7.4
+#define INPUT_1	"%e", 0.0
+#define INPUT_2	"%e", -0.000001
+#define INPUT_3	"%.0e scientific notation", 1.6
+#define INPUT_4	"%.0f", -3.85
+#define INPUT_5	"%i, %d, %d, %d, %d, %s, %c, %d, %u, %x, %X", i, j, k, l, m, n, c, c, j, j, j
 
 int		main(void)
 {
-	int		len;
 	char	*p1;
-	int		n1;
-	int		n2;
-	int		n3;
+	int		len, n1, n2, n3;
 	double	dbl_max = FLT_MAX;
-	double	dbl1 = 3402823466385288598117041834845169254.0;
+	double	dbl = 1.025978548534310421;
 	double	mod = 10.0;
 	double	res;
+	long double	l_dbl;
 
 	// Hello Kitty test variables
-	int		a = -4;
-	int		b = 0;
+	int		a = -4, b = 0, d = 2147483647, e = -2147483648, f = 42, g = 25;
+	int		h = 4200, i = 8, j = -12, k = 123456789, l = 0, m = -12345678;
 	char	c = 'a';
-	int		d = 2147483647;
-	int		e = -2147483648;
-	int		f = 42;
-	int		g = 25;
-	int		h = 4200;
-	int		i = 8;
-	int		j = -12;
-	int		k = 123456789;
-	int		l = 0;
-	int		m = -12345678;
-	char	*n = "abcdefghijklmnop";
-	char	*o = "-a";
-	char	*p = "-12";
-	char	*q = "0";
-	char	*r = "%%";
-	char	*s = "-2147483648";
-	char	*t = "0x12345678";
-	char	*u = "-0";
+	char	*n = "abcdefghijklmnop", *o = "-a", *p = "-12", *q = "0";
+	char	*r = "%%", *s = "-2147483648", *t = "0x12345678", *u = "-0";
 
 	//printf("FLT_MAX     :   %.7f\n", (float)FLT_MAX);
 	//printf("FLT_MAX     :   %.7f\n", dbl1 - mod);
@@ -70,9 +52,6 @@ int		main(void)
 	//printf("\n• ft_fmod(dbl, mod) = %f\n", res);
 
 	printf(MAIN_2("\n=== • printf compare • ===\n") "\n");
-
-	//printf(HEADER_2("• printf") "\n");
-	//printf(HEADER_1("• ft_printf") "\n\n");
 
 	len = printf(INPUT_1);
 	printf(HEADER_2(" (len = %i - printf)") "\n", len);

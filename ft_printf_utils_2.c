@@ -6,13 +6,13 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 12:25:19 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/26 18:24:41 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/26 18:38:06 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char		*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*new_str;
 	int		i;
@@ -38,7 +38,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (new_str);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char		*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*new_str;
 	size_t	i;
@@ -59,7 +59,7 @@ long double	ft_pow(long double n, unsigned int pow)
 	return (pow ? n * ft_pow(n, pow - 1) : 1);
 }
 
-char	*ft_ullitoa_base(unsigned long long int n, char *base)
+char		*ft_ullitoa_base(unsigned long long int n, char *base)
 {
 	char					*a;
 	unsigned long long int	nbr;

@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/26 23:34:32 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/26 23:39:16 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_flags	nbr_toa(t_flags fl)
 static t_flags	n0_toa(t_flags fl)
 {
 	char	str[fl.precision + 3];
-	int 	i;
+	int		i;
 
 	fl.e[1] = '+';
 	fl.e[2] = '0';

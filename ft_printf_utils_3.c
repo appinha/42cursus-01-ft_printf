@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/26 15:46:24 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/26 23:57:31 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char			*ver_precision(char *dec_str, short int dec_len)
 	return (dec_str);
 }
 
-static t_ftoa_rnd	ver_rounding(t_ftoa_rnd var)
+static t_ftoa	ver_rounding(t_ftoa var)
 {
 	unsigned long long int	aux;
 	int						size;
@@ -51,7 +51,7 @@ static t_ftoa_rnd	ver_rounding(t_ftoa_rnd var)
 	return (var);
 }
 
-static t_ftoa_rnd	dectoa(t_ftoa_rnd var)
+static t_ftoa	dectoa(t_ftoa var)
 {
 	int			i;
 
@@ -70,7 +70,7 @@ static t_ftoa_rnd	dectoa(t_ftoa_rnd var)
 	return (var);
 }
 
-static t_ftoa_rnd	dectoulli(t_ftoa_rnd var)
+static t_ftoa	dectoulli(t_ftoa var)
 {
 	var.int_part = var.n;
 	var.dec_part = var.n - var.int_part;
@@ -86,9 +86,9 @@ static t_ftoa_rnd	dectoulli(t_ftoa_rnd var)
 	return (var);
 }
 
-char				*ft_ftoa_rnd(long double n, short int dec_len, short int rnd)
+char			*ft_ftoa_rnd(long double n, short int dec_len, short int rnd)
 {
-	t_ftoa_rnd	var;
+	t_ftoa	var;
 
 	var.n = (n >= 0) ? n : -n;
 	var.dec_len = dec_len;

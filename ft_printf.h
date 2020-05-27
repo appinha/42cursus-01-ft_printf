@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/26 23:32:57 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/26 23:40:06 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ typedef struct	s_flags
 	int						j;
 }				t_flags;
 
-typedef struct	s_ftoa_rnd
+typedef struct	s_ftoa
 {
 	long double				n;
-	short int 				dec_len;
-	short int 				rnd;
+	short int				dec_len;
+	short int				rnd;
 	unsigned long long int	int_part;
 	long double				dec_part;
 	unsigned long long int	dec_int;
@@ -92,7 +92,7 @@ typedef struct	s_ftoa_rnd
 	char					*d;
 	char					*tmp;
 	char					z0[20];
-}				t_ftoa_rnd;
+}				t_ftoa;
 
 /*
 ** MACROS
