@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/27 03:16:29 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/27 03:25:50 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void			print_spec_e(int *len, t_flags fl, double n)
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = fl.f;
 	fl = get_nbr_e(fl, fl.f, fl.ulli);
-	if (ft_strlen(fl.d) > 1)
+	if (!(fl.d[1] == '.' || fl.d[1] == '\0'))
 	{
 		if (fl.e[3] == '9')
 		{
