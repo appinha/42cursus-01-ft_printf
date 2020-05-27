@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/26 18:23:32 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/26 23:32:57 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct	s_flags
 	unsigned long long int	ulli;
 	long long int			lli;
 	unsigned long long int	aux;
-	short unsigned int		rnd;
 	long double				f;
 	long double				fe;
 	int						e_nbr;
