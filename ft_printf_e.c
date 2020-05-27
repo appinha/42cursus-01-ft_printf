@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/27 15:26:14 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/27 17:47:49 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,8 @@ static t_flags	get_nbr_e(t_flags fl, long double f,unsigned long long int i_part
 	}
 	else if ((ft_strlcpy(fl.e, "e-", 3)))
 	{
-		while (fl.e_nbr > -100 && i_part == 0)
-		{
+		while (fl.e_nbr-- > -100 && f < 0.1)
 			f *= 10;
-			i_part = f;
-			fl.e_nbr--;
-		}
 	}
 	fl.tmp = ft_ullitoa_base((fl.e_nbr >= 0) ? fl.e_nbr : -fl.e_nbr, DIGITS);
 	if ((ft_strlen(fl.tmp)) == 1 && (ft_strlcat(fl.e, "0", 4)))

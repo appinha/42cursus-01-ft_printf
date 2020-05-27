@@ -6,11 +6,12 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/06 21:56:58 by apuchill          #+#    #+#              #
-#    Updated: 2020/05/27 02:20:54 by apuchill         ###   ########.fr        #
+#    Updated: 2020/05/27 16:58:48 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC		= gcc
+#CC		= gcc
+CC		= clang
 CFLAGS	= -Wall -Wextra -Werror
 RM		= /bin/rm -f
 

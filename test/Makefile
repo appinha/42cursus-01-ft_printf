@@ -6,14 +6,15 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/06 17:29:07 by apuchill          #+#    #+#              #
-#    Updated: 2020/05/26 19:04:57 by apuchill         ###   ########.fr        #
+#    Updated: 2020/05/27 16:58:40 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PROJECT_DIR	= ../
 LIB	= -L$(PROJECT_DIR) -lftprintf
 
-CC		= gcc
+#CC		= gcc
+CC		= clang
 #CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
 CFLAGS	= -g3 -fsanitize=address
 RM		= /bin/rm -f
