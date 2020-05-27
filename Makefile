@@ -6,7 +6,7 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/06 21:56:58 by apuchill          #+#    #+#              #
-#    Updated: 2020/05/24 19:06:55 by apuchill         ###   ########.fr        #
+#    Updated: 2020/05/27 02:20:54 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ RM		= /bin/rm -f
 
 NAME	= libftprintf.a
 
-SRCS	= ft_printf.c ft_printf_utils.c ft_printf_utils_2.c ft_printf_flags.c \
-			ft_printf_csp_pct.c ft_printf_iduxo.c \
-			ft_printf_utils_3.c ft_printf_f.c ft_printf_e.c
+SRCS	= ft_printf.c ft_printf_flags.c ft_printf_csp_pct.c ft_printf_iduxo.c \
+			ft_printf_f.c ft_printf_e.c ft_ftoa_rnd.c \
+			ft_printf_utils.c ft_printf_utils_2.c ft_printf_utils_3.c
 
 OBJS	= $(SRCS:.c=.o)
 

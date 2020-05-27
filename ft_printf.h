@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/26 23:40:06 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/27 02:21:12 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,13 +138,16 @@ size_t			ft_strlen(const char *s);
 int				ft_strchr_01(char *s, char c);
 void			ft_putchar_len(char c, int *len);
 void			ft_putcstr_len(char *s, int *len, int size);
-char			*ft_strdup(const char *s1);
 
+size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
+char			*ft_strdup(const char *s1);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-long double			ft_pow(long double n, unsigned int pow);
+
+long double		ft_pow(long double n, unsigned int pow);
 char			*ft_ullitoa_base(unsigned long long int n, char *base);
-long double			ft_fmod(long double n, long double mod);
+long double		ft_fmod(long double n, long double mod);
 
 char			*ft_ftoa_rnd(long double n, short int dec_len, short int rnd);
 

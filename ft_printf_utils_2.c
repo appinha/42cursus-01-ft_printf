@@ -6,13 +6,71 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 12:25:19 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/26 18:38:06 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/27 02:18:31 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*ft_strjoin(char const *s1, char const *s2)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t srcsize;
+	size_t i;
+
+	if (!dst || !src)
+		return (0);
+	srcsize = ft_strlen(src);
+	i = 0;
+	if (dstsize != 0)
+	{
+		while (src[i] != '\0' && i < (dstsize - 1))
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (srcsize);
+}
+
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+{
+	size_t c;
+	size_t d;
+
+	if (dstsize <= ft_strlen(dst))
+		return (dstsize + ft_strlen(src));
+	c = ft_strlen(dst);
+	d = 0;
+	while (src[d] != '\0' && c + 1 < dstsize)
+	{
+		dst[c] = src[d];
+		c++;
+		d++;
+	}
+	dst[c] = '\0';
+	return (ft_strlen(dst) + ft_strlen(&src[d]));
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*s2;
+	size_t	size;
+	size_t	i;
+
+	size = ft_strlen(s1) + 1;
+	if (!(s2 = (char *)malloc(size)))
+		return (0);
+	i = 0;
+	while (i < size)
+	{
+		((unsigned char *)s2)[i] = ((unsigned char *)s1)[i];
+		i++;
+	}
+	return (s2);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*new_str;
 	int		i;
@@ -38,7 +96,7 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	return (new_str);
 }
 
-char		*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*new_str;
 	size_t	i;
@@ -54,39 +112,3 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 	return (new_str);
 }
 
-long double	ft_pow(long double n, unsigned int pow)
-{
-	return (pow ? n * ft_pow(n, pow - 1) : 1);
-}
-
-char		*ft_ullitoa_base(unsigned long long int n, char *base)
-{
-	char					*a;
-	unsigned long long int	nbr;
-	size_t					size;
-	int						b_len;
-
-	b_len = ft_strlen(base);
-	nbr = n;
-	size = 1;
-	while (n /= b_len)
-		size++;
-	if (!(a = (char *)malloc(size + 1)))
-		return (0);
-	a[size--] = '\0';
-	while (nbr > 0)
-	{
-		a[size--] = base[nbr % b_len];
-		nbr /= b_len;
-	}
-	if (size == 0 && a[1] == '\0')
-		a[0] = '0';
-	return (a);
-}
-
-long double	ft_fmod(long double n, long double mod)
-{
-	while (n >= mod)
-		n -= mod;
-	return (n);
-}

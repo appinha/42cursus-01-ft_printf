@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/26 23:39:16 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/27 03:16:29 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,12 @@ static t_flags	n0_toa(t_flags fl)
 	char	str[fl.precision + 3];
 	int		i;
 
-	fl.e[1] = '+';
-	fl.e[2] = '0';
-	fl.e[3] = '0';
+	ft_strlcpy(fl.e, "e+00", 5);
 	if (fl.point == 1 && fl.precision == 0)
-	{
-		str[0] = '0';
-		str[1] = '\0';
-	}
+		ft_strlcpy(str, "0", 2);
 	else
 	{
-		str[0] = '0';
-		str[1] = '.';
+		ft_strlcpy(str, "0.", 3);
 		i = 2;
 		while (i <= fl.precision + 1)
 			str[i++] = '0';
@@ -59,54 +53,32 @@ static t_flags	n0_toa(t_flags fl)
 	return (fl);
 }
 
-static t_flags	e_toa(t_flags fl)
-{
-	int		e_nbr_pos;
-
-	e_nbr_pos = (fl.e_nbr >= 0) ? fl.e_nbr : -fl.e_nbr;
-	fl.tmp = ft_ullitoa_base(e_nbr_pos, DIGITS);
-	fl.e[0] = 'e';
-	if (e_nbr_pos > 9)
-	{
-		fl.e[2] = fl.tmp[0];
-		fl.e[3] = fl.tmp[1];
-	}
-	else
-	{
-		fl.e[2] = '0';
-		fl.e[3] = fl.tmp[0];
-	}
-	fl.e[4] = '\0';
-	free(fl.tmp);
-	return (fl);
-}
-
-static t_flags	ft_etoa(t_flags fl, long double f,
-							unsigned long long int int_part)
+static t_flags	get_nbr_e(t_flags fl, long double f,unsigned long long int i_part)
 {
 	fl.e_nbr = 0;
-	if (int_part > 0)
+	if (i_part > 0 && (ft_strlcpy(fl.e, "e+", 3)))
 	{
-		fl.e[1] = '+';
-		while (int_part /= 10)
+		while (i_part /= 10)
 			fl.e_nbr++;
 	}
-	else
+	else if ((ft_strlcpy(fl.e, "e-", 3)))
 	{
-		fl.e[1] = '-';
-		while (int_part == 0 && (fl.e_nbr)-- > -100)
+		while (fl.e_nbr-- > -100 && i_part == 0)
 		{
 			f *= 10;
-			int_part = f;
+			i_part = f;
 		}
 	}
-	fl = e_toa(fl);
+	fl.tmp = ft_ullitoa_base((fl.e_nbr >= 0) ? fl.e_nbr : -fl.e_nbr, DIGITS);
+	if ((ft_strlen(fl.tmp)) == 1 && (ft_strlcat(fl.e, "0", 4)))
+		ft_strlcat(fl.e, fl.tmp, 5);
+	else
+		ft_strlcat(fl.e, fl.tmp, 5);
+	free(fl.tmp);
 	if (fl.e_nbr < -99)
 		fl = n0_toa(fl);
 	else
 		fl = nbr_toa(fl);
-	fl.a = ft_strjoin(fl.d, fl.e);
-	free(fl.d);
 	return (fl);
 }
 
@@ -115,7 +87,23 @@ void			print_spec_e(int *len, t_flags fl, double n)
 	fl.sign = (n >= 0) ? '+' : '-';
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = fl.f;
-	fl = ft_etoa(fl, fl.f, fl.ulli);
+	fl = get_nbr_e(fl, fl.f, fl.ulli);
+	if (ft_strlen(fl.d) > 1)
+	{
+		if (fl.e[3] == '9')
+		{
+			fl.e[2]++;
+			fl.e[3] = '0';
+		}
+		else
+			fl.e[3]++;
+		fl.tmp = ft_substr(fl.d, 2, ft_strlen(fl.d) - 2);
+		free(fl.d);
+		fl.d = ft_strjoin("1", fl.tmp);
+		free(fl.tmp);
+	}
+	fl.a = ft_strjoin(fl.d, fl.e);
+	free(fl.d);
 	print_flags(len, fl);
 	free(fl.a);
 }
