@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/27 17:47:49 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/27 18:17:11 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_flags	n0_toa(t_flags fl)
 	return (fl);
 }
 
-static t_flags	get_nbr_e(t_flags fl, long double f,unsigned long long int i_part)
+static t_flags	get_nbr_e(t_flags fl, double f,unsigned long long int i_part)
 {
 	fl.e_nbr = 0;
 	if (i_part > 0 && (ft_strlcpy(fl.e, "e+", 3)))
@@ -84,20 +84,12 @@ void			print_spec_e(int *len, t_flags fl, double n)
 	fl.sign = (n >= 0) ? '+' : '-';
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = fl.f;
-	fl = get_nbr_e(fl, fl.f, fl.ulli);
-	if (!(fl.d[1] == '.' || fl.d[1] == '\0'))
+	fl = get_nbr_e(fl, (n >= 0) ? n : -n, fl.ulli);
+	if (fl.hash == 1 && fl.point == 1 && fl.precision == 0)
 	{
-		if (fl.e[3] == '9')
-		{
-			fl.e[2]++;
-			fl.e[3] = '0';
-		}
-		else
-			fl.e[3]++;
-		fl.tmp = ft_substr(fl.d, 2, ft_strlen(fl.d) - 2);
+		fl.tmp = ft_strjoin(fl.d, ".");
 		free(fl.d);
-		fl.d = ft_strjoin("1", fl.tmp);
-		free(fl.tmp);
+		fl.d = fl.tmp;
 	}
 	fl.a = ft_strjoin(fl.d, fl.e);
 	free(fl.d);
