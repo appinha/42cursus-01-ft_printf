@@ -6,13 +6,13 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 15:03:08 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 12:51:59 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/28 14:57:20 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_width(int *len, t_flags fl)
+static void	print_width(int *len, t_flags fl)
 {
 	if (fl.sign == '-' || (fl.plus == 1 && fl.sign == '+') ||
 		(fl.space == 1 && fl.plus == 0 && fl.sign == '+'))
@@ -29,8 +29,10 @@ void	print_width(int *len, t_flags fl)
 	}
 }
 
-void	print_zeros(int *len, t_flags fl)
+static void	print_zeros(int *len, t_flags fl)
 {
+	int		j;
+
 	if (fl.spe_c == 'x' && fl.hash == 1 && fl.ulli != 0)
 		ft_putcstr_len("0x", len, 2);
 	if (fl.spe_c == 'X' && fl.hash == 1 && fl.ulli != 0)
@@ -42,13 +44,13 @@ void	print_zeros(int *len, t_flags fl)
 		print_width(len, fl);
 	if (fl.point == 1)
 	{
-		fl.j = fl.precision;
-		while (fl.j-- > (int)fl.strlen)
+		j = fl.precision;
+		while (j-- > (int)fl.strlen)
 			ft_putchar_len('0', len);
 	}
 }
 
-void	print_flags(int *len, t_flags fl)
+void		print_flags(int *len, t_flags fl)
 {
 	fl.strlen = ft_strlen(fl.a);
 	if (fl.spe_c != 'f' && fl.ulli == 0 && fl.point == 1 && fl.precision == 0)

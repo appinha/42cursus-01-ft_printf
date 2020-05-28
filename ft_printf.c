@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 03:44:24 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/28 14:56:34 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static t_flags	treat_star(va_list args, t_flags fl)
 	int	value;
 
 	value = va_arg(args, int);
-	fl.j++;
 	if (fl.point == 0)
 	{
 		fl.width = (value >= 0) ? value : -value;
@@ -58,28 +57,29 @@ static t_flags	treat_star(va_list args, t_flags fl)
 
 static t_flags	treat_flags(va_list args, t_flags fl)
 {
-	fl.j = 0;
-	fl.pad_c = ' ';
-	while (fl.set[fl.j] != '\0' && ft_strchr_01(FLAGS, fl.set[fl.j]))
+	int		j;
+
+	j = 0;
+	while (fl.set[j] != '\0' && ft_strchr_01(FLAGS, fl.set[j]))
 	{
-		if (fl.set[fl.j++] == '0')
+		if (fl.set[j++] == '0')
 			fl.pad_c = '0';
 	}
-	if (fl.set[fl.j] == '*')
+	if (fl.set[j] == '*' && (j++))
 		fl = treat_star(args, fl);
-	while (fl.set[fl.j] != '\0' && ft_strchr_01(DIGITS, fl.set[fl.j]))
-		fl.width = 10 * fl.width + fl.set[fl.j++] - '0';
-	if (fl.set[fl.j] == '.')
+	while (fl.set[j] != '\0' && ft_strchr_01(DIGITS, fl.set[j]))
+		fl.width = 10 * fl.width + fl.set[j++] - '0';
+	if (fl.set[j] == '.')
 	{
 		fl.point = 1;
-		if (fl.set[++fl.j] == '*')
+		if (fl.set[++j] == '*' && (j++))
 			fl = treat_star(args, fl);
-		while (fl.set[fl.j] != '\0' && ft_strchr_01(DIGITS, fl.set[fl.j]))
-			fl.precision = 10 * fl.precision + fl.set[fl.j++] - '0';
+		while (fl.set[j] != '\0' && ft_strchr_01(DIGITS, fl.set[j]))
+			fl.precision = 10 * fl.precision + fl.set[j++] - '0';
 	}
-	while (fl.set[fl.j] != '\0' && ft_strchr_01("l", fl.set[fl.j++]))
+	while (fl.set[j] != '\0' && ft_strchr_01("l", fl.set[j++]))
 		fl.length++;
-	while (fl.set[fl.j] != '\0' && ft_strchr_01("h", fl.set[fl.j++]))
+	while (fl.set[j] != '\0' && ft_strchr_01("h", fl.set[j++]))
 		fl.length--;
 	return (fl);
 }
@@ -87,11 +87,12 @@ static t_flags	treat_flags(va_list args, t_flags fl)
 static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 {
 	t_flags	fl;
+	int 	j;
 
-	fl.j = 0;
-	while (ft_strchr_01(ALL_FL, format[*i]) && fl.j < 19)
-		fl.set[fl.j++] = format[(*i)++];
-	fl.set[fl.j] = '\0';
+	j = 0;
+	while (ft_strchr_01(ALL_FL, format[*i]) && j < 19)
+		fl.set[j++] = format[(*i)++];
+	fl.set[j] = '\0';
 	if (ft_strchr_01(FSPECS, format[*i]))
 	{
 		fl.spe_c = format[(*i)++];
@@ -103,6 +104,7 @@ static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 		fl.point = 0;
 		fl.precision = 0;
 		fl.length = 0;
+		fl.pad_c = ' ';
 		fl = treat_flags(args, fl);
 		triage_specs(args, len, fl);
 	}

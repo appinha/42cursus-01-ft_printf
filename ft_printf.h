@@ -6,20 +6,44 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 12:50:11 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/28 15:04:55 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdio.h>
+/*
+** •.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•
+** HEADERS
+*/
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
 
 /*
+** •.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•
+** MACROS
+*/
+
+# define FLAGS		"-+#0 "
+# define ALL_FL		"-+#0 *.0123456789lh"
+# define FSPECS		"cspdiuxX%onfge"
+
+# define DIGITS		"0123456789"
+# define HEXALOW	"0123456789abcdef"
+# define HEXAUPP	"0123456789ABCDEF"
+# define OCTAL		"01234567"
+
+/*
+** •.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•
+** STRUCT DECLARATIONS
+*/
+/*
 ** FORMAT SPECIFIER STRUCT
+**
+** .set:	stores all collected format specifiers.
 ** .spe_c:	specifier character - i.e. variable type (ex.: %c %s %p %d %i).
 ** .pad_c:	padding character - could be eiter ' ' (default) or '0' ('0' flag).
 ** .minus:	'-' flag - left-justifies within the given field width; right
@@ -48,7 +72,6 @@
 **			'hh	| signed char	| unsigned char				| signed char*	|
 ** Reference: http://www.cplusplus.com/reference/cstdio/printf/
 */
-
 typedef struct	s_flags
 {
 	char					set[20];
@@ -62,23 +85,23 @@ typedef struct	s_flags
 	char					point;
 	int						precision;
 	char					length;
-	size_t					strlen;
+	unsigned long int		*p;
 	char					sign;
 	unsigned long long int	ulli;
 	long long int			lli;
-	unsigned long long int	aux;
 	long double				f;
-	long double				fe;
 	int						e_nbr;
-	int						size;
 	char					*a;
 	char					*d;
 	char					e[5];
 	char					*tmp;
-	unsigned long int		*p;
-	int						j;
+	int						size;
+	size_t					strlen;
 }				t_flags;
 
+/*
+** ft_ftoa_rnd STRUCT
+*/
 typedef struct	s_ftoa
 {
 	long double				n;
@@ -95,62 +118,86 @@ typedef struct	s_ftoa
 }				t_ftoa;
 
 /*
-** MACROS
-*/
-
-# define FLAGS		"-+#0 "
-# define ALL_FL		"-+#0 *.0123456789lh"
-# define FSPECS		"cspdiuxX%onfge"
-
-# define DIGITS		"0123456789"
-# define HEXALOW	"0123456789abcdef"
-# define HEXAUPP	"0123456789ABCDEF"
-# define OCTAL		"01234567"
-
-/*
+** •.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•
 ** MAIN FUNCTIONS
 */
-
+/*
+** FILE: ft_printf.c
+** Initialization function: start/end variadic arguments functions <stdarg.h>;
+** in between that, goes through the input string printing plain characters or
+** collecting + treating format specifiers to the FORMAT SPECIFIER STRUCT thus
+** printing each occurrance with the corresponding function.
+*/
 int				ft_printf(const char *str, ...);
-
-void			print_flags(int *len, t_flags fl);
-void			print_width(int *len, t_flags fl);
-void			print_zeros(int *len, t_flags fl);
-
-void			print_spec_pct(int *len, t_flags fl);
+/*
+** FILE: ft_printf_csp_pct.c
+** Outputs the input variable (collected by 'va_arg' function) as a pointer to a
+** string to be printed by the 'print_flags' function.
+*/
 void			print_spec_c(int *len, t_flags fl, char c);
 void			print_spec_s(int *len, t_flags fl, char *s);
-
+void			print_spec_pct(int *len, t_flags fl);
+/*
+** FILE: ft_printf_iduxo.c
+** Outputs the input variable (collected by 'va_arg' function) as a pointer to a
+** string to be printed by the 'print_flags' function.
+*/
 void			print_spec_i_d_u(int *len, t_flags fl, va_list args);
 void			print_spec_x(int *len, t_flags fl, va_list args);
 void			print_spec_o(int *len, t_flags fl, va_list args);
 void			print_spec_p(int *len, t_flags fl, unsigned long int p);
-
+/*
+** FILE: ft_printf_f_g.c
+** Outputs the input variable (collected by 'va_arg' function) as a pointer to a
+** string to be printed by the 'print_flags' function.
+*/
 void			print_spec_f_e_g(int *len, t_flags fl, double n);
 t_flags			print_spec_f(t_flags fl, double n);
 t_flags			print_spec_g(t_flags fl, double n, int P);
-
+/*
+** FILE: ft_printf_e.c
+** Outputs the input variable (collected by 'va_arg' function) as a pointer to a
+** string to be printed by the 'print_flags' function.
+*/
 t_flags			print_spec_e(t_flags fl, double n);
+/*
+** FILE: ft_printf_flags.c
+** Prints each format specifier function's outputted string with formatting in
+** accordance with the collected format specifiers.
+*/
+void			print_flags(int *len, t_flags fl);
 
 /*
+** •.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•
 ** UTILS FUNCTIONS
+**
+** Basic Libc functions - note: some were adapted and thus named with a suffix
+** to indicate the nature of the customization.
 */
-
+/*
+** FILE: ft_printf_utils.c
+*/
 size_t			ft_strlen(const char *s);
 int				ft_strchr_01(char *s, char c);
 void			ft_putchar_len(char c, int *len);
 void			ft_putcstr_len(char *s, int *len, int size);
-
+/*
+** FILE: ft_printf_utils_2.c
+*/
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 char			*ft_strdup(const char *s1);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-
+/*
+** FILE: ft_printf_utils_3.c
+*/
 long double		ft_pow(long double n, unsigned int pow);
 char			*ft_ullitoa_base(unsigned long long int n, char *base);
 long double		ft_fmod(long double n, long double mod);
-
+/*
+** FILE: ft_ftoa_rnd.c
+*/
 char			*ft_ftoa_rnd(long double n, short int dec_len, short int rnd);
 
 #endif
