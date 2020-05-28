@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 01:47:26 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/28 03:41:07 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static t_flags	get_0nbr_e_verifs(t_flags fl)
 			break ;
 		}
 	}
-	fl.e_nbr = fl.j - 1;
+	fl.e_nbr = -(fl.j - 1);
 	fl.tmp = ft_substr(fl.d, fl.j - 1, ft_strlen(fl.d) - (fl.j - 1));
 	return (fl);
 }
@@ -117,7 +117,7 @@ static t_flags	get_nbr_e(t_flags fl, unsigned long long int i_part)
 	return (fl);
 }
 
-void			print_spec_e(int *len, t_flags fl, double n)
+t_flags			print_spec_e(t_flags fl, double n)
 {
 	fl.sign = (n >= 0) ? '+' : '-';
 	fl.f = (n >= 0) ? n : -n;
@@ -128,7 +128,7 @@ void			print_spec_e(int *len, t_flags fl, double n)
 		fl = get_nbr_e(fl, fl.ulli);
 	else
 		fl = get_0nbr_e(fl);
-	fl.tmp = ft_ullitoa_base(fl.e_nbr, DIGITS);
+	fl.tmp = ft_ullitoa_base(((fl.e_nbr > 0) ? fl.e_nbr : -fl.e_nbr), DIGITS);
 	if ((ft_strlen(fl.tmp)) == 1 && (ft_strlcat(fl.e, "0", 4)))
 		ft_strlcat(fl.e, fl.tmp, 5);
 	else
@@ -142,6 +142,5 @@ void			print_spec_e(int *len, t_flags fl, double n)
 	}
 	fl.a = ft_strjoin(fl.d, fl.e);
 	free(fl.d);
-	print_flags(len, fl);
-	free(fl.a);
+	return (fl);
 }

@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 01:42:12 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/28 03:57:23 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%.0f", -0.00032
-#define INPUT_2	"%.0e", -0.00032
-#define INPUT_3	"%.0g", -0.00032
-#define INPUT_4	"%e", 42.1
+#define INPUT_1	"%.2g", (double)0.000000123
+#define INPUT_2	"%g", (double)12.000
+#define INPUT_3	"%e", (double)1234567.89
+#define INPUT_4	"%%g 0000042 == |%g|", (double)0000042
 #define INPUT_5	"%i, %d, %d, %d, %d, %s, %c, %d, %u, %x, %X", i, j, k, l, m, n, c, c, j, j, j
 
 int		main(void)
