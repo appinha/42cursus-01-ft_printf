@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/27 22:18:29 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/27 22:47:21 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,34 @@ static t_flags	fill_0s(t_flags fl, char *nbr)
 static t_flags	get_0nbr_e(t_flags fl)
 {
 	ft_strlcpy(fl.e, "e-", 3);
-	fl.d = ft_ftoa_rnd(fl.f, 18, 5);
+	fl.size = 1;
+	fl.d = ft_ftoa_rnd(fl.f, fl.size, 5);
+	fl.j = 1;
+	while (fl.d[++fl.j] != '\0' && fl.j <= 18)
+	{
+		if ((ft_strchr_01("123456789", fl.d[fl.j])) == 1)
+			break ;
+		if (fl.d[fl.j + 1] == '\0')
+		{
+			free(fl.d);
+			fl.size++;
+			fl.d = ft_ftoa_rnd(fl.f, fl.size, 5);
+		}
+	}
+	if (fl.j > 18 && (fl.e[1] = '+'))
+	{
+		free(fl.d);
+		fl = fill_0s(fl, "0.");
+		return (fl);
+	}
+	fl.j = 1;
+	while (fl.d[++fl.j] != '\0')
+	{
+		if ((ft_strchr_01("123456789", fl.d[fl.j])) == 1)
+			break ;
+	}
+	free(fl.d);
+	fl.d = ft_ftoa_rnd(fl.f, (fl.j - 1) + fl.precision, 5);
 	fl.j = 1;
 	while (fl.d[++fl.j] != '\0')
 	{
@@ -64,12 +91,6 @@ static t_flags	get_0nbr_e(t_flags fl)
 			fl.d[fl.j - 1] = '0';
 		else if ((fl.d[fl.j - 1] = fl.d[fl.j]) && (fl.d[fl.j] = '.'))
 			break ;
-	}
-	if (fl.j > 19 && (fl.e[1] = '+'))
-	{
-		free(fl.d);
-		fl = fill_0s(fl, "0.");
-		return (fl);
 	}
 	fl.e_nbr = fl.j - 1;
 	fl.tmp = ft_substr(fl.d, fl.j - 1, ft_strlen(fl.d) - (fl.j - 1));
