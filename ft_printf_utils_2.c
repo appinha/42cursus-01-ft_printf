@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 12:25:19 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/27 02:18:31 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/28 01:47:45 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	new_str[j] = '\0';
 	return (new_str);
 }
-

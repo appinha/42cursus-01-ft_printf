@@ -6,13 +6,13 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:56:49 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/27 02:05:24 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/28 01:25:16 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char			*ver_precision(char *dec_str, short int dec_len)
+static char		*ver_precision(char *dec_str, short int dec_len)
 {
 	size_t	strlen;
 	int		diff;
