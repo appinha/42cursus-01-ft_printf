@@ -6,32 +6,12 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/27 22:47:21 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/27 23:00:36 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
-static t_flags	n0_toa(t_flags fl)
-{
-	char	str[fl.precision + 3];
-	int		i;
 
-	ft_strlcpy(fl.e, "e+00", 5);
-	if (fl.point == 1 && fl.precision == 0)
-		ft_strlcpy(str, "0", 2);
-	else
-	{
-		ft_strlcpy(str, "0.", 3);
-		i = 2;
-		while (i <= fl.precision + 1)
-			str[i++] = '0';
-		str[i] = '\0';
-	}
-	fl.d = ft_strdup(str);
-	return (fl);
-}
-*/
 static t_flags	fill_0s(t_flags fl, char *nbr)
 {
 	char	str[fl.precision + 3];
@@ -95,8 +75,8 @@ static t_flags	get_0nbr_e(t_flags fl)
 	fl.e_nbr = fl.j - 1;
 	fl.tmp = ft_substr(fl.d, fl.j - 1, ft_strlen(fl.d) - (fl.j - 1));
 	free(fl.d);
-	if (ft_strlen(fl.tmp) >= (size_t)fl.precision + 2)
-		fl.d  = ft_substr(fl.tmp, 0, fl.precision + 2);
+	if (ft_strlen(fl.tmp) >= fl.strlen)
+		fl.d  = ft_substr(fl.tmp, 0, fl.strlen);
 	else
 		fl = fill_0s(fl, fl.tmp);
 	free(fl.tmp);
@@ -118,10 +98,6 @@ static t_flags	get_nbr_e(t_flags fl, unsigned long long int i_part)
 			fl.d[fl.j - 1] = '.';
 		}
 	}
-	if (fl.precision > 0)
-		fl.strlen = (size_t)fl.precision + 2;
-	if (fl.precision == 0)
-		fl.strlen = 1;
 	if (ft_strlen(fl.d) > fl.strlen)
 	{
 		fl.tmp = ft_substr(fl.d, 0, fl.strlen);
@@ -138,6 +114,7 @@ void			print_spec_e(int *len, t_flags fl, double n)
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = fl.f;
 	fl.e_nbr = 0;
+	fl.strlen = (fl.precision > 0) ? (size_t)fl.precision + 2 : 1;
 	if (fl.ulli > 0)
 		fl = get_nbr_e(fl, fl.ulli);
 	else
