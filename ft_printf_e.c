@@ -6,33 +6,12 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/27 18:17:11 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/27 21:46:25 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static t_flags	nbr_toa(t_flags fl)
-{
-	if (fl.e_nbr > 0)
-		fl.fe = fl.f / ft_pow(10, fl.e_nbr);
-	if (fl.e_nbr == 0)
-		fl.fe = fl.f;
-	if (fl.e_nbr < 0)
-		fl.fe = fl.f * ft_pow(10, -fl.e_nbr);
-	fl.d = ft_ftoa_rnd(fl.fe, fl.precision, 5);
-	fl.j = ft_strlen(fl.a);
-	while (--fl.j >= 0)
-	{
-		if (fl.d[fl.j] == '.' && fl.j >= 2)
-		{
-			fl.d[fl.j] = fl.d[fl.j - 1];
-			fl.d[fl.j - 1] = '.';
-		}
-	}
-	return (fl);
-}
-
+/*
 static t_flags	n0_toa(t_flags fl)
 {
 	char	str[fl.precision + 3];
@@ -52,30 +31,72 @@ static t_flags	n0_toa(t_flags fl)
 	fl.d = ft_strdup(str);
 	return (fl);
 }
-
-static t_flags	get_nbr_e(t_flags fl, double f,unsigned long long int i_part)
+*/
+static t_flags	fill_0s(t_flags fl, char *nbr)
 {
-	fl.e_nbr = 0;
-	if (i_part > 0 && (ft_strlcpy(fl.e, "e+", 3)))
-	{
-		while (i_part /= 10)
-			fl.e_nbr++;
-	}
-	else if ((ft_strlcpy(fl.e, "e-", 3)))
-	{
-		while (fl.e_nbr-- > -100 && f < 0.1)
-			f *= 10;
-	}
-	fl.tmp = ft_ullitoa_base((fl.e_nbr >= 0) ? fl.e_nbr : -fl.e_nbr, DIGITS);
-	if ((ft_strlen(fl.tmp)) == 1 && (ft_strlcat(fl.e, "0", 4)))
-		ft_strlcat(fl.e, fl.tmp, 5);
+	char	str[fl.precision + 3];
+	size_t	strlen;
+	int		i;
+
+	strlen = ft_strlen(nbr);
+	if (fl.point == 1 && fl.precision == 0)
+		ft_strlcpy(str, nbr, 2);
 	else
-		ft_strlcat(fl.e, fl.tmp, 5);
+	{
+		ft_strlcpy(str, nbr, strlen + 1);
+		i = strlen;
+		while (i <= fl.precision + 1)
+			str[i++] = '0';
+		str[i] = '\0';
+	}
+	fl.d = ft_strdup(str);
+	return (fl);
+}
+
+static t_flags	get_0nbr_e(t_flags fl)
+{
+	ft_strlcpy(fl.e, "e-", 3);
+	fl.d = ft_ftoa_rnd(fl.f, 18, 5);
+	fl.j = 1;
+	while (fl.d[++fl.j] != '\0')
+	{
+		if (fl.d[fl.j] == '0' && (fl.d[fl.j] = '.'))
+			fl.d[fl.j - 1] = '0';
+		else if ((fl.d[fl.j - 1] = fl.d[fl.j]) && (fl.d[fl.j] = '.'))
+			break ;
+	}
+	if (fl.j > 19 && (fl.e[1] = '+'))
+	{
+		free(fl.d);
+		fl = fill_0s(fl, "0.");
+		return (fl);
+	}
+	fl.e_nbr = fl.j - 1;
+	fl.tmp = ft_substr(fl.d, fl.j - 1, ft_strlen(fl.d) - (fl.j - 1));
+	free(fl.d);
+	if (ft_strlen(fl.tmp) >= (size_t)fl.precision + 2)
+		fl.d  = ft_substr(fl.tmp, 0, fl.precision + 2);
+	else
+		fl = fill_0s(fl, fl.tmp);
 	free(fl.tmp);
-	if (fl.e_nbr < -99)
-		fl = n0_toa(fl);
-	else
-		fl = nbr_toa(fl);
+	return (fl);
+}
+
+static t_flags	get_nbr_e(t_flags fl, unsigned long long int i_part)
+{
+	ft_strlcpy(fl.e, "e+", 3);
+	while (i_part /= 10)
+		fl.e_nbr++;
+	fl.d = ft_ftoa_rnd((fl.f / ft_pow(10, fl.e_nbr)), fl.precision, 5);
+	fl.j = ft_strlen(fl.d);
+	while (--fl.j >= 0)
+	{
+		if (fl.d[fl.j] == '.' && fl.j >= 2)
+		{
+			fl.d[fl.j] = fl.d[fl.j - 1];
+			fl.d[fl.j - 1] = '.';
+		}
+	}
 	return (fl);
 }
 
@@ -84,7 +105,17 @@ void			print_spec_e(int *len, t_flags fl, double n)
 	fl.sign = (n >= 0) ? '+' : '-';
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = fl.f;
-	fl = get_nbr_e(fl, (n >= 0) ? n : -n, fl.ulli);
+	fl.e_nbr = 0;
+	if (fl.ulli > 0)
+		fl = get_nbr_e(fl, fl.ulli);
+	else
+		fl = get_0nbr_e(fl);
+	fl.tmp = ft_ullitoa_base(fl.e_nbr, DIGITS);
+	if ((ft_strlen(fl.tmp)) == 1 && (ft_strlcat(fl.e, "0", 4)))
+		ft_strlcat(fl.e, fl.tmp, 5);
+	else
+		ft_strlcat(fl.e, fl.tmp, 5);
+	free(fl.tmp);
 	if (fl.hash == 1 && fl.point == 1 && fl.precision == 0)
 	{
 		fl.tmp = ft_strjoin(fl.d, ".");
