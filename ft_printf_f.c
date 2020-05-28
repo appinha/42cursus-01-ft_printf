@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 03:58:05 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/28 04:11:38 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,12 @@ static t_flags	rm_trailing_0s(t_flags fl)
 	{
 		if (!(fl.a[i] == '0' || fl.a[i] == '.'))
 			break ;
-		else
+		if (fl.a[i] == '.')
+		{
+			fl.a[i] = '\0';
+			break ;
+		}
+		if (fl.a[i] == '0')
 			fl.a[i] = '\0';
 	}
 	return (fl);
@@ -83,7 +88,7 @@ t_flags			print_spec_g(t_flags fl, double n)
 		fl.precision = P - (fl.e_nbr + 1);
 		free(fl.a);
 		fl = print_spec_f(fl, n);
-		if (fl.hash == 0)
+		if (fl.hash == 0 && ft_strchr_01(fl.a, '.') == 1)
 			fl = rm_trailing_0s(fl);
 	}
 	else

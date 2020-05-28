@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 03:57:23 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/28 04:04:27 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%.2g", (double)0.000000123
+#define INPUT_1	"Il fait au moins %g", (double)-8000
 #define INPUT_2	"%g", (double)12.000
 #define INPUT_3	"%e", (double)1234567.89
 #define INPUT_4	"%%g 0000042 == |%g|", (double)0000042
