@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_f.c                                      :+:      :+:    :+:   */
+/*   ft_printf_f_g.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 04:11:38 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/28 12:52:26 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,22 @@ void			print_spec_f_e_g(int *len, t_flags fl, double n)
 	if (fl.point == 0)
 		fl.precision = 6;
 	if (fl.spe_c == 'f')
-	{
 		fl = print_spec_f(fl, n);
-		print_flags(len, fl);
-		free(fl.a);
-		if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
-			ft_putchar_len('0', len);
-	}
 	if (fl.spe_c == 'e')
-	{
 		fl = print_spec_e(fl, n);
-		print_flags(len, fl);
-		free(fl.a);
-	}
 	if (fl.spe_c == 'g')
 	{
-		fl = print_spec_g(fl, n);
-		print_flags(len, fl);
-		free(fl.a);
+		if (fl.point == 1 && fl.precision == 0)
+			fl = print_spec_g(fl, n, 1);
+		else
+			fl = print_spec_g(fl, n, fl.precision);
 	}
+	print_flags(len, fl);
+	if (fl.spe_c == 'f' && fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
+		ft_putchar_len('0', len);
+	if (fl.spe_c == 'e')
+		free(fl.d);
+	free(fl.a);
 }
 
 t_flags			print_spec_f(t_flags fl, double n)
@@ -53,49 +50,51 @@ t_flags			print_spec_f(t_flags fl, double n)
 	return (fl);
 }
 
-static t_flags	rm_trailing_0s(t_flags fl)
+static int		rm_trailing_0s(int precision, char *str)
 {
 	int		i;
 
-	i = ft_strlen(fl.a);
+	i = ft_strlen(str);
 	while (--i >= 0)
 	{
-		if (!(fl.a[i] == '0' || fl.a[i] == '.'))
+		if (!(str[i] == '0' || str[i] == '.'))
 			break ;
-		if (fl.a[i] == '.')
+		if (str[i] == '.')
 		{
-			fl.a[i] = '\0';
+			str[i] = '\0';
 			break ;
 		}
-		if (fl.a[i] == '0')
-			fl.a[i] = '\0';
+		if (str[i] == '0')
+		{
+			precision--;
+			str[i] = '\0';
+		}
 	}
-	return (fl);
+	return (precision);
 }
 
-t_flags			print_spec_g(t_flags fl, double n)
+t_flags			print_spec_g(t_flags fl, double n, int P)
 {
-	int 	P;
-
-	P = fl.precision;
-	if (fl.point == 1 && fl.precision == 0)
-		P = 1;
-	if (fl.point == 1 && fl.precision > 0)
-		P = fl.precision;
 	fl = print_spec_e(fl, n);
+	free(fl.a);
+	free(fl.d);
 	if (P > fl.e_nbr && fl.e_nbr >= -4)
 	{
+		fl.spe_c = 'f';
 		fl.precision = P - (fl.e_nbr + 1);
-		free(fl.a);
 		fl = print_spec_f(fl, n);
 		if (fl.hash == 0 && ft_strchr_01(fl.a, '.') == 1)
-			fl = rm_trailing_0s(fl);
+			fl.precision = rm_trailing_0s(fl.precision, fl.a);
 	}
 	else
 	{
+		fl.spe_c = 'e';
 		fl.precision = P - 1;
-		free(fl.a);
 		fl = print_spec_e(fl, n);
+		if (fl.hash == 0 && ft_strchr_01(fl.d, '.') == 1)
+			fl.precision = rm_trailing_0s(fl.precision, fl.d);
+		free(fl.a);
+		fl.a = ft_strjoin(fl.d, fl.e);
 	}
 	return (fl);
 }

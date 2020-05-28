@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 03:41:07 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/28 11:32:21 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,5 @@ t_flags			print_spec_e(t_flags fl, double n)
 		fl.d = fl.tmp;
 	}
 	fl.a = ft_strjoin(fl.d, fl.e);
-	free(fl.d);
 	return (fl);
 }

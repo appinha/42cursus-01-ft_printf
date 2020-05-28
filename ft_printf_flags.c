@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 15:03:08 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/25 18:51:09 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/28 12:51:59 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	print_zeros(int *len, t_flags fl)
 void	print_flags(int *len, t_flags fl)
 {
 	fl.strlen = ft_strlen(fl.a);
-	if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
+	if (fl.spe_c != 'f' && fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
 		fl.width++;
 	if ((fl.spe_c == 'x' || fl.spe_c == 'X') && fl.hash == 1 && fl.ulli != 0)
 		fl.width -= 2;
