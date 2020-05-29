@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:15:57 by gfielder          #+#    #+#             */
-/*   Updated: 2020/05/29 11:46:42 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/29 12:59:34 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1721,12 +1721,12 @@ int bonus_length_nocrash_nullarg_13(void){return test("%lls", NULL); }
 int bonus_length_nocrash_nullarg_14(void){return test("%ls", NULL); }
 int bonus_length_nocrash_mandatory_c_hh(void){return test("%hhc", 'a');}
 int bonus_length_nocrash_mandatory_c_h(void){return test("%hc", 'a');}
-int bonus_length_nocrash_mandatory_c_l(void){return test("%lc", L'a');}
-int bonus_length_nocrash_mandatory_c_ll(void){return test("%llc", L'a');}
+int bonus_length_nocrash_mandatory_c_l(void){return test("%lc", 'a');}
+int bonus_length_nocrash_mandatory_c_ll(void){return test("%llc", 'a');}
 int bonus_length_nocrash_mandatory_s_hh(void){return test("%hhs", "hello");}
 int bonus_length_nocrash_mandatory_s_h(void){return test("%hs", "hello");}
-int bonus_length_nocrash_mandatory_s_l(void){return test("%ls", L"hello");}
-int bonus_length_nocrash_mandatory_s_ll(void){return test("%lls", L"hello");}
+int bonus_length_nocrash_mandatory_s_l(void){return test("%s", "hello");}
+int bonus_length_nocrash_mandatory_s_ll(void){return test("%lls", "hello");}
 int bonus_length_nocrash_mandatory_p_hh(void){return test("%hhp", &ncm_p);}
 int bonus_length_nocrash_mandatory_p_h(void){return test("%hp", &ncm_p);}
 int bonus_length_nocrash_mandatory_p_l(void){return test("%lp", &ncm_p);}
