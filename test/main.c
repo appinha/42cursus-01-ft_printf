@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 13:57:01 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/29 06:59:41 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%.0g", (DBL_MIN - 0.000001)
-#define INPUT_2	"%10.g", 0.00000
-#define INPUT_3	"%010.5f", 1.0
-#define INPUT_4	"%010.5e", 1.0
+#define INPUT_1	"%5.2s", "abc"
+#define INPUT_2	"%*s", 15, "hello"
+#define INPUT_3	"%.*f", 4, 948.27
+#define INPUT_4	"%*i", 14, 94827
 #define INPUT_5	"%i, %d, %d, %d, %d, %s, %c, %d, %u, %x, %X", i, j, k, l, m, n, c, c, j, j, j
 
 int		main(void)
@@ -37,6 +37,18 @@ int		main(void)
 	double	mod = 10.0;
 	double	res;
 	long double	l_dbl;
+
+	//PFT Mix tests
+	static unsigned int	mx_u = 235;
+	static double		mx_Lf = 0.375;
+	static double		mx_f = 0.625;
+	static long			mx_li =  4223372036854775800;
+	static long long	mx_lli = 3223372036654775200;
+	static char			mx_c = 'G';
+	static short		mx_hi = -3244;
+	static char			mx_hhi = 'F';
+	static char			*mx_s = "Hello, World!";
+	static int			mx_i = 42;
 
 	// Hello Kitty test variables
 	int		a = -4, b = 0, d = 2147483647, e = -2147483648, f = 42, g = 25;

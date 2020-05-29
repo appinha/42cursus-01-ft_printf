@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 14:56:34 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/29 07:01:39 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ static void		triage_specs(va_list args, int *len, t_flags fl)
 		print_spec_f_e_g(len, fl, va_arg(args, double));
 }
 
-static t_flags	treat_star(va_list args, t_flags fl)
+static t_flags	treat_star(va_list args, t_flags fl, int *j)
 {
 	int	value;
 
+	(*j)++;
 	value = va_arg(args, int);
 	if (fl.point == 0)
 	{
@@ -65,15 +66,15 @@ static t_flags	treat_flags(va_list args, t_flags fl)
 		if (fl.set[j++] == '0')
 			fl.pad_c = '0';
 	}
-	if (fl.set[j] == '*' && (j++))
-		fl = treat_star(args, fl);
+	if (fl.set[j] == '*')
+		fl = treat_star(args, fl, &j);
 	while (fl.set[j] != '\0' && ft_strchr_01(DIGITS, fl.set[j]))
 		fl.width = 10 * fl.width + fl.set[j++] - '0';
 	if (fl.set[j] == '.')
 	{
 		fl.point = 1;
-		if (fl.set[++j] == '*' && (j++))
-			fl = treat_star(args, fl);
+		if (fl.set[++j] == '*')
+			fl = treat_star(args, fl, &j);
 		while (fl.set[j] != '\0' && ft_strchr_01(DIGITS, fl.set[j]))
 			fl.precision = 10 * fl.precision + fl.set[j++] - '0';
 	}
