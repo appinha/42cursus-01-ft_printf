@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/29 12:55:10 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/29 13:00:12 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	print_spec_x(int *len, t_flags fl, va_list args)
 		fl.ulli = va_arg(args, unsigned int);
 	if (fl.length == 1)
 		fl.ulli = va_arg(args, unsigned long int);
-	if (fl.length == 2)
+	if (fl.length >= 2)
 		fl.ulli = va_arg(args, unsigned long long int);
 	fl.sign = 'u';
 	if (fl.spe_c == 'x')
@@ -63,7 +63,7 @@ void	print_spec_o(int *len, t_flags fl, va_list args)
 		fl.ulli = va_arg(args, unsigned int);
 	if (fl.length == 1)
 		fl.ulli = va_arg(args, unsigned long int);
-	if (fl.length == 2)
+	if (fl.length >= 2)
 		fl.ulli = va_arg(args, unsigned long long int);
 	fl.sign = 'u';
 	fl.a = ft_ullitoa_base(fl.ulli, OCTAL);
