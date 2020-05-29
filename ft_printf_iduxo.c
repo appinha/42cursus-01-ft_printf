@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/29 12:02:52 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/29 12:55:10 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_spec_i_d_u(int *len, t_flags fl, va_list args)
 			fl.lli = va_arg(args, int);
 		if (fl.length == 1)
 			fl.lli = va_arg(args, long int);
-		if (fl.length == 2)
+		if (fl.length >= 2)
 			fl.lli = va_arg(args, long long int);
 		fl.sign = (fl.lli >= 0) ? '+' : '-';
 		fl.ulli = (fl.lli >= 0) ? fl.lli : -fl.lli;
@@ -31,7 +31,7 @@ void	print_spec_i_d_u(int *len, t_flags fl, va_list args)
 			fl.ulli = va_arg(args, unsigned int);
 		if (fl.length == 1)
 			fl.ulli = va_arg(args, unsigned long int);
-		if (fl.length == 2)
+		if (fl.length >= 2)
 			fl.ulli = va_arg(args, unsigned long long int);
 		fl.sign = 'u';
 	}
