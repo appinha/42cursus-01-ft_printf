@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:15:57 by gfielder          #+#    #+#             */
-/*   Updated: 2020/05/29 11:11:49 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/29 11:46:42 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1413,6 +1413,15 @@ int bonus_assp_nocrash_mandatory_dupflag_d_spassp(void){return test("% + d", 42)
 ** 							'l ll h hh' FLAGS (LENGTH) TESTS (BONUS)
 ** ---------------------------------------------------------------------------*/
 
+static char 		ch_pos_1 = 100, ch_neg_1 = -87;
+static short		sh_pos_1 = 3047, sh_neg_1 = -8875;
+static int			i_pos_1 = 878023;
+static long			l_pos_1 = 22337203685477, l_neg_1 = -22337203685477;
+static long long	ll_pos_1 = 22337203685477, ll_neg_1 = -22337203685477;
+static long			lmax	= 9223372036854775807;
+static long			lmin	= -9223372036854775807;
+static long long	llmax = 9223372036854775807;
+static long long	llmin = -9223372036854775807ll;
 //Signed integers of varying size modifiers
 int bonus_length_d_hh_pos_casted(void){return test("%hhd", (char)45);}
 int bonus_length_d_hh_neg_casted(void){return test("%hhd", (char)-45);}
@@ -1492,15 +1501,6 @@ int bonus_length_d_hhmax_sp(void){return test("% hhd", (char)(127));}
 int bonus_length_d_hhmin_sp(void){return test("% hhd", (char)(-128));}
 
 //Signed integers of varying size modifiers
-static char 		ch_pos_1 = 100, ch_neg_1 = -87;
-static short		sh_pos_1 = 3047, sh_neg_1 = -8875;
-static int			i_pos_1 = 878023;
-static long			l_pos_1 = 22337203685477, l_neg_1 = -22337203685477;
-static long long	ll_pos_1 = 22337203685477, ll_neg_1 = -22337203685477;
-static long			lmax	= 9223372036854775807;
-static long			lmin	= -9223372036854775807;
-static long long	llmax = 9223372036854775807;
-static long long	llmin = -9223372036854775807ll;
 int bonus_length_i_hh_pos_casted(void){return test("%hhi", (char)45);}
 int bonus_length_i_hh_neg_casted(void){return test("%hhi", (char)-45);}
 int bonus_length_i_h_pos_casted(void){return test("%hi", (short)385);}
