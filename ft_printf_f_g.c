@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/30 15:57:22 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 16:12:51 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,15 @@ static int		rm_trailing_0s(int precision, char *str)
 	return (precision);
 }
 
-t_flags			print_spec_g(t_flags fl, double n, int P)
+t_flags			print_spec_g(t_flags fl, double n, int p)
 {
 	fl = print_spec_e(fl, n);
 	free(fl.a);
 	free(fl.d);
-	if (P > fl.e_nbr && fl.e_nbr >= -4)
+	if (p > fl.e_nbr && fl.e_nbr >= -4)
 	{
 		fl.spe_c = 'f';
-		fl.precision = P - (fl.e_nbr + 1);
+		fl.precision = p - (fl.e_nbr + 1);
 		fl = print_spec_f(fl, n);
 		if (fl.hash == 0 && ft_strchr_01(fl.a, '.') == 1)
 			fl.precision = rm_trailing_0s(fl.precision, fl.a);
@@ -90,7 +90,7 @@ t_flags			print_spec_g(t_flags fl, double n, int P)
 	else
 	{
 		fl.spe_c = 'e';
-		fl.precision = P - 1;
+		fl.precision = p - 1;
 		fl = print_spec_e(fl, n);
 		if (fl.hash == 0 && ft_strchr_01(fl.d, '.') == 1)
 			fl.precision = rm_trailing_0s(fl.precision, fl.d);

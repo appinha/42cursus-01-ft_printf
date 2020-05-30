@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/29 07:01:39 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 16:13:12 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static t_flags	treat_flags(va_list args, t_flags fl)
 static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 {
 	t_flags	fl;
-	int 	j;
+	int		j;
 
 	j = 0;
 	while (ft_strchr_01(ALL_FL, format[*i]) && j < 19)
