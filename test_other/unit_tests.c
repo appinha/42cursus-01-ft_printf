@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/03 21:15:57 by gfielder          #+#    #+#             */
-/*   Updated: 2020/05/29 23:14:38 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 00:36:55 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2278,6 +2278,7 @@ int bonus_f_asspr_prec1n_ignoreflag(void){return test("% +.1f", -7.3);}
 int bonus_f_asspr_prec3n_ignoreflag(void){return test("% +.3f", -7.3);}
 int bonus_f_asspr_prec6n_ignoreflag(void){return test("% +.6f", -7.3);}
 //Floats at double max, double min
+/*
 int bonus_f_dblmax_limits_prec0_notmandatory(void){return test("%.0f", DBL_MAX);}
 int bonus_f_dblmax_limits_prec3_notmandatory(void){return test("%.3f", DBL_MAX);}
 int bonus_f_dblmax_limits_precd_notmandatory(void){return test("%f", DBL_MAX);}
@@ -2306,6 +2307,7 @@ int bonus_f_dblmin_neg_limits_prec8(void){return test("%.8f", -DBL_MIN);}
 int bonus_f_dblmin_neg_stress_limits_prec12(void){return test("%.12f", -DBL_MIN);}
 int bonus_f_dblmin_neg_stress_limits_prec16(void){return test("%.16f", -DBL_MIN);}
 int bonus_f_dblmin_neg_stress_limits_prec18(void){return test("%.18f", -DBL_MIN);}
+*/
 //Floats of special values
 int bonus_f_reserved_values_inf(void){double special; *((unsigned long *)(&special)) = DBL_INF;
 	return test("%f", special);}
@@ -2900,7 +2902,7 @@ int bonus_g_asspr_prec1n_ignoreflag(void){return test("% +.1g", -7.3);}
 int bonus_g_asspr_prec3n_ignoreflag(void){return test("% +.3g", -7.3);}
 int bonus_g_asspr_prec6n_ignoreflag(void){return test("% +.6g", -7.3);}
 //General format at double max, double min
-// NOT MANDATORY (?)
+/*
 int bonus_g_dblmax_limits_prec0_notmandatory(void){return test("%.0g", DBL_MAX);}
 int bonus_g_dblmax_limits_prec3_notmandatory(void){return test("%.3g", DBL_MAX);}
 int bonus_g_dblmax_limits_precd_notmandatory(void){return test("%g", DBL_MAX);}
@@ -2915,7 +2917,6 @@ int bonus_g_dblmax_neg_limits_prec8_notmandatory(void){return test("%.8g", -DBL_
 int bonus_g_dblmax_neg_stress_limits_prec12_notmandatory(void){return test("%.12g", -DBL_MAX);}
 int bonus_g_dblmax_neg_stress_limits_prec16_notmandatory(void){return test("%.16g", -DBL_MAX);}
 int bonus_g_dblmax_neg_stress_limits_prec18_notmandatory(void){return test("%.18g", -DBL_MAX);}
-//MANDATORY (?)
 int bonus_g_dblmin_limits_prec0(void){return test("%.0g", DBL_MIN);}
 int bonus_g_dblmin_limits_prec3(void){return test("%.3g", DBL_MIN);}
 int bonus_g_dblmin_limits_precd(void){return test("%g", DBL_MIN);}
@@ -2930,6 +2931,7 @@ int bonus_g_dblmin_neg_limits_prec8(void){return test("%.8g", -DBL_MIN);}
 int bonus_g_dblmin_neg_stress_limits_prec12(void){return test("%.12g", -DBL_MIN);}
 int bonus_g_dblmin_neg_stress_limits_prec16(void){return test("%.16g", -DBL_MIN);}
 int bonus_g_dblmin_neg_stress_limits_prec18(void){return test("%.18g", -DBL_MIN);}
+*/
 //General format - Original
 int bonus_g_original_1(void){return test("%g", (double)42);}
 int bonus_g_original_2(void){return test("Kashim a %g histoires à raconter", (double)1001);}
@@ -3470,7 +3472,7 @@ int bonus_e_asspr_prec1n_ignoreflag(void){return test("% +.1e", -7.3);}
 int bonus_e_asspr_prec3n_ignoreflag(void){return test("% +.3e", -7.3);}
 int bonus_e_asspr_prec6n_ignoreflag(void){return test("% +.6e", -7.3);}
 //Scientific notation at double max, double min
-//NOTMANDATORY (?)
+/*
 int bonus_e_dblmax_limits_prec0_notmandatory(void){return test("%.0e", DBL_MAX);}
 int bonus_e_dblmax_limits_prec3_notmandatory(void){return test("%.3e", DBL_MAX);}
 int bonus_e_dblmax_limits_precd_notmandatory(void){return test("%e", DBL_MAX);}
@@ -3485,7 +3487,6 @@ int bonus_e_dblmax_neg_limits_prec8_notmandatory(void){return test("%.8e", -DBL_
 int bonus_e_dblmax_neg_stress_limits_prec12_notmandatory(void){return test("%.12e", -DBL_MAX);}
 int bonus_e_dblmax_neg_stress_limits_prec16_notmandatory(void){return test("%.16e", -DBL_MAX);}
 int bonus_e_dblmax_neg_stress_limits_prec18_notmandatory(void){return test("%.18e", -DBL_MAX);}
-//MANDATORY (?)
 int bonus_e_dblmin_limits_prec0(void){return test("%.0e", DBL_MIN);}
 int bonus_e_dblmin_limits_prec3(void){return test("%.3e", DBL_MIN);}
 int bonus_e_dblmin_limits_precd(void){return test("%e", DBL_MIN);}
@@ -3500,6 +3501,7 @@ int bonus_e_dblmin_neg_limits_prec8(void){return test("%.8e", -DBL_MIN);}
 int bonus_e_dblmin_neg_stress_limits_prec12(void){return test("%.12e", -DBL_MIN);}
 int bonus_e_dblmin_neg_stress_limits_prec16(void){return test("%.16e", -DBL_MIN);}
 int bonus_e_dblmin_neg_stress_limits_prec18(void){return test("%.18e", -DBL_MIN);}
+*/
 //Scientific notation - Original
 int bonus_e_original_1(void){return test("%e", (double)42);}
 int bonus_e_original_2(void){return test("Kashim a %e histoires à raconter", (double)1001);}
