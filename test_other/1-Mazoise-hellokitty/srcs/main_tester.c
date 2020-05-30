@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 15:40:07 by mchardin          #+#    #+#             */
-/*   Updated: 2020/05/30 15:13:52 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 15:42:10 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int main()
 	char	*s = "-2147483648";
 	char	*t = "0x12345678";
 	char	*u = "-0";
-	//unsigned long long int	ulli = 18446744073709551615;
-	unsigned long long int	ulli = 100;
+//	unsigned long long int	ulli = 18446744073709551615;
+//	unsigned long long int	ulli = 100;
 
-	while (ulli >= 0)
-	{
-		PRINT(" --- Return : %d\n", PRINT("%f", (double)ulli));
-		ulli--;
-	}
+//	while (ulli > 0)
+//	{
+//		PRINT(" --- Return : %d\n", PRINT("%f", (double)ulli));
+//		ulli--;
+//	}
 	PRINT(" --- Return : %d\n", PRINT("Simple input test"));
 	PRINT(" --- Return : %d\n", PRINT("%i, %d, %d, %d, %d, %s, %c, %d, %u, %x, %X", i, j, k, l, m, n, c, c, j, j, j)); //T2
 	PRINT(" --- Return : %d\n", PRINT("%0i, %0d, %0d, %0d, %0d, %0d, %0d, %0d", i, j, k, l, m, c, e, d)); //T3
