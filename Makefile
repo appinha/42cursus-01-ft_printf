@@ -6,7 +6,7 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/06 21:56:58 by apuchill          #+#    #+#              #
-#    Updated: 2020/05/28 11:27:41 by apuchill         ###   ########.fr        #
+#    Updated: 2020/05/30 19:33:51 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			@ar -rcs $(NAME) $(OBJS)
 
-bonus:		$(NAME)
-			@ar -rcs $(NAME) $(OBJS)
+bonus:		all
 
 clean:
 			@$(RM) $(OBJS)

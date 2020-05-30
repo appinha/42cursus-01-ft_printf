@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/30 19:14:22 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 19:33:58 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct	s_dbl
 union			u_dbl
 {
 	double	f;
-	t_dbl	dbl;
+	t_dbl	bits;
 }				u_double_bit;
 
 /*
