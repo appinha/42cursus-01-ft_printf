@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/30 19:11:04 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 19:14:22 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,18 @@ typedef struct	s_ftoa
 	char					z0[20];
 }				t_ftoa;
 
+typedef struct	s_dbl
+{
+	uint64_t	mantisa		:52;
+	uint64_t	exponent	:11;
+	uint64_t	sign		:1;
+
+}				t_dbl;
+
 union			u_dbl
 {
 	double	f;
-	struct
-	{
-		uint64_t	mantisa		:52;
-		uint64_t	exponent	:11;
-		uint64_t	sign		:1;
-	}			bits;
+	t_dbl	dbl;
 }				u_double_bit;
 
 /*
