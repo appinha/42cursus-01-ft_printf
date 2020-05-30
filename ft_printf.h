@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/30 16:16:04 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 16:20:30 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,15 @@
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
 ** HEADERS
 */
-
-#include <stdio.h>
-
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-#include <stdint.h>
+# include <stdint.h>
 
 /*
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
 ** MACROS
 */
-
 # define FLAGS		"-+#0 "
 # define ALL_FL		"-+#0 *.0123456789lh"
 # define FSPECS		"cspdiuxX%onfge"
@@ -120,15 +116,15 @@ typedef struct	s_ftoa
 	char					z0[20];
 }				t_ftoa;
 
-union				u_dbl{
+union			u_dbl{
 	double f;
 	struct
 	{
 		uint64_t	mantisa		:52;
 		uint64_t	exponent	:11;
 		uint64_t	sign		:1;
-		}			bits;
-}					u_double_bit;
+	}			bits;
+}				u_double_bit;
 
 /*
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
@@ -166,7 +162,7 @@ void			print_spec_p(int *len, t_flags fl, unsigned long int p);
 */
 void			print_spec_f_e_g(int *len, t_flags fl, double n);
 t_flags			print_spec_f(t_flags fl, double n);
-t_flags			print_spec_g(t_flags fl, double n, int P);
+t_flags			print_spec_g(t_flags fl, double n, int p);
 /*
 ** FILE: ft_printf_e.c
 ** Outputs the input variable (collected by 'va_arg' function) as a pointer to a
@@ -208,7 +204,6 @@ char			*ft_substr(char const *s, unsigned int start, size_t len);
 long double		ft_pow(long double n, unsigned int pow);
 char			*ft_ullitoa_base(unsigned long long int n, char *base);
 long double		ft_fmod(long double n, long double mod);
-//char			*ft_byte2binary(double n);
 /*
 ** FILE: ft_ftoa_rnd.c
 */
