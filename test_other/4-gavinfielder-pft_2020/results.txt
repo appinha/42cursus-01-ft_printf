@@ -1,4 +1,4 @@
-Test 2432 (bonus_e_stress_prec16_limits_tiny) : FAILED.
+Test 2642 (bonus_e_stress_prec16_limits_tiny) : FAILED.
     First line of code: {return test("%.16e", 0.000000000000000100);}
       expected output : "9.9999999999999998e-17"
       your output     : "1.0000000000000000e-16"
