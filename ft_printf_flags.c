@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 15:03:08 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 14:57:20 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/29 23:08:31 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void	print_zeros(int *len, t_flags fl)
 void		print_flags(int *len, t_flags fl)
 {
 	fl.strlen = ft_strlen(fl.a);
-	if (fl.spe_c != 'f' && fl.ulli == 0 && fl.point == 1 && fl.precision == 0)
+	if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0 &&
+		fl.spe_c != 'f' && fl.spe_c != 'e')
 		fl.width++;
 	if ((fl.spe_c == 'x' || fl.spe_c == 'X') && fl.hash == 1 && fl.ulli != 0)
 		fl.width -= 2;
@@ -71,8 +72,8 @@ void		print_flags(int *len, t_flags fl)
 	if (fl.space == 1 && fl.plus == 0 && fl.sign == '+')
 		ft_putchar_len(' ', len);
 	print_zeros(len, fl);
-	if (!(fl.ulli == 0 && fl.point == 1 && fl.precision == 0 &&
-		fl.spe_c != 'e'))
+	if (!(fl.ulli == 0 && fl.point == 1 && fl.precision == 0) ||
+		(fl.spe_c == 'f' || fl.spe_c == 'e'))
 		ft_putcstr_len(fl.a, len, ft_strlen(fl.a));
 	if (fl.minus == 1)
 		print_width(len, fl);

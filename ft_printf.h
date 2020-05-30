@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/28 22:08:15 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 00:22:50 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+#include <stdint.h>
 
 /*
 ** •.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•
@@ -102,7 +103,7 @@ typedef struct	s_flags
 }				t_flags;
 
 /*
-** ft_ftoa_rnd STRUCT
+** ft_ftoa_rnd STRUCT & UNION
 */
 typedef struct	s_ftoa
 {
@@ -118,6 +119,16 @@ typedef struct	s_ftoa
 	char					*tmp;
 	char					z0[20];
 }				t_ftoa;
+
+union				u_dbl{
+	double f;
+	struct
+	{
+		uint64_t	mantisa		:52;
+		uint64_t	exponent	:11;
+		uint64_t	sign		:1;
+		}			bits;
+}					u_double_bit;
 
 /*
 ** •.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•.•'•
@@ -197,6 +208,7 @@ char			*ft_substr(char const *s, unsigned int start, size_t len);
 long double		ft_pow(long double n, unsigned int pow);
 char			*ft_ullitoa_base(unsigned long long int n, char *base);
 long double		ft_fmod(long double n, long double mod);
+//char			*ft_byte2binary(double n);
 /*
 ** FILE: ft_ftoa_rnd.c
 */

@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 17:31:43 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/29 06:59:41 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 00:22:58 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,16 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%5.2s", "abc"
-#define INPUT_2	"%*s", 15, "hello"
-#define INPUT_3	"%.*f", 4, 948.27
-#define INPUT_4	"%*i", 14, 94827
+#define INPUT_1	"%f", -0.0
+#define INPUT_2	"%-5.0e", 0.0
+#define INPUT_3	"%5.1f", (double)2.7182818
+#define INPUT_4	"%5.7f", (double)2.7182818
 #define INPUT_5	"%i, %d, %d, %d, %d, %s, %c, %d, %u, %x, %X", i, j, k, l, m, n, c, c, j, j, j
 
 int		main(void)
 {
 	char	*p1;
+	char	*str;
 	int		len, n1, n2, n3;
 	double	dbl_max = FLT_MAX;
 	double	dbl = 1.025978548534310421;
