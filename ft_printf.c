@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:10:37 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/30 16:13:12 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 20:43:39 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static t_flags	treat_star(va_list args, t_flags fl, int *j)
 
 	(*j)++;
 	value = va_arg(args, int);
-	if (fl.point == 0)
+	if (fl.precision == -1)
 	{
 		fl.width = (value >= 0) ? value : -value;
 		fl.pad_c = (value >= 0) ? fl.pad_c : ' ';
 		fl.minus = (value >= 0) ? fl.minus : 1;
 	}
-	if (fl.point == 1)
+	if (fl.precision > -1)
 	{
 		if (value >= 0)
 			fl.precision = value;
@@ -56,10 +56,8 @@ static t_flags	treat_star(va_list args, t_flags fl, int *j)
 	return (fl);
 }
 
-static t_flags	treat_flags(va_list args, t_flags fl)
+static t_flags	treat_flags(va_list args, t_flags fl, int j)
 {
-	int		j;
-
 	j = 0;
 	while (fl.set[j] != '\0' && ft_strchr_01(FLAGS, fl.set[j]))
 	{
@@ -73,6 +71,7 @@ static t_flags	treat_flags(va_list args, t_flags fl)
 	if (fl.set[j] == '.')
 	{
 		fl.point = 1;
+		fl.precision = 0;
 		if (fl.set[++j] == '*')
 			fl = treat_star(args, fl, &j);
 		while (fl.set[j] != '\0' && ft_strchr_01(DIGITS, fl.set[j]))
@@ -103,10 +102,10 @@ static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 		fl.hash = ft_strchr_01(fl.set, '#');
 		fl.width = 0;
 		fl.point = 0;
-		fl.precision = 0;
+		fl.precision = -1;
 		fl.length = 0;
 		fl.pad_c = ' ';
-		fl = treat_flags(args, fl);
+		fl = treat_flags(args, fl, j);
 		triage_specs(args, len, fl);
 	}
 	else

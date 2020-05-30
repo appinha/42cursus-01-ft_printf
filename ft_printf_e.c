@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 23:55:34 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/30 15:57:30 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 20:43:43 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ t_flags			print_spec_e(t_flags fl, double n)
 	else
 		ft_strlcat(fl.e, fl.tmp, 5);
 	free(fl.tmp);
-	if (fl.hash == 1 && fl.point == 1 && fl.precision == 0)
+	if (fl.hash == 1 && fl.precision == 0)
 	{
 		fl.tmp = ft_strjoin(fl.d, ".");
 		free(fl.d);
