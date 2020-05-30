@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/30 00:22:48 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 15:57:22 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void			print_spec_f_e_g(int *len, t_flags fl, double n)
 {
+	union u_dbl	dbl;
+
+	dbl.f = n;
+	fl.sign = (dbl.bits.sign > 0) ? '-' : '+';
 	if (fl.point == 0)
 		fl.precision = 6;
 	if (fl.spe_c == 'f')
@@ -35,10 +39,6 @@ void			print_spec_f_e_g(int *len, t_flags fl, double n)
 
 t_flags			print_spec_f(t_flags fl, double n)
 {
-	union u_dbl	dbl;
-
-	dbl.f = n;
-	fl.sign = (dbl.bits.sign > 0) ? '-' : '+';
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = fl.f;
 	fl.a = ft_ftoa_rnd(fl.f, fl.precision, 5);
