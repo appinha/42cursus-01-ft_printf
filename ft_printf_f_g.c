@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/19 15:03:07 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/30 20:43:44 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 22:12:06 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void			print_spec_f_e_g(int *len, t_flags fl, double n)
 	dbl.f = n;
 	fl.sign = (dbl.bits.sign > 0) ? '-' : '+';
 	fl.print_n0 = 1;
-	if (fl.precision == -1)
+	if (fl.point == 0)
 		fl.precision = 6;
 	if (fl.spe_c == 'f')
 		fl = print_spec_f(fl, n);
@@ -27,7 +27,7 @@ void			print_spec_f_e_g(int *len, t_flags fl, double n)
 		fl = print_spec_e(fl, n);
 	if (fl.spe_c == 'g')
 	{
-		if (fl.precision == 0)
+		if (fl.point == 1 && fl.precision == 0)
 			fl = print_spec_g(fl, n, 1);
 		else
 			fl = print_spec_g(fl, n, fl.precision);
@@ -43,7 +43,7 @@ t_flags			print_spec_f(t_flags fl, double n)
 	fl.f = (n >= 0) ? n : -n;
 	fl.ulli = fl.f;
 	fl.a = ft_ftoa_rnd(fl.f, fl.precision, 5);
-	if (fl.hash == 1 && fl.precision == 0)
+	if (fl.hash == 1 && fl.point == 1 && fl.precision == 0)
 	{
 		fl.tmp = ft_strjoin(fl.a, ".");
 		free(fl.a);
