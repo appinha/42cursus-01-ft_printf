@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 13:25:14 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/30 22:19:01 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 22:30:52 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	print_spec_x(int *len, t_flags fl, va_list args)
 		fl.ulli = va_arg(args, unsigned long long int);
 	fl.sign = 'u';
 	fl.print_n0 = 0;
+	if (fl.ulli == 0)
+		fl.hash = 0;
 	if (fl.spe_c == 'x')
 		fl.a = ft_ullitoa_base(fl.ulli, HEXALOW);
 	if (fl.spe_c == 'X')
@@ -69,6 +71,8 @@ void	print_spec_o(int *len, t_flags fl, va_list args)
 		fl.ulli = va_arg(args, unsigned long long int);
 	fl.sign = 'u';
 	fl.print_n0 = 1;
+	if (fl.ulli == 0)
+		fl.hash = 0;
 	fl.a = ft_ullitoa_base(fl.ulli, OCTAL);
 	print_flags(len, fl);
 	free(fl.a);
@@ -77,7 +81,7 @@ void	print_spec_o(int *len, t_flags fl, va_list args)
 void		print_spec_p(int *len, t_flags fl, unsigned long int p)
 {
 	fl.sign = 'u';
-	fl.print_n0 = 1;
+	fl.print_n0 = 0;
 	fl.a = ft_ullitoa_base(p, HEXALOW);
 	print_flags(len, fl);
 	free(fl.a);

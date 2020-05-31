@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 15:03:08 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/30 22:19:52 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/05/30 22:28:44 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,11 @@ static void	print_zeros(int *len, t_flags fl)
 {
 	int		j;
 
-	if ((fl.spe_c == 'x' && fl.hash == 1 && fl.ulli != 0) || fl.spe_c == 'p')
+	if ((fl.spe_c == 'x' && fl.hash == 1) || fl.spe_c == 'p')
 		ft_putcstr_len("0x", len, 2);
-	if (fl.spe_c == 'X' && fl.hash == 1 && fl.ulli != 0)
+	if (fl.spe_c == 'X' && fl.hash == 1)
 		ft_putcstr_len("0X", len, 2);
-	if (fl.spe_c == 'o' && fl.hash == 1 && (fl.ulli != 0 ||
-		(fl.point == 1 && fl.precision == 0)))
+	if (fl.spe_c == 'o' && fl.hash == 1 && (fl.point == 1 && fl.precision == 0))
 		ft_putchar_len('0', len);
 	if (fl.minus == 0 && fl.pad_c == '0')
 		print_width(len, fl);
@@ -53,14 +52,14 @@ static void	print_zeros(int *len, t_flags fl)
 void		print_flags(int *len, t_flags fl)
 {
 	fl.strlen = ft_strlen(fl.a);
-	if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0 && fl.print_n0 == 1)
+	if (fl.ulli == 0 && fl.point == 1 && fl.precision == 0 && fl.print_n0 == 0)
 		fl.width++;
-	if ((fl.spe_c == 'x' || fl.spe_c == 'X') && fl.hash == 1 && fl.ulli != 0)
+	if (((fl.spe_c == 'x' || fl.spe_c == 'X') && fl.hash == 1) ||
+			fl.spe_c == 'p')
 		fl.width -= 2;
-	if (fl.spe_c == 'o' && fl.hash == 1 && (fl.ulli != 0 ||
-		(fl.point == 1 && fl.precision == 0)))
+	if (fl.spe_c == 'o' && fl.hash == 1 && (fl.point == 1 && fl.precision == 0))
 		fl.width -= 1;
-	if (fl.spe_c == 'o' && fl.hash == 1 && fl.ulli != 0 && fl.point == 1)
+	if (fl.spe_c == 'o' && fl.hash == 1 && fl.point == 1)
 		fl.precision -= 1;
 	if (fl.point == 1 && fl.spe_c != 'f')
 		fl.pad_c = ' ';

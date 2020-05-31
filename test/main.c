@@ -10,7 +10,7 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%.p", 0.0
+#define INPUT_1	"%.p", NULL
 #define INPUT_2	"%.x", 0.0
 #define INPUT_3	"%5.p", NULL
 #define INPUT_4	"%2.p", NULL
