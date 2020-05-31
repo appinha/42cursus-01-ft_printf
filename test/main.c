@@ -10,10 +10,10 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%.p", NULL
-#define INPUT_2	"%.x", 0.0
-#define INPUT_3	"%5.p", NULL
-#define INPUT_4	"%2.p", NULL
+#define INPUT_1	"%#.5o", 21
+#define INPUT_2	"%#3o", 0
+#define INPUT_3	"%#.0o", 0
+#define INPUT_4	"%#.3o", 0
 #define INPUT_5	"%i, %d, %d, %d, %d, %s, %c, %d, %u, %x, %X", i, j, k, l, m, n, c, c, j, j, j
 
 int		main(void)
