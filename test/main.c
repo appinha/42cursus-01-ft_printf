@@ -10,14 +10,16 @@
 #define HEADER_2(string)	"\033[38;5;75m" string "\033[0m"
 #define HIGHLIGHT(string)	"\033[38;5;191m" string "\033[0m"
 
-#define INPUT_1	"%5o", 12
-#define INPUT_2	"%5.o", 12
-#define INPUT_3	"%#5o", 12
+#define INPUT_1	"Amanda%n P", &nbr
+#define INPUT_2	"Amanda%n P", &nbr
+#define INPUT_3	"Amanda%n P", &nbr
 #define INPUT_4	"%#5.o", 12
 #define INPUT_5	"%i, %d, %d, %d, %d, %s, %c, %d, %u, %x, %X", i, j, k, l, m, n, c, c, j, j, j
 
 int		main(void)
 {
+	int		nbr;
+	int		*p_int;
 	char	*p1;
 	char	*str;
 	int		len, n1, n2, n3;
@@ -48,10 +50,14 @@ int		main(void)
 
 	printf(MAIN_2("\n=== • printf compare • ===\n") "\n");
 
+	nbr = 0;
+	printf("• n=%i\n", nbr);
 	len = printf(INPUT_1);
 	printf(HEADER_2(" (len = %i - printf)") "\n", len);
+	printf("• n=%i\n", nbr);
 	len = ft_printf(INPUT_1);
-	printf(HEADER_1(" (len = %i - ft_printf)") "\n\n", len);
+	printf(HEADER_1(" (len = %i - ft_printf)") "\n", len);
+	printf("• n=%i\n\n", nbr);
 
 	len = printf(INPUT_2);
 	printf(HEADER_2(" (len = %i - printf)") "\n", len);

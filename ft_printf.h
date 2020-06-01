@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 15:12:29 by apuchill          #+#    #+#             */
-/*   Updated: 2020/05/30 22:09:57 by apuchill         ###   ########.fr       */
+/*   Updated: 2020/06/01 14:57:00 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ typedef struct	s_flags
 	int						precision;
 	char					length;
 	char					print_n0;
-	unsigned long int		*p;
 	char					sign;
 	unsigned long long int	ulli;
 	long long int			lli;
