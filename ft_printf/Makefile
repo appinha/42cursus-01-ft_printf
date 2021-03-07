@@ -5,33 +5,41 @@
 #                                                     +:+ +:+         +:+      #
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/04/06 17:29:07 by apuchill          #+#    #+#              #
-#    Updated: 2020/05/27 16:58:40 by apuchill         ###   ########.fr        #
+#    Created: 2020/05/06 21:56:58 by apuchill          #+#    #+#              #
+#    Updated: 2021/03/07 18:56:25 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-PROJECT_DIR	= ../
-LIB	= -L$(PROJECT_DIR) -lftprintf
-
-#CC		= gcc
 CC		= clang
-#CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
-CFLAGS	= -g3 -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror
 RM		= /bin/rm -f
 
-NAME	= a.out
+NAME	= libftprintf.a
+
+SRCS	= ft_printf.c ft_printf_flags.c ft_printf_cs_pct.c ft_printf_piduxo.c \
+			ft_printf_fg.c ft_printf_e.c ft_ftoa_rnd.c \
+			ft_printf_utils.c ft_printf_utils_2.c ft_printf_utils_3.c
+
+OBJS	= $(SRCS:.c=.o)
+
+.c.o:
+			@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 all:		$(NAME)
 
-$(NAME):
-			@make re -C $(PROJECT_DIR)
-			@$(CC) $(CFLAGS) -o $(NAME) main.c $(LIB)
-			@sh test_header.sh && ./$(NAME) && sh test_footer.sh
-#			@echo "" && cd $(PROJECT_DIR) && make fclean
+$(NAME):	$(OBJS)
+			@ar -rcs $(NAME) $(OBJS)
+
+bonus:		all
+
+clean:
+			@$(RM) $(OBJS)
 
 fclean:		clean
 			@$(RM) $(NAME)
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+rebonus:	fclean bonus
+
+.PHONY:		all clean fclean re bonus rebonus
