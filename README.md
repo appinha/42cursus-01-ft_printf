@@ -161,13 +161,17 @@ and, when compiling your code, add the required flags:
 
 ## 📋 Testing
 
-**1. First, configure the path to the ft_printf folder in the Makefile (inside `/testing/`):**
+**1. Configuring**
+
+First, open the [`Makefile`](testing/Makefile) inside `/testing/` and configure the path to the `ft_printf` folder:
 
 ```Makefile
 PROJECT_DIR	= ../ft_printf/
 ```
 
-**2. Then run:**
+Then, configure the tests to your needs in the [`/testing/main.c`](testing/main.c) file.
+
+**2. Running:**
 
 ```shell
 make
